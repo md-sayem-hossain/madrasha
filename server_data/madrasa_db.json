@@ -1,0 +1,1604 @@
+{
+  "settings": {
+    "name": {
+      "bn": "ডাঃ আহমেদ উল্ল্যা-ছালেহা আল-জাদিদ মাদ্রাসা",
+      "en": "Dr. Ahmed Ullah-Saleha Al-Jadid Madrasa",
+      "ar": "مدرسة الدكتور أحمد الله صالحة الجديد"
+    },
+    "shortName": {
+      "bn": "আল-জাদিদ মাদ্রাসা",
+      "en": "Al-Jadid Madrasa",
+      "ar": "مدرسة الجديد"
+    },
+    "slogan": {
+      "bn": "ইলমে ওহী, তাকওয়া ও চারিত্রিক উৎকর্ষ সাধনে এক অনন্য দ্বীনি প্রতিষ্ঠান",
+      "en": "An exemplary Islamic institution for authentic knowledge, piety, and moral excellence",
+      "ar": "صرح إسلامي متميز لتعليم علوم الوحي وبناء الأخلاق الفاضلة"
+    },
+    "establishedYear": "১৯৯৮",
+    "address": {
+      "bn": "প্রযত্নেঃ আকবর পাটোয়ারীর বাড়ী, গ্রামঃ কুড়িয়ামৌড়া, ডাকঘরঃ মৌলভীবাজার, উপজেলাঃ সন্দ্বীপ, চট্টগ্রাম, বাংলাদেশ।",
+      "en": "Care of: Akbar Patwary Bari, Village: Kuriyamoura, Post: Moulvibazar, Upazila: Sandwip, Chattogram, Bangladesh.",
+      "ar": "رعاية: دار أكبر باتواري، قرية: كوريامورا، بريد: مولوي بازار، مركز: ساندويب، شيتاغونغ، بنغلاديش."
+    },
+    "district": {
+      "bn": "চট্টগ্রাম",
+      "en": "Chattogram",
+      "ar": "شيتاغونغ"
+    },
+    "upazila": {
+      "bn": "সন্দ্বীপ",
+      "en": "Sandwip",
+      "ar": "ساندويب"
+    },
+    "phone": "018888888888",
+    "secondaryPhone": "01711000000",
+    "email": "useremail@gmail.com",
+    "googleMapsEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d118029.07185363403!2d91.36531393608754!3d22.49397669466547!2m3!1f0!2f0!3f0!3m2!1i1024!2f768!4f13.1!3m3!1m2!1s0x3752c002241cf071%3A0xe9f7ee5e49339e08!2sSandwip%20Upazila!5e0!3m2!1sen!2sbd!4v1700000000000!5m2!1sen!2sbd",
+    "socialLinks": {
+      "facebook": "https://facebook.com",
+      "youtube": "https://youtube.com",
+      "whatsapp": "https://wa.me/8801888888888",
+      "telegram": "https://t.me",
+      "twitter": "https://twitter.com"
+    },
+    "prayerTimes": {
+      "fajr": "০৪:৪৭",
+      "dhuhr": "১২:০৬",
+      "asr": "০৪:৩৮",
+      "maghrib": "০৬:২৫",
+      "isha": "০৭:৪৪",
+      "jummah": "০১:১৫"
+    },
+    "emergencyNotice": {
+      "enabled": true,
+      "text": {
+        "bn": "নতুন শিক্ষাবর্ষে হিফজুল কুরআন ও নূরানী বিভাগে সীমিত আসনে ভর্তি চলছে!",
+        "en": "Admissions open for the new academic session in Hifz & Noorani departments (Limited seats)!",
+        "ar": "باب القبول والتسجيل مفتوح للعام الدراسي الجديد في قسمي تحفيظ القرآن والنورانية!"
+      },
+      "link": "#admission"
+    },
+    "seo": {
+      "metaTitle": {
+        "bn": "ডাঃ আহমেদ উল্ল্যা-ছালেহা আল-জাদিদ মাদ্রাসা | সন্দ্বীপ, চট্টগ্রাম",
+        "en": "Dr. Ahmed Ullah-Saleha Al-Jadid Madrasa | Sandwip, Chattogram",
+        "ar": "مدرسة الدكتور أحمد الله صالحة الجديد | ساندويب، شيتاغونغ"
+      },
+      "metaDescription": {
+        "bn": "সন্দ্বীপের কুড়িয়ামৌড়ায় প্রতিষ্ঠিত ঐতিহ্যবাহী দ্বীনি শিক্ষাপ্রতিষ্ঠান ডাঃ আহমেদ উল্ল্যা-ছালেহা আল-জাদিদ মাদ্রাসার অফিসিয়াল পোর্টাল।",
+        "en": "Official portal of Dr. Ahmed Ullah-Saleha Al-Jadid Madrasa situated in Kuriyamoura, Sandwip, Chattogram.",
+        "ar": "الموقع الرسمي لمدرسة الدكتور أحمد الله صالحة الجديد في ساندويب، شيتاغونغ، بنغلاديش."
+      },
+      "keywords": "Madrasa, Sandwip, Islamic Education, Hifz, Noorani, Qawmi, Dr. Ahmed Ullah"
+    },
+    "homepageSections": [
+      {
+        "id": "sec_hero",
+        "key": "hero",
+        "title": {
+          "bn": "হিরো ব্যানার",
+          "en": "Hero Banner",
+          "ar": "الواجهة الرئيسية"
+        },
+        "enabled": true,
+        "order": 1
+      },
+      {
+        "id": "sec_quote",
+        "key": "quote",
+        "title": {
+          "bn": "আজকের বাণী",
+          "en": "Verse/Hadith of Day",
+          "ar": "حكمة اليوم"
+        },
+        "enabled": true,
+        "order": 2
+      },
+      {
+        "id": "sec_intro",
+        "key": "intro",
+        "title": {
+          "bn": "মাদ্রাসার সংক্ষিপ্ত পরিচিতি",
+          "en": "Introduction",
+          "ar": "المقدمة"
+        },
+        "enabled": true,
+        "order": 3
+      },
+      {
+        "id": "sec_stats",
+        "key": "stats",
+        "title": {
+          "bn": "পরিসংখ্যান ও অর্জন",
+          "en": "Statistics & Milestones",
+          "ar": "الإحصائيات"
+        },
+        "enabled": true,
+        "order": 4
+      },
+      {
+        "id": "sec_founders",
+        "key": "founders",
+        "title": {
+          "bn": "প্রতিষ্ঠাতা স্পটলাইট",
+          "en": "Founders Spotlight",
+          "ar": "المؤسسون"
+        },
+        "enabled": true,
+        "order": 5
+      },
+      {
+        "id": "sec_teachers",
+        "key": "teachers",
+        "title": {
+          "bn": "শিক্ষক পরিচিতি",
+          "en": "Teachers Highlight",
+          "ar": "المدرسون"
+        },
+        "enabled": true,
+        "order": 6
+      },
+      {
+        "id": "sec_departments",
+        "key": "departments",
+        "title": {
+          "bn": "শিক্ষা বিভাগসমূহ",
+          "en": "Academic Departments",
+          "ar": "الأقسام"
+        },
+        "enabled": true,
+        "order": 7
+      },
+      {
+        "id": "sec_notices",
+        "key": "notices",
+        "title": {
+          "bn": "নোটিশ ও ইভেন্ট",
+          "en": "Notices & Events",
+          "ar": "الإعلانات والفعاليات"
+        },
+        "enabled": true,
+        "order": 8
+      },
+      {
+        "id": "sec_media",
+        "key": "media",
+        "title": {
+          "bn": "অডিও ও ভিডিও গ্যালারি",
+          "en": "Audio & Video Showcase",
+          "ar": "الصوتيات والمرئيات"
+        },
+        "enabled": true,
+        "order": 9
+      },
+      {
+        "id": "sec_gallery",
+        "key": "gallery",
+        "title": {
+          "bn": "ফটো গ্যালারি",
+          "en": "Photo Gallery",
+          "ar": "معرض الصور"
+        },
+        "enabled": true,
+        "order": 10
+      },
+      {
+        "id": "sec_contact",
+        "key": "contact",
+        "title": {
+          "bn": "যোগাযোগ ও ম্যাপ",
+          "en": "Contact & Location",
+          "ar": "الاتصال والموقع"
+        },
+        "enabled": true,
+        "order": 11
+      }
+    ]
+  },
+  "departments": [
+    {
+      "id": "dep-noorani",
+      "name": {
+        "bn": "নূরানী ও নাজেরা বিভাগ",
+        "en": "Noorani & Nazera Department",
+        "ar": "قسم النورانية والناظرة"
+      },
+      "description": {
+        "bn": "শুদ্ধ উচ্চারণে তাজবীদসহ পবিত্র কুরআন তিলাওয়াত, মাসনুন দুআ ও প্রাথমিক ইসলামিক শিক্ষা।",
+        "en": "Foundational Quran recitation with Tajweed, essential supplications, and basic Islamic manners.",
+        "ar": "تلاوة القرآن الكريم بالتجويد مع الأدعية المأثورة والتربية الإسلامية الأولية."
+      },
+      "duration": {
+        "bn": "২ বছর",
+        "en": "2 Years",
+        "ar": "سنتان"
+      },
+      "features": [
+        {
+          "bn": "সহজ পদ্ধতিতে কুরআন শিক্ষা",
+          "en": "Interactive learning methods",
+          "ar": "طرق تدريس ميسرة"
+        },
+        {
+          "bn": "বাংলা, ইংরেজি ও গণিত প্রাথমিক পাঠ",
+          "en": "Basic Language & Math",
+          "ar": "مبادئ اللغات والحساب"
+        },
+        {
+          "bn": "আখলাক ও শিষ্টাচার চর্চা",
+          "en": "Moral character grooming",
+          "ar": "تأهيل أخلاقي وسلوكي"
+        }
+      ],
+      "icon": "BookOpen",
+      "image": "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=800&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "dep-hifz",
+      "name": {
+        "bn": "হিফজুল কুরআন বিভাগ",
+        "en": "Tahfeez-ul-Quran (Hifz) Department",
+        "ar": "قسم تحفيظ القرآن الكريم"
+      },
+      "description": {
+        "bn": "অভিজ্ঞ হাফেজে কুরআনদের সার্বক্ষণিক তত্ত্বাবধানে ৩০ পারা কুরআন হিফজ ও হুসনুত তিলাওয়াত।",
+        "en": "Full 30 Juz memorization under dedicated certified Huffaz with international Tajweed standards.",
+        "ar": "حفظ القرآن الكريم كاملاً تحت إشراف حفظة مجازين وفق أعلى معايير التجويد."
+      },
+      "duration": {
+        "bn": "৩-৪ বছর",
+        "en": "3-4 Years",
+        "ar": "٣-٤ سنوات"
+      },
+      "features": [
+        {
+          "bn": "দৈনিক ছবক, সাত ছবক ও আমোখতা",
+          "en": "Daily revision routines",
+          "ar": "متابعة يومية ومراجعة مستمرة"
+        },
+        {
+          "bn": "হিফজ সমাপ্তিতে বিশেষ সনদ ও পাগড়ি",
+          "en": "Official Hifz Graduation certificate",
+          "ar": "شهادة وإجازة معتمدة"
+        },
+        {
+          "bn": "আন্তর্জাতিক কিরাত প্রশিক্ষক",
+          "en": "Qiraat training",
+          "ar": "تدريب على المقامات القرآنية"
+        }
+      ],
+      "icon": "HeartHandshake",
+      "image": "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=800&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "dep-kitab",
+      "name": {
+        "bn": "কিতাব ও কওমি নেসাব বিভাগ",
+        "en": "Kitab & Islamic Studies (Qawmi/Madani)",
+        "ar": "قسم الكتب والعلوم الشرعية"
+      },
+      "description": {
+        "bn": "আরবি ব্যাকরণ, ফিকহ, তাফসির, হাদিস ও আধুনিক আরবি সাহিত্য অধ্যয়ন।",
+        "en": "Deep study of Arabic Grammar, Islamic Jurisprudence (Fiqh), Tafseer, and Hadith sciences.",
+        "ar": "دراسة قواعد اللغة العربية، الفقه الإسلامي، التفسير، وعلوم الحديث الشريف."
+      },
+      "duration": {
+        "bn": "ধাপভিত্তিক",
+        "en": "Staged Curriculum",
+        "ar": "مراحل متعددة"
+      },
+      "features": [
+        {
+          "bn": "ইলমে তাসাউফ ও আত্মশুদ্ধি",
+          "en": "Spiritual purification",
+          "ar": "تزكية النفس والتصوف الشرعي"
+        },
+        {
+          "bn": "আরবি ভাষায় কথোপকথন দক্ষতা",
+          "en": "Spoken Arabic practice",
+          "ar": "محادثة باللغة العربية"
+        },
+        {
+          "bn": "সমকালীন মাসআলা ও গবেষণা",
+          "en": "Contemporary Islamic issues",
+          "ar": "بحوث فقهية معاصرة"
+        }
+      ],
+      "icon": "GraduationCap",
+      "image": "https://images.unsplash.com/photo-1577495508048-b635879837f1?w=800&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "dep-lillah",
+      "name": {
+        "bn": "লিল্লাহ বোর্ডিং ও এতিমখানা",
+        "en": "Lillah Boarding & Orphan Care",
+        "ar": "القسم الداخلي ورعاية الأيتام"
+      },
+      "description": {
+        "bn": "অসহায়, এতিম ও দরিদ্র শিক্ষার্থীদের জন্য সম্পূর্ণ বিনামূল্যে থাকা, খাওয়া ও পোশাকের সুব্যবস্থা।",
+        "en": "Free residential accommodation, nutritious food, and educational logistics for orphans & underprivileged students.",
+        "ar": "توفير السكن، الغذاء، والرعاية الشاملة مجاناً للطلاب الأيتام وذوي الدخل المحدود."
+      },
+      "duration": {
+        "bn": "সার্বক্ষণিক",
+        "en": "Full-time",
+        "ar": "دائم"
+      },
+      "features": [
+        {
+          "bn": "১০০% বিনামূল্যে চিকিৎসা ও খাবার",
+          "en": "100% Free food & healthcare",
+          "ar": "علاج ورعاية غذائية مجانية"
+        },
+        {
+          "bn": "পারিবারিক ও স্নেহময় পরিবেশ",
+          "en": "Caring environment",
+          "ar": "بيئة أسرية دافئة"
+        },
+        {
+          "bn": "নৈতিক দিকনির্দেশনা ও হোস্টেল সুপারভিশন",
+          "en": "Hostel supervision",
+          "ar": "إشراف تربوي متواصل"
+        }
+      ],
+      "icon": "ShieldCheck",
+      "image": "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&auto=format&fit=crop&q=80"
+    }
+  ],
+  "founders": [
+    {
+      "id": "founder-1",
+      "name": {
+        "bn": "ডাঃ আহমেদ উল্ল্যা",
+        "en": "Dr. Ahmed Ullah",
+        "ar": "د. أحمد الله"
+      },
+      "designation": {
+        "bn": "প্রধান প্রতিষ্ঠাতা ও আজীবন পৃষ্ঠপোষক",
+        "en": "Chief Founder & Life Patron",
+        "ar": "المؤسس الرئيسي والراعي الدائم"
+      },
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80",
+      "address": {
+        "bn": "আকবর পাটোয়ারীর বাড়ী, কুড়িয়ামৌড়া, সন্দ্বীপ, চট্টগ্রাম",
+        "en": "Akbar Patwary Bari, Kuriyamoura, Sandwip, Chattogram",
+        "ar": "دار أكبر باتواري، كوريامورا، ساندويب، شيتاغونغ"
+      },
+      "about": {
+        "bn": "প্রখ্যাত শিক্ষানুরাগী, সমাজসেবক ও সন্দ্বীপের দ্বীনি শিক্ষার অন্যতম অগ্রদূত।",
+        "en": "Renowned educationist, philanthropist, and pioneering patron of Islamic education in Sandwip.",
+        "ar": "شخصية تربوية وخيرية رائدة، وأحد أبرز دعاة التعليم الشرعي في ساندويب."
+      },
+      "biography": {
+        "bn": "ডাঃ আহমেদ উল্ল্যা চিকিৎসা পেশার পাশাপাশি আমৃত্যু দ্বীনি শিক্ষার প্রসারে কাজ করেছেন। সন্দ্বীপের কুড়িয়ামৌড়ায় যাতে একটি আদর্শ দ্বীনি শিক্ষাকেন্দ্র গড়ে ওঠে, সেই লক্ষ্যেই তিনি এই মাদ্রাসার ভিত্তিপ্রস্তর স্থাপন ও সার্বিক অর্থায়ন করেন।",
+        "en": "Dr. Ahmed Ullah dedicated his life to medical practice and Islamic education development. To foster an exemplary Islamic learning center in Kuriyamoura, Sandwip, he established and financed this Madrasa.",
+        "ar": "كرس الدكتور أحمد الله حياته للطب وخدمة المجتمع الإسلامي. أسس هذه المدرسة المباركة في ساندويب لتكون منارة للعلم الشرعي."
+      },
+      "historyContribution": {
+        "bn": "মাদ্রাসার প্রাথমিক ভূমি দান, প্রধান ভবন নির্মাণে মুখ্য অর্থায়ন এবং স্থায়ী লিল্লাহ ফান্ড গঠন।",
+        "en": "Donated prime land, provided primary construction funds, and established the permanent Lillah Boarding endowment.",
+        "ar": "تبرع بالأرض الرئيسية ومول بناء المبنى الأول وأسس الوقف الخيري للطلاب."
+      },
+      "educationalBackground": {
+        "bn": "এমবিবিএস ও চিকিৎসা শাস্ত্রে উচ্চতর ডিগ্রি",
+        "en": "MBBS & Higher Medical Certifications",
+        "ar": "بكالوريوس الطب والجراحة وشهادات عليا"
+      },
+      "professionalBackground": {
+        "bn": "জ্যেষ্ঠ চিকিৎসক ও সমাজসেবী",
+        "en": "Senior Medical Practitioner & Philanthropist",
+        "ar": "طبيب استشاري وفاعل خير"
+      },
+      "founderSince": "১৯৯৮",
+      "phone": "018888888888",
+      "email": "dr.ahmedullah@gmail.com",
+      "isApproved": true,
+      "order": 1
+    },
+    {
+      "id": "founder-2",
+      "name": {
+        "bn": "বেগম ছালেহা খাতুন",
+        "en": "Begum Saleha Khatun",
+        "ar": "السيدة صالحة خاتون"
+      },
+      "designation": {
+        "bn": "সহ-প্রতিষ্ঠাতা ও প্রধান হিতৈষী",
+        "en": "Co-Founder & Chief Benefactor",
+        "ar": "شريكة التأسيس والراعية الكبرى"
+      },
+      "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&auto=format&fit=crop&q=80",
+      "address": {
+        "bn": "কুড়িয়ামৌড়া, সন্দ্বীপ, চট্টগ্রাম",
+        "en": "Kuriyamoura, Sandwip, Chattogram",
+        "ar": "كوريامورا، ساندويب، شيتاغونغ"
+      },
+      "about": {
+        "bn": "মহীয়সী নারী ও কোরআন শিক্ষায় নিবেদিতপ্রাণ হিতৈষী ব্যক্তিত্ব।",
+        "en": "Noble philanthropist devoted to female education and Quranic literacy.",
+        "ar": "سيدة فاضلة ومحسنة كرست جهودها لتعليم القرآن والخير."
+      },
+      "biography": {
+        "bn": "ছালেহা খাতুনের নিরন্তর উৎসাহ ও সহযোগিতায় মাদ্রাসার হিফজ ও মহিলা শাখা কার্যক্রম শুরু হয়। তাঁর স্বপ্ন ছিল সন্দ্বীপের প্রতিটি ঘরে দ্বীনি শিক্ষার নূর পৌঁছে দেওয়া।",
+        "en": "With the sincere inspiration and material contributions of Begum Saleha Khatun, the Hifz section and community Islamic programs flourished in Sandwip.",
+        "ar": "بفضل جهودها وتشجيعها انطلقت برامج تحفيظ القرآن الكريم والأنشطة النسوية والخيرية."
+      },
+      "historyContribution": {
+        "bn": "ছাত্রদের খাবার ও বস্ত্র ব্যবস্থার জন্য নিজস্ব তহবিল থেকে নিয়মিত অনুদান ও এতিমখানা পৃষ্ঠপোষকতা।",
+        "en": "Endowed continuous stipends for student meals, clothing, and orphan welfare.",
+        "ar": "كفالة مستمرة لطلاب العلم وتوفير وجبات الطعام والكسوة للأيتام."
+      },
+      "founderSince": "১৯৯৮",
+      "isApproved": true,
+      "order": 2
+    },
+    {
+      "id": "founder-3",
+      "name": {
+        "bn": "মরহুম আকবর পাটোয়ারী",
+        "en": "Late Akbar Patwary",
+        "ar": "المرحوم أكبر باتواري"
+      },
+      "designation": {
+        "bn": "সহ-প্রতিষ্ঠাতা ও ভূমিদাতা",
+        "en": "Co-Founder & Land Donor",
+        "ar": "شريك التأسيس والواقف للأرض"
+      },
+      "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&auto=format&fit=crop&q=80",
+      "address": {
+        "bn": "আকবর পাটোয়ারীর বাড়ী, কুড়িয়ামৌড়া, সন্দ্বীপ",
+        "en": "Akbar Patwary Bari, Kuriyamoura, Sandwip",
+        "ar": "دار أكبر باتواري، كوريامورا، ساندويب"
+      },
+      "about": {
+        "bn": "সন্দ্বীপের বিশিষ্ট সমাজসেবক ও দ্বীনি প্রতিষ্ঠানের জন্য নিজস্ব পারিবারিক ভিটা ওয়াকফকারী।",
+        "en": "Eminent local dignitary who endowed family land for the establishment of the Madrasa.",
+        "ar": "وجيه من وجهاء ساندويب الذي وقف أرض عائلته لإقامة الصرح التعليمي."
+      },
+      "biography": {
+        "bn": "মরহুম আকবর পাটোয়ারী দ্বীনের প্রচার ও প্রসারে নিজের বাড়ীর সংলগ্ন বিস্তৃত জমি মাদ্রাসার নামে স্থায়ীভাবে ওয়াকফ করেন।",
+        "en": "Late Akbar Patwary permanently endowed the campus land adjacent to his homestead for spreading Islamic knowledge.",
+        "ar": "وقف مساحة واسعة من أرضه بجوار داره لتكون مقراً دائماً للمدرسة ونشر العلم."
+      },
+      "historyContribution": {
+        "bn": "মাদ্রাসার প্রাথমিক ক্যাম্পাসের জায়গা দান ও সার্বিক স্থানীয় সমন্বয়।",
+        "en": "Endowed original campus land and led local community mobilization.",
+        "ar": "وقف الأرض الأولى للمجمع وقيادة الدعم المجتمعي."
+      },
+      "founderSince": "১৯৯৮",
+      "isApproved": true,
+      "order": 3
+    }
+  ],
+  "teachers": [
+    {
+      "id": "t-1",
+      "name": {
+        "bn": "মাওলানা মুফতি আব্দুল হক আল-মাদানী",
+        "en": "Mawlana Mufti Abdul Haque Al-Madani",
+        "ar": "الشيخ المفتي عبد الحق المدني"
+      },
+      "designation": {
+        "bn": "মুহতামিম ও শাইখুল হাদিস",
+        "en": "Principal & Shaykhul Hadith",
+        "ar": "مدير المدرسة وشيخ الحديث"
+      },
+      "department": {
+        "bn": "প্রশাসন ও হাদিস বিভাগ",
+        "en": "Administration & Hadith",
+        "ar": "الإدارة وقسم الحديث"
+      },
+      "image": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&auto=format&fit=crop&q=80",
+      "subject": {
+        "bn": "বুখারী শরীফ ও ইফতা",
+        "en": "Sahih Bukhari & Ifta Jurisprudence",
+        "ar": "صحيح البخاري والإفتاء"
+      },
+      "qualifications": {
+        "bn": "দাওরায়ে হাদিস (মুত্তাহেদা বোর্ড), এম.এ (ইসলামিক স্টাডিজ), ইফতা (দারুল উলুম)",
+        "en": "Dawra-e-Hadith, MA in Islamic Studies, Takhassus fi al-Ifta",
+        "ar": "شهادة دورة الحديث، ماجستير الدراسات الإسلامية، تخصص الإفتاء"
+      },
+      "experience": {
+        "bn": "১৮+ বছর পাঠদান ও শিক্ষা প্রশাসন",
+        "en": "18+ Years in Islamic Academia & Admin",
+        "ar": "أكثر من ١٨ عاماً في التدريس والإدارة"
+      },
+      "biography": {
+        "bn": "সুনামধন্য আলেম ও মুফতি। দারুল উলুম ও মদিনা শরিফের অভিজ্ঞতায় সিক্ত। মাদ্রাসার শিক্ষা মান নিয়ন্ত্রণে নিরলসভাবে কাজ করছেন।",
+        "en": "Renowned scholar and Mufti leading the institution with academic excellence and spiritual leadership.",
+        "ar": "عالم ومفتي جليل كرس جهوده لتطوير المناهج والارتقاء بالمستوى التعليمي."
+      },
+      "address": {
+        "bn": "সন্দ্বীপ, চট্টগ্রাম",
+        "en": "Sandwip, Chattogram",
+        "ar": "ساندويب، شيتاغونغ"
+      },
+      "joiningDate": "২০০৩",
+      "phone": "01811223344",
+      "email": "mufti.abdulhaque@gmail.com",
+      "isActive": true,
+      "order": 1
+    },
+    {
+      "id": "t-2",
+      "name": {
+        "bn": "হাফেজ ক্বারী নূরুল ইসলাম",
+        "en": "Hafez Qari Nurul Islam",
+        "ar": "الحافظ القارئ نور الإسلام"
+      },
+      "designation": {
+        "bn": "প্রধান শিক্ষক (হিফজ বিভাগ)",
+        "en": "Head of Hifz Department",
+        "ar": "رئيس قسم تحفيظ القرآن"
+      },
+      "department": {
+        "bn": "হিফজুল কুরআন বিভাগ",
+        "en": "Tahfeez Department",
+        "ar": "قسم التحفيظ"
+      },
+      "image": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80",
+      "subject": {
+        "bn": "হিফজুল কুরআন ও মাশকুত তাজবীদ",
+        "en": "Hifz & International Tajweed",
+        "ar": "التحفيظ وأحكام التجويد"
+      },
+      "qualifications": {
+        "bn": "আন্তর্জাতিক হিফজ সনদপ্রাপ্ত, ক্বিরাত আসেম রেওয়ায়েতে হাফস",
+        "en": "Certified Hafiz with Qiraat Asim Riwayat Hafs",
+        "ar": "حافظ متقن ومجاز في قراءة عاصم برواية حفص"
+      },
+      "experience": {
+        "bn": "১৪ বছর হিফজ প্রশিক্ষণ",
+        "en": "14 Years in Hifz Mentorship",
+        "ar": "١٤ عاماً في تعليم القرآن"
+      },
+      "biography": {
+        "bn": "তাঁর হাতে এখন পর্যন্ত শতাধিক শিক্ষার্থী সফলভাবে ৩০ পারা কুরআন হিফজ সম্পন্ন করেছেন।",
+        "en": "Under his mentorship, over a hundred students have successfully completed full Quran memorization.",
+        "ar": "تخرج على يديه أكثر من مائة حافظ لكتاب الله العزيز."
+      },
+      "address": {
+        "bn": "কুড়িয়ামৌড়া, সন্দ্বীপ",
+        "en": "Kuriyamoura, Sandwip",
+        "ar": "كوريامورا، ساندويب"
+      },
+      "joiningDate": "২০১০",
+      "isActive": true,
+      "order": 2
+    },
+    {
+      "id": "t-3",
+      "name": {
+        "bn": "মাওলানা মাহমুদ হাসান",
+        "en": "Mawlana Mahmud Hasan",
+        "ar": "الشيخ محمود حسن"
+      },
+      "designation": {
+        "bn": "সিনিয়র শিক্ষক (আরবি সাহিত্য ও ব্যাকরণ)",
+        "en": "Senior Lecturer in Arabic Literature",
+        "ar": "مدرس أول الأدب العربي والنحو"
+      },
+      "department": {
+        "bn": "কিতাব বিভাগ",
+        "en": "Kitab Department",
+        "ar": "قسم الكتب"
+      },
+      "image": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&auto=format&fit=crop&q=80",
+      "subject": {
+        "bn": "নাহু, সরফ ও আরবি সাহিত্য",
+        "en": "Nahu, Sarf & Arabic Balagha",
+        "ar": "النحو والصرف والبلاغة"
+      },
+      "qualifications": {
+        "bn": "দাওরায়ে হাদিস, আরবি সাহিত্যে ডিপ্লোমা",
+        "en": "Dawra-e-Hadith, Diploma in Arabic",
+        "ar": "دورة الحديث ودبلوم اللغة العربية"
+      },
+      "experience": {
+        "bn": "১০ বছর",
+        "en": "10 Years",
+        "ar": "١٠ سنوات"
+      },
+      "biography": {
+        "bn": "ছাত্রদের আরবি ভাষা ও সাহিত্যে পারদর্শী করে গড়ে তুলতে বিশেষ ভূমিকা রেখে চলেছেন।",
+        "en": "Specialized in Arabic communicative competence and classical grammar texts.",
+        "ar": "متخصص في تدريب الطلاب على مهارات اللغة العربية والتعبير."
+      },
+      "address": {
+        "bn": "সন্দ্বীপ, চট্টগ্রাম",
+        "en": "Sandwip, Chattogram",
+        "ar": "ساندويب، شيتاغونغ"
+      },
+      "joiningDate": "২০১৪",
+      "isActive": true,
+      "order": 3
+    },
+    {
+      "id": "t-4",
+      "name": {
+        "bn": "মাওলানা জয়নাল আবেদীন",
+        "en": "Mawlana Zainal Abedin",
+        "ar": "الشيخ زين العابدين"
+      },
+      "designation": {
+        "bn": "প্রধান শিক্ষক (নূরানী বিভাগ)",
+        "en": "Head of Noorani Department",
+        "ar": "رئيس قسم النورانية"
+      },
+      "department": {
+        "bn": "নূরানী ও প্রাথমিক বিভাগ",
+        "en": "Noorani & Primary",
+        "ar": "القسم الابتدائي والنوراني"
+      },
+      "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=80",
+      "subject": {
+        "bn": "নূরানী কায়দা ও সুন্দর হাতের লেখা",
+        "en": "Noorani Method & Calligraphy",
+        "ar": "القاعدة النورانية والخط"
+      },
+      "qualifications": {
+        "bn": "নূরানী মুয়াল্লিম প্রশিক্ষণপ্রাপ্ত (১ম শ্রেণি)",
+        "en": "Certified Noorani Master Trainer",
+        "ar": "مدرب معتمد في الطريقة النورانية"
+      },
+      "experience": {
+        "bn": "১২ বছর",
+        "en": "12 Years",
+        "ar": "١٢ عاماً"
+      },
+      "biography": {
+        "bn": "শিশুদের অত্যন্ত স্নেহ ও আন্তরিকতার সাথে সহিহ কুরআন ও বুনিয়াদি শিক্ষার সূচনা দেন।",
+        "en": "Known for his affectionate and structured approach to early childhood Islamic foundations.",
+        "ar": "مشهور بأسلوبه التربوي الحنون والمتميز في تعليم الأطفال."
+      },
+      "address": {
+        "bn": "মৌলভীবাজার, সন্দ্বীপ",
+        "en": "Moulvibazar, Sandwip",
+        "ar": "مولوي بازار، ساندويب"
+      },
+      "joiningDate": "২০১২",
+      "isActive": true,
+      "order": 4
+    }
+  ],
+  "history": {
+    "mainTitle": {
+      "bn": "আমাদের গৌরবময় ইতিহাস ও পথচলা",
+      "en": "Our Historic Journey & Legacy",
+      "ar": "تاريخنا العريق ومسيرتنا المباركة"
+    },
+    "introduction": {
+      "bn": "১৯৯৮ সালে চট্টগ্রাম জেলার ঐতিহাসিক দ্বীপ উপজেলা সন্দ্বীপের কুড়িয়ামৌড়া গ্রামে ডাঃ আহমেদ উল্ল্যা এবং সহধর্মিনী বেগম ছালেহা খাতুনের ঐকান্তিক প্রচেষ্টা ও জমিদাতা মরহুম আকবর পাটোয়ারীর সহযোগিতায় প্রতিষ্ঠিত হয় \"ডাঃ আহমেদ উল্ল্যা-ছালেহা আল-জাদিদ মাদ্রাসা\"।",
+      "en": "Established in 1998 in the historic island of Sandwip, Chattogram, Dr. Ahmed Ullah-Saleha Al-Jadid Madrasa was founded through the vision of Dr. Ahmed Ullah, Begum Saleha Khatun, and land patron late Akbar Patwary.",
+      "ar": "تأسست مدرسة الدكتور أحمد الله صالحة الجديد عام ١٩٩٨م في جزيرة ساندويب بمحافظة شيتاغونغ بجهود الدكتور أحمد الله وزوجته ورعاية المرحوم أكبر باتواري."
+    },
+    "purposeOfEstablishment": {
+      "bn": "একটি দ্বীপাঞ্চলে যেখানে সহিহ দ্বীনি শিক্ষা ও হিফজুল কুরআনের সুযোগ ছিল অত্যন্ত অপ্রতুল, সেখানে খাঁটি তাওহীদের আলো ছড়ানো, চরিত্রবান আলেম গড়ে তোলা এবং অসহায়-এতিম শিশুদের নিখরচায় মানসম্মত দ্বীনি শিক্ষায় শিক্ষিত করাই ছিল এই প্রতিষ্ঠানের মূল লক্ষ্য।",
+      "en": "In an island area where authentic Islamic learning was scarce, the core purpose was to disseminate Quranic enlightenment, groom scholars of noble character, and provide free holistic education to orphans.",
+      "ar": "كان الهدف الأساسي توفير التعليم القرآني الصحيح وتخريج علماء مصلحين وكفالة الأيتام والفقراء مجاناً في منطقة الجزيرة."
+    },
+    "backgroundStory": {
+      "bn": "একটি ছোট টিনের ঘর ও মাত্র ২০ জন ছাত্র নিয়ে মাদ্রাসার যাত্রা শুরু হয়েছিল। স্থানীয় ধর্মপ্রাণ মানুষের অকৃত্রিম ভালোবাসা এবং প্রতিষ্ঠাতা পরিবারের ধারাবাহিক পৃষ্ঠপোষকতায় আজ তা একটি আধুনিক বহুতল ভবন বিশিষ্ট দ্বীনি বিদ্যাপিঠে রূপ নিয়েছে।",
+      "en": "Starting in a humble tin-roof cottage with only 20 students, the institution has blossomed with the blessings of Allah and community patronage into a premier multi-storey Islamic academy.",
+      "ar": "بدأت المدرسة في مبنى بسيط بعشرين طالباً فقط، وبفضل الله ثم دعم المحسنين تطورت لتصبح مجمعاً إسلامياً حديثاً."
+    },
+    "majorAchievements": [
+      {
+        "bn": "এ যাবৎ ২০০+ এর অধিক ছাত্র পবিত্র কুরআনের হিফজ সম্পন্ন করেছেন।",
+        "en": "Over 200+ students graduated as certified Huffaz of the Holy Quran.",
+        "ar": "تخرج أكثر من ٢٠٠ حافظ لكتاب الله تعالى."
+      },
+      {
+        "bn": "জাতীয় ও বিভাগীয় হিফজ ও কিরাত প্রতিযোগিতায় শিক্ষার্থীদের শীর্ষস্থান অর্জন।",
+        "en": "Top positions in national and divisional Quran & Qiraat competitions.",
+        "ar": "حصول الطلاب على مراكز متقدمة في المسابقات القرآنية الوطنية."
+      },
+      {
+        "bn": "১০০% আবাসিক এতিম ও দরিদ্র শিক্ষার্থীদের ফ্রি থাকা-খাওয়ার লিল্লাহ ফান্ড পরিচালনা।",
+        "en": "Sustaining a 100% free Lillah boarding hostel for orphans & underprivileged learners.",
+        "ar": "استمرار الصندوق الخيري الداخلي بكفالة كاملة للطلاب المحتاجين."
+      },
+      {
+        "bn": "আধুনিক লাইব্রেরি ও কম্পিউটার সজ্জিত নূরানী ল্যাব স্থাপন।",
+        "en": "Equipped modern Islamic library and structured Noorani classrooms.",
+        "ar": "تأسيس مكتبة علمية شاملة وقاعات دراسية مجهزة."
+      }
+    ],
+    "milestones": [
+      {
+        "id": "m-1998",
+        "year": "১৯৯৮",
+        "title": {
+          "bn": "মাদ্রাসার ভিত্তিপ্রস্তর স্থাপন ও শুভ উদ্বোধন",
+          "en": "Foundation Stone & Inception",
+          "ar": "وضع حجر الأساس والافتتاح"
+        },
+        "description": {
+          "bn": "কুড়িয়ামৌড়া মৌলভীবাজার সংলগ্ন আকবর পাটোয়ারী বাড়ীর ওয়াকফকৃত জমিতে আনুষ্ঠানিকভাবে মাদ্রাসার কার্যক্রম শুরু হয়।",
+          "en": "Operations commenced officially on the endowed grounds in Kuriyamoura, Sandwip.",
+          "ar": "انطلاق الدراسة رسمياً على الأرض الموقوفة في ساندويب."
+        },
+        "image": "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&auto=format&fit=crop&q=80",
+        "order": 1
+      },
+      {
+        "id": "m-2005",
+        "year": "২০০৫",
+        "title": {
+          "bn": "পূর্ণাঙ্গ হিফজুল কুরআন বিভাগ চালু",
+          "en": "Inauguration of Full Hifz Section",
+          "ar": "تدشين قسم تحفيظ القرآن الكريم"
+        },
+        "description": {
+          "bn": "হিফজুল কুরআন বিভাগ আনুষ্ঠানিকভাবে যাত্রা করে এবং প্রথম ব্যাচে ১২ জন শিক্ষার্থী সফলভাবে কোরআন হিফজ করেন।",
+          "en": "The full-time Tahfeez department launched, producing its first batch of 12 Huffaz.",
+          "ar": "افتتاح قسم التحفيظ وتخريج الدفعة الأولى المكونة من ١٢ حافظاً."
+        },
+        "image": "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=800&auto=format&fit=crop&q=80",
+        "order": 2
+      },
+      {
+        "id": "m-2015",
+        "year": "২০১৫",
+        "title": {
+          "bn": "পাকা বহুতল একাডেমিক ভবন ও মসজিদ কমপ্লেক্স",
+          "en": "Multi-Storey Academic & Mosque Complex",
+          "ar": "المبنى الأكاديمي ومجمع المسجد"
+        },
+        "description": {
+          "bn": "প্রতিষ্ঠাতা পরিবারের অর্থায়নে মাদ্রাসার আধুনিক ৩ তলা একাডেমিক ভবন ও জামে মসজিদ নির্মিত হয়।",
+          "en": "Construction of a modern 3-storey academic building and Jame Mosque funded by founders.",
+          "ar": "بناء مجمع تعليمي من ٣ طوابق وجامع كبير بتمويل من المؤسسين."
+        },
+        "image": "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=800&auto=format&fit=crop&q=80",
+        "order": 3
+      },
+      {
+        "id": "m-2024",
+        "year": "২০২৪",
+        "title": {
+          "bn": "রজত জয়ন্তী ও ডিজিটাল সিএমএস পোর্টাল উন্মোচন",
+          "en": "Silver Jubilee & Digital CMS Portal",
+          "ar": "اليوبيل الفضي وإطلاق البوابة الرقمية"
+        },
+        "description": {
+          "bn": "২৫ বছরের গৌরবোজ্জ্বল পথচলায় আধুনিক মাল্টিমিডিয়া রিসোর্স সেন্টার ও স্বয়ংসম্পূর্ণ ওয়েবসাইট চালু।",
+          "en": "25th Year Celebration with modern multimedia resource hub and dynamic multilingual CMS.",
+          "ar": "الاحتفال بمرور ٢٥ عاماً وإطلاق البوابة الإلكترونية الشاملة."
+        },
+        "image": "https://images.unsplash.com/photo-1564769625905-50e93615e769?w=800&auto=format&fit=crop&q=80",
+        "order": 4
+      }
+    ]
+  },
+  "gallery": [
+    {
+      "id": "g-1",
+      "title": {
+        "bn": "মাদ্রাসার নয়নাভিরাম ক্যাম্পাস ও মসজিদ",
+        "en": "Scenic Campus & Mosque",
+        "ar": "الحرم المدرسي والمسجد الجامع"
+      },
+      "category": "campus",
+      "imageUrl": "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=1000&auto=format&fit=crop&q=80",
+      "description": {
+        "bn": "সন্দ্বীপের মনোরম পরিবেশে অবস্থিত মাদ্রাসার বহুতল ভবন।",
+        "en": "Multi-storey building situated in serene Sandwip surroundings.",
+        "ar": "المبنى الرئيسي وسط الطبيعة الهادئة في ساندويب."
+      },
+      "date": "২০২৪-০১-১৫",
+      "isFeatured": true,
+      "order": 1
+    },
+    {
+      "id": "g-2",
+      "title": {
+        "bn": "হিফজ ক্লাসে কুরআন তিলাওয়াতরত ছাত্ররা",
+        "en": "Students in Hifz Quran Session",
+        "ar": "الطلاب أثناء حلقة تحفيظ القرآن"
+      },
+      "category": "students",
+      "imageUrl": "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=1000&auto=format&fit=crop&q=80",
+      "description": {
+        "bn": "তাজবীদসহ সহিহ কোরআন মুখস্থ ও আমোখতা পাঠ।",
+        "en": "Focused memorization and daily revision with Tajweed.",
+        "ar": "مراجعة الحفظ اليومي بأحكام التجويد المتقنة."
+      },
+      "date": "২০২৪-০২-১০",
+      "isFeatured": true,
+      "order": 2
+    },
+    {
+      "id": "g-3",
+      "title": {
+        "bn": "বার্ষিক মাহফিল ও দস্তারবন্দী পাগড়ি প্রদান",
+        "en": "Annual Mahfil & Graduation Ceremony",
+        "ar": "المؤتمر السنوي وتتويج الحفاظ"
+      },
+      "category": "events",
+      "imageUrl": "https://images.unsplash.com/photo-1519817650390-64a93db51149?w=1000&auto=format&fit=crop&q=80",
+      "description": {
+        "bn": "হিফজ সম্পন্নকারী আলেম ও হাফেজদের পাগড়ি ও সম্মাননা ক্রেস্ট বিতরণ।",
+        "en": "Conferring honorary turbans and awards to Hifz graduates.",
+        "ar": "تتويج خريجي حفظ القرآن بالعمائم والجوائز التقديرية."
+      },
+      "date": "২০২৪-০২-২৮",
+      "isFeatured": true,
+      "order": 3
+    },
+    {
+      "id": "g-4",
+      "title": {
+        "bn": "ইসলামিক কিতাবখানা ও রিসার্চ লাইব্রেরি",
+        "en": "Islamic Library & Reading Hall",
+        "ar": "المكتبة الإسلامية وقاعة المطالعة"
+      },
+      "category": "campus",
+      "imageUrl": "https://images.unsplash.com/photo-1577495508048-b635879837f1?w=1000&auto=format&fit=crop&q=80",
+      "description": {
+        "bn": "তাফসির, হাদিস ও ফিকহ শাস্ত্রের বিশাল গ্রন্থ সংগ্রহশালা।",
+        "en": "Rich repository of Tafseer, Hadith, and Islamic jurisprudence texts.",
+        "ar": "مجموعة ضخمة من أمهات كتب التفسير والحديث والفقه."
+      },
+      "date": "২০২৪-০৩-০৫",
+      "isFeatured": false,
+      "order": 4
+    },
+    {
+      "id": "g-5",
+      "title": {
+        "bn": "নূরানী বিভাগের ছোট্ট সোনামণিদের ক্লাস",
+        "en": "Noorani Early Learners Classroom",
+        "ar": "فصول براعم النورانية"
+      },
+      "category": "students",
+      "imageUrl": "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=1000&auto=format&fit=crop&q=80",
+      "description": {
+        "bn": "ছোট শিশুদের বর্ণমালা ও হরফ চেনার আনন্দঘন মুহূর্ত।",
+        "en": "Joyful foundational Arabic and ethical grooming for toddlers.",
+        "ar": "لحظات تعليم الحروف العربية والآداب للأطفال."
+      },
+      "date": "২০২৪-০৩-১২",
+      "isFeatured": true,
+      "order": 5
+    },
+    {
+      "id": "g-6",
+      "title": {
+        "bn": "শিক্ষকমণ্ডলীর মাসিক একাডেমিক বৈঠক",
+        "en": "Monthly Academic Faculty Meeting",
+        "ar": "الاجتماع الدوري لهيئة التدريس"
+      },
+      "category": "teachers",
+      "imageUrl": "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1000&auto=format&fit=crop&q=80",
+      "description": {
+        "bn": "মাদ্রাসার শিক্ষার মানোন্নয়নে সম্মানিত উস্তাদগণের পরামর্শ সভা।",
+        "en": "Faculty consultation on curricular enhancements and student progress.",
+        "ar": "مشاورة الأساتذة لتطوير المناهج ومتابعة مستوى الطلاب."
+      },
+      "date": "২০২৪-০৩-২০",
+      "isFeatured": false,
+      "order": 6
+    }
+  ],
+  "audio": [
+    {
+      "id": "aud-1",
+      "title": {
+        "bn": "সূরা আর-রহমান – হৃদয়স্পর্শী তিলাওয়াত",
+        "en": "Surah Ar-Rahman – Soulful Recitation",
+        "ar": "سورة الرحمن – تلاوة خاشعة"
+      },
+      "category": "quran",
+      "speaker": {
+        "bn": "হাফেজ ক্বারী নূরুল ইসলাম",
+        "en": "Qari Nurul Islam",
+        "ar": "القارئ نور الإسلام"
+      },
+      "audioUrl": "https://server8.mp3quran.net/afs/055.mp3",
+      "duration": "১৩:২৫",
+      "description": {
+        "bn": "মাদ্রাসার প্রধান ক্বারী সাহেবের কণ্ঠে মাশকুত সুরের অনন্য তিলাওয়াত।",
+        "en": "Melodious recitation recorded at the Madrasa annual assembly.",
+        "ar": "تلاوة ندية بصوت رئيس قسم التحفيظ بالمدرسة."
+      },
+      "date": "২০২৪-০২-১২",
+      "isPublished": true,
+      "playCount": 1423
+    },
+    {
+      "id": "aud-2",
+      "title": {
+        "bn": "দ্বীনি শিক্ষার গুরুত্ব ও সন্তানের দায়িত্ব – বিশেষ বয়ান",
+        "en": "Significance of Islamic Education & Parenting",
+        "ar": "أهمية التربية الإسلامية وحقوق الأبناء"
+      },
+      "category": "waz",
+      "speaker": {
+        "bn": "মুফতি আব্দুল হক আল-মাদানী",
+        "en": "Mufti Abdul Haque Al-Madani",
+        "ar": "المفتي عبد الحق المدني"
+      },
+      "audioUrl": "https://server8.mp3quran.net/afs/067.mp3",
+      "duration": "২৮:৪০",
+      "description": {
+        "bn": "সন্দ্বীপের বার্ষিক ইসলামী মহাসম্মেলনে প্রদত্ত গুরুত্বপূর্ণ দিকনির্দেশনামূলক নসিহত।",
+        "en": "Guidance lecture delivered during the annual Sandwip Islamic conference.",
+        "ar": "محاضرة توجيهية ألقيت في المؤتمر السنوي بساندويب."
+      },
+      "date": "২০২৪-০১-২০",
+      "isPublished": true,
+      "playCount": 981
+    },
+    {
+      "id": "aud-3",
+      "title": {
+        "bn": "সূরা আল-মুলক – তিলাওয়াত ও ফজিলত",
+        "en": "Surah Al-Mulk – Virtues & Recitation",
+        "ar": "سورة الملك – تلاوة وفضائل"
+      },
+      "category": "quran",
+      "speaker": {
+        "bn": "ক্বারী আব্দুল্লাহ বিন সাঈদ",
+        "en": "Qari Abdullah bin Saeed",
+        "ar": "القارئ عبد الله بن سعيد"
+      },
+      "audioUrl": "https://server8.mp3quran.net/afs/067.mp3",
+      "duration": "০৮:৫০",
+      "description": {
+        "bn": "হিফজ বিভাগের কৃতী ছাত্রের কণ্ঠে সুমধুর তিলাওয়াত।",
+        "en": "Recitation by an outstanding graduate of the Tahfeez section.",
+        "ar": "تلاوة عذبة لأحد خريجي قسم التحفيظ المتميزين."
+      },
+      "date": "২০২৪-০৩-০১",
+      "isPublished": true,
+      "playCount": 650
+    },
+    {
+      "id": "aud-4",
+      "title": {
+        "bn": "রাসূলুল্লাহ (সা.)-এর সুন্নাহ ও চরিত্র – দরস",
+        "en": "The Character & Sunnah of the Prophet (PBUH)",
+        "ar": "شمائل النبي صلى الله عليه وسلم وسنته"
+      },
+      "category": "lectures",
+      "speaker": {
+        "bn": "মাওলানা মাহমুদ হাসান",
+        "en": "Mawlana Mahmud Hasan",
+        "ar": "الشيخ محمود حسن"
+      },
+      "audioUrl": "https://server8.mp3quran.net/afs/055.mp3",
+      "duration": "২১:১৫",
+      "description": {
+        "bn": "ছাত্রদের চরিত্র গঠনে নবীজির উত্তম আদর্শের বাস্তব অনুসরণ।",
+        "en": "Practical lessons in adhering to the prophetic character.",
+        "ar": "دروس عملية في الاقتداء بأخلاق المصطفى صلى الله عليه وسلم."
+      },
+      "date": "২০২৪-০৩-১০",
+      "isPublished": true,
+      "playCount": 420
+    }
+  ],
+  "videos": [
+    {
+      "id": "vid-1",
+      "title": {
+        "bn": "ডাঃ আহমেদ উল্ল্যা-ছালেহা আল-জাদিদ মাদ্রাসা পরিচিতি প্রামাণ্যচিত্র",
+        "en": "Institutional Documentary – Dr. Ahmed Ullah-Saleha Al-Jadid Madrasa",
+        "ar": "الفيلم الوثائقي التعريفي لمدرسة الجديد"
+      },
+      "category": "documentary",
+      "presenter": {
+        "bn": "মাদ্রাসা মিডিয়া বিভাগ",
+        "en": "Madrasa Media Wing",
+        "ar": "قسم الإعلام المدرسي"
+      },
+      "videoUrl": "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=800&auto=format&fit=crop&q=80",
+      "description": {
+        "bn": "মাদ্রাসার ইতিহাস, হিফজ বিভাগ, লিল্লাহ বোর্ডিং ও সার্বিক কার্যক্রমের পূর্ণ চিত্র।",
+        "en": "A comprehensive visual overview of campus facilities, Hifz classrooms, and hostel life.",
+        "ar": "نظرة شاملة على مرافق المدرسة وفصول التحفيظ والحياة الطلابية."
+      },
+      "date": "২০২৪-০১-১০",
+      "isPublished": true
+    },
+    {
+      "id": "vid-2",
+      "title": {
+        "bn": "বার্ষিক দস্তারবন্দী সম্মেলন ও বিশেষ দোয়ার মাহফিল",
+        "en": "Annual Graduation Convocation & Dua Assembly",
+        "ar": "حفل تخرج الحفاظ والمؤتمر السنوي"
+      },
+      "category": "events",
+      "presenter": {
+        "bn": "মুহতামিম সাহেব ও আমন্ত্রিত ওলামায়ে কেরাম",
+        "en": "Principal & Honorable Guest Scholars",
+        "ar": "مدير المدرسة والعلماء الضيوف"
+      },
+      "videoUrl": "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1519817650390-64a93db51149?w=800&auto=format&fit=crop&q=80",
+      "description": {
+        "bn": "হিফজ সম্পন্নকারীদের মাথায় পাগড়ি প্রদান ও দেশ ও জাতির কল্যাণে মুনাজাত।",
+        "en": "Conferring turbans on newly minted Huffaz followed by mass prayers.",
+        "ar": "تتويج الحفاظ والدعاء العام للأمة الإسلامية."
+      },
+      "date": "২০২৪-০২-২৮",
+      "isPublished": true
+    },
+    {
+      "id": "vid-3",
+      "title": {
+        "bn": "জাতীয় হিফজ প্রতিযোগিতায় সন্দ্বীপের শিক্ষার্থীদের সাফল্য",
+        "en": "Sandwip Students Excelling in National Quran Contest",
+        "ar": "تميز طلاب ساندويب في المسابقة القرآنية"
+      },
+      "category": "programs",
+      "presenter": {
+        "bn": "হাফেজ ক্বারী নূরুল ইসলাম",
+        "en": "Hafez Qari Nurul Islam",
+        "ar": "القارئ نور الإسلام"
+      },
+      "videoUrl": "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=800&auto=format&fit=crop&q=80",
+      "description": {
+        "bn": "জাতীয় ক্বিরাত প্রতিযোগিতায় আমাদের ছাত্রদের অসাধারণ পারফরম্যান্স।",
+        "en": "Captivating recitation and recognition in regional Quran championship.",
+        "ar": "أداء متميز وتكريم في بطولة القرآن الإقليمية."
+      },
+      "date": "২০২৪-০৩-০২",
+      "isPublished": true
+    }
+  ],
+  "notices": [
+    {
+      "id": "not-1",
+      "title": {
+        "bn": "২০২৬ শিক্ষাবর্ষে হিফজ ও নূরানী বিভাগে নতুন ছাত্র ভর্তি বিজ্ঞপ্তি",
+        "en": "Admission Announcement for Academic Session 2026 (Hifz & Noorani)",
+        "ar": "إعلان فتح باب القبول للعام الدراسي ٢٠٢٦م في قسمي التحفيظ والنورانية"
+      },
+      "description": {
+        "bn": "এতদ্বারা সংশ্লিষ্ট অভিভাবক ও শিক্ষার্থীবৃন্দের অবগতির জন্য জানানো যাচ্ছে যে, ডাঃ আহমেদ উল্ল্যা-ছালেহা আল-জাদিদ মাদ্রাসায় নূরানী, নাজেরা ও হিফজুল কুরআন বিভাগে নতুন শিক্ষাবর্ষের ভর্তি ফরম বিতরণ শুরু হয়েছে। আসন সংখ্যা সীমিত। আগ্রহী শিক্ষার্থীদের দ্রুত যোগাযোগ করার জন্য অনুরোধ করা হলো।",
+        "en": "This is to inform all respected guardians and students that admission forms for the new session are available for Noorani, Nazera, and Hifz departments. Limited seats available.",
+        "ar": "نحيط أولياء الأمور الكرام علماً ببدء توزيع استمارات القبول للعام الجديد في أقسام النورانية والناظرة والتحفيظ. المقاعد محدودة."
+      },
+      "category": "admission",
+      "date": "২০২৬-০৮-১৫",
+      "expiryDate": "২০২৬-০৯-৩০",
+      "attachmentUrl": "#download-admission-form",
+      "attachmentName": "Admission_Form_2026.pdf",
+      "isPinned": true,
+      "isPublished": true,
+      "publishedBy": {
+        "bn": "মুহতামিম, আল-জাদিদ মাদ্রাসা",
+        "en": "Principal, Al-Jadid Madrasa",
+        "ar": "إدارة مدرسة الجديد"
+      }
+    },
+    {
+      "id": "not-2",
+      "title": {
+        "bn": "হিফজ সমাপনী অর্ধবার্ষিক পরীক্ষা ও পরীক্ষার ফলাফল প্রকাশ",
+        "en": "Hifz Mid-term Exam Schedule & Result Declaration Notice",
+        "ar": "جدول اختبارات منتصف العام لقسم التحفيظ وإعلان النتائج"
+      },
+      "description": {
+        "bn": "আগামী মাসের প্রথম সপ্তাহ থেকে হিফজুল কুরআন বিভাগের অর্ধবার্ষিক সবক ও আমোখতা মৌখিক পরীক্ষা অনুষ্ঠিত হবে। সকল শিক্ষার্থীকে নির্ধারিত সময়ে উপস্থিত থাকার নির্দেশ দেওয়া হলো।",
+        "en": "The oral and memorization evaluation tests for the Tahfeez section will commence from the first week of next month.",
+        "ar": "تبدأ اختبارات الحفظ والمراجعة الشفوية لطلاب قسم التحفيظ مطلع الشهر القادم."
+      },
+      "category": "exam",
+      "date": "২০২৬-০৮-১০",
+      "expiryDate": "২০২৬-০৯-১০",
+      "attachmentUrl": "#exam-routine",
+      "attachmentName": "Hifz_Exam_Routine.pdf",
+      "isPinned": true,
+      "isPublished": true,
+      "publishedBy": {
+        "bn": "পরীক্ষা নিয়ন্ত্রণ কমিটি",
+        "en": "Examination Controller Committee",
+        "ar": "لجنة الامتحانات"
+      }
+    },
+    {
+      "id": "not-3",
+      "title": {
+        "bn": "পবিত্র রমজানুল মুবারক ও ইতিকাফ উপলক্ষে বিশেষ দিকনির্দেশনা",
+        "en": "Guidelines for Ramadan Programs & Itikaf Registration",
+        "ar": "إرشادات خاصة ببرامج شهر رمضان المبارك والاعتكاف"
+      },
+      "description": {
+        "bn": "মাদ্রাসা জামে মসজিদে খতমে তারাবীহ এবং শেষ দশকে ইতিকাফে আগ্রহী মুসল্লিদের মাদ্রাসার অফিসে নাম লিপিবদ্ধ করার অনুরোধ করা যাচ্ছে।",
+        "en": "Khatm-e-Tarawih will be held at the Jame Mosque. Those wishing to participate in Itikaf are requested to register in advance.",
+        "ar": "تقام صلاة التراويح مع ختم القرآن بجامع المدرسة، ويرجى من الراغبين في الاعتكاف التسجيل مسبقاً."
+      },
+      "category": "event",
+      "date": "২০২৬-০৮-০১",
+      "isPinned": false,
+      "isPublished": true,
+      "publishedBy": {
+        "bn": "মাদ্রাসা পরিচালনা কমিটি",
+        "en": "Madrasa Management Committee",
+        "ar": "مجلس إدارة المدرسة"
+      }
+    }
+  ],
+  "events": [
+    {
+      "id": "ev-1",
+      "title": {
+        "bn": "বার্ষিক ইসলামী মহাসম্মেলন ও দস্তারবন্দী মাহফিল ২০২৬",
+        "en": "Annual Islamic Grand Conference & Dastarbandi Convocation 2026",
+        "ar": "المؤتمر الإسلامي السنوي وحفل تتويج الحفاظ ٢٠٢٦م"
+      },
+      "description": {
+        "bn": "মাদ্রাসার ময়দানে দেশবরেণ্য ওলামায়ে কেরাম ও ক্বারীদের উপস্থিতিতে দিনব্যাপী ঐতিহাসিক দ্বীনি সম্মেলন অনুষ্ঠিত হবে। হিফজ সম্পন্নকারী ছাত্রদের সম্মাননা পাগড়ি পরানো হবে।",
+        "en": "A historic day-long gathering featuring renowned Islamic scholars and Qaris, honoring new Hifz graduates.",
+        "ar": "مؤتمر سنوي حاشد بمشاركة كبار العلماء والقراء وتكريم خريجي حفظ القرآن الكريم."
+      },
+      "date": "২০২৬-১১-২০",
+      "time": "সকাল ১০:০০ টা থেকে রাত ১০:০০ টা",
+      "location": {
+        "bn": "মাদ্রাসা ময়দান, কুড়িয়ামৌড়া, সন্দ্বীপ, চট্টগ্রাম",
+        "en": "Madrasa Grounds, Kuriyamoura, Sandwip, Chattogram",
+        "ar": "ساحة مدرسة الجديد، كوريامورا، ساندويب"
+      },
+      "image": "https://images.unsplash.com/photo-1519817650390-64a93db51149?w=800&auto=format&fit=crop&q=80",
+      "isUpcoming": true,
+      "isPublished": true,
+      "guestSpeakers": [
+        {
+          "bn": "প্রধান অতিথি: বিশিষ্ট আন্তর্জাতিক মুফাসসিরে কুরআন",
+          "en": "Chief Guest: Renowned Scholar of Tafseer",
+          "ar": "الضيف الرئيسي: مفسر قرآني بارز"
+        },
+        {
+          "bn": "সভাপতিত্ব: প্রধান প্রতিষ্ঠাতা ডাঃ আহমেদ উল্ল্যা",
+          "en": "Presided by: Chief Founder Dr. Ahmed Ullah",
+          "ar": "برئاسة: المؤسس د. أحمد الله"
+        }
+      ]
+    },
+    {
+      "id": "ev-2",
+      "title": {
+        "bn": "হিফজুল কুরআন ও ক্বিরাত প্রতিযোগিতা এবং পুরস্কার বিতরণী",
+        "en": "Inter-Madrasa Quran Memorization & Qiraat Contest",
+        "ar": "مسابقة حفظ القرآن الكريم وتجويده وتوزيع الجوائز"
+      },
+      "description": {
+        "bn": "সন্দ্বীপ উপজেলার বিভিন্ন দ্বীনি শিক্ষাপ্রতিষ্ঠানের ছাত্র-ছাত্রীদের অংশগ্রহণে প্রতিযোগিতা ও বিজয়ী উপহার প্রদান।",
+        "en": "A healthy Quranic competition among students from multiple institutes in Sandwip.",
+        "ar": "مسابقة قرآنية تنافسية لطلاب مدارس ساندويب مع جوائز قيمة."
+      },
+      "date": "২০২৬-১০-০৫",
+      "time": "বাদ আসর",
+      "location": {
+        "bn": "মাদ্রাসা অডিটোরিয়াম ও মসজিদ প্রাঙ্গণ",
+        "en": "Madrasa Auditorium & Mosque Complex",
+        "ar": "قاعة المدرسة ومجمع المسجد"
+      },
+      "image": "https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=800&auto=format&fit=crop&q=80",
+      "isUpcoming": true,
+      "isPublished": true
+    },
+    {
+      "id": "ev-3",
+      "title": {
+        "bn": "অভিভাবক ও সুধী সমাবেশ ২০২৬",
+        "en": "Guardians & Community Welfare Gathering 2026",
+        "ar": "ملتقى أولياء الأمور ووجهاء المجتمع"
+      },
+      "description": {
+        "bn": "শিক্ষার্থীদের পড়াশোনার অগ্রগতি পর্যালোচনা ও শিক্ষকদের সাথে মতবিনিময় সভা।",
+        "en": "A consultation assembly between teachers, parents, and community patrons.",
+        "ar": "جلسة حوارية وتشاورية بين أولياء الأمور والهيئة التدريسية."
+      },
+      "date": "২০২৬-০৭-১৫",
+      "time": "সকাল ১০:০০ টা",
+      "location": {
+        "bn": "মাদ্রাসা সেমিনার হল",
+        "en": "Madrasa Seminar Hall",
+        "ar": "قاعة الندوات"
+      },
+      "image": "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&auto=format&fit=crop&q=80",
+      "isUpcoming": false,
+      "isPublished": true
+    }
+  ],
+  "downloads": [
+    {
+      "id": "dl-1",
+      "title": {
+        "bn": "মাদ্রাসা ভর্তি আবেদন ফরম (২০২৬)",
+        "en": "Madrasa Student Admission Application Form (2026)",
+        "ar": "استمارة طلب القبول والتسجيل للعام ٢٠٢٦م"
+      },
+      "category": "admission",
+      "fileUrl": "/documents/admission_form_2026.pdf",
+      "fileSize": "১.২ মেগাবাইট (PDF)",
+      "fileType": "pdf",
+      "date": "২০২৬-০৮-১৫",
+      "downloadCount": 384
+    },
+    {
+      "id": "dl-2",
+      "title": {
+        "bn": "মাদ্রাসার প্রাতিষ্ঠানিক নির্দেশিকা ও পরিচিতি ব্রোশিউর",
+        "en": "Institutional Prospectus & Information Brochure",
+        "ar": "دليل المدرسة والكتيب التعريفي الشامل"
+      },
+      "category": "prospectus",
+      "fileUrl": "/documents/madrasa_prospectus.pdf",
+      "fileSize": "৩.৫ মেগাবাইট (PDF)",
+      "fileType": "pdf",
+      "date": "২০২৬-০১-১০",
+      "downloadCount": 512
+    },
+    {
+      "id": "dl-3",
+      "title": {
+        "bn": "হিফজুল কুরআন বিভাগীয় সিলেবাস ও দৈনিক রুটিন",
+        "en": "Tahfeez Department Syllabus & Daily Timetable",
+        "ar": "منهج قسم التحفيظ والجدول اليومي للطلاب"
+      },
+      "category": "academic",
+      "fileUrl": "/documents/hifz_curriculum.pdf",
+      "fileSize": "৮৫০ কিলোবাইট (PDF)",
+      "fileType": "pdf",
+      "date": "২০২৬-০২-০১",
+      "downloadCount": 290
+    },
+    {
+      "id": "dl-4",
+      "title": {
+        "bn": "লিল্লাহ বোর্ডিং ও আবাসিক হোস্টেল নীতিমালা",
+        "en": "Lillah Boarding & Residential Hostel Rules & Regulations",
+        "ar": "لوائح السكن الداخلي والرعاية الخيرية"
+      },
+      "category": "rules",
+      "fileUrl": "/documents/hostel_rules.pdf",
+      "fileSize": "৫২০ কিলোবাইট (PDF)",
+      "fileType": "pdf",
+      "date": "২০২৬-০১-২০",
+      "downloadCount": 175
+    }
+  ],
+  "contacts": [
+    {
+      "id": "cnt-1",
+      "name": "মোহাম্মদ রাশেদুল ইসলাম",
+      "email": "rashedul.sandwip@gmail.com",
+      "phone": "01812345678",
+      "subject": "হিফজ বিভাগে ভর্তি সংক্রান্ত তথ্য",
+      "message": "আসসালামু আলাইকুম। আমার ছোট ভাইকে হিফজ বিভাগে ভর্তি করাতে চাই। আবাসিক হোস্টেলের সুযোগ-সুবিধা সম্পর্কে জানতে পারলে উপকৃত হতাম।",
+      "date": "২০২৬-০৮-১৬",
+      "isRead": false,
+      "replyStatus": "pending"
+    },
+    {
+      "id": "cnt-2",
+      "name": "কাজী মিজানুর রহমান",
+      "email": "mizan.kazi@yahoo.com",
+      "phone": "01711223344",
+      "subject": "এতিমখানা তহবিলে মাসিক অনুদান",
+      "message": "শুভকামনা রইল। আমি প্রতি মাসে দুইজন এতিম ছাত্রের খাবার খরচের দায়িত্ব নিতে আগ্রহী। অনুদান পাঠানোর বিস্তারিত অ্যাকাউন্ট নম্বর জানিয়ে সহায়তা করবেন।",
+      "date": "২০২৬-০৮-১৪",
+      "isRead": true,
+      "replyStatus": "replied",
+      "adminNotes": "অনুদানের বিকাশ ও ব্যাংক তথ্য মেইলে পাঠানো হয়েছে।"
+    }
+  ],
+  "users": [
+    {
+      "id": "usr-1",
+      "name": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "username": "superadmin",
+      "email": "superadmin@aljadidmadrasa.edu.bd",
+      "role": "super_admin",
+      "permissions": [
+        "manage_teachers",
+        "manage_founders",
+        "manage_history",
+        "manage_gallery",
+        "manage_audio",
+        "manage_video",
+        "manage_notices",
+        "manage_events",
+        "manage_downloads",
+        "manage_contacts",
+        "manage_settings",
+        "manage_users",
+        "manage_homepage"
+      ],
+      "password": "admin123",
+      "isActive": true,
+      "createdAt": "2024-01-01"
+    },
+    {
+      "id": "usr-2",
+      "name": "মিডিয়া ও কন্টেন্ট অ্যাডমিন",
+      "username": "admin_media",
+      "email": "media@aljadidmadrasa.edu.bd",
+      "role": "admin",
+      "permissions": [
+        "manage_gallery",
+        "manage_audio",
+        "manage_video",
+        "manage_notices",
+        "manage_events",
+        "manage_downloads"
+      ],
+      "password": "admin123",
+      "isActive": true,
+      "createdAt": "2024-02-01"
+    },
+    {
+      "id": "usr-3",
+      "name": "ডাঃ আহমেদ উল্ল্যা (প্রতিষ্ঠাতা)",
+      "username": "founder_ahmed",
+      "email": "dr.ahmedullah@gmail.com",
+      "role": "founder",
+      "permissions": [],
+      "linkedFounderId": "founder-1",
+      "password": "founder123",
+      "isActive": true,
+      "createdAt": "2024-01-01"
+    }
+  ],
+  "activityLogs": [
+    {
+      "id": "log-1787053701714",
+      "timestamp": "১৮/৮/২০২৬, ৫:৪৮:২১ PM",
+      "userId": "usr-1",
+      "userName": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "userRole": "super_admin",
+      "action": "লগআউট (Logout)",
+      "target": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "details": "সিস্টেম থেকে লগআউট সম্পন্ন হয়েছে।"
+    },
+    {
+      "id": "log-1787052784884",
+      "timestamp": "১৮/৮/২০২৬, ৫:৩৩:০৪ PM",
+      "userId": "usr-1",
+      "userName": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "userRole": "super_admin",
+      "action": "ইউজার আপডেট",
+      "target": "usr-1",
+      "details": "ইউজার অ্যাকাউন্ট বিবরণী সংশোধন করা হয়েছে।"
+    },
+    {
+      "id": "log-1787052783868",
+      "timestamp": "১৮/৮/২০২৬, ৫:৩৩:০৩ PM",
+      "userId": "usr-1",
+      "userName": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "userRole": "super_admin",
+      "action": "ইউজার আপডেট",
+      "target": "usr-1",
+      "details": "ইউজার অ্যাকাউন্ট বিবরণী সংশোধন করা হয়েছে।"
+    },
+    {
+      "id": "log-1787052774404",
+      "timestamp": "১৮/৮/২০২৬, ৫:৩২:৫৪ PM",
+      "userId": "usr-1",
+      "userName": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "userRole": "super_admin",
+      "action": "ইউজার আপডেট",
+      "target": "usr-1",
+      "details": "ইউজার অ্যাকাউন্ট বিবরণী সংশোধন করা হয়েছে।"
+    },
+    {
+      "id": "log-1787052773412",
+      "timestamp": "১৮/৮/২০২৬, ৫:৩২:৫৩ PM",
+      "userId": "usr-1",
+      "userName": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "userRole": "super_admin",
+      "action": "ইউজার আপডেট",
+      "target": "usr-1",
+      "details": "ইউজার অ্যাকাউন্ট বিবরণী সংশোধন করা হয়েছে।"
+    },
+    {
+      "id": "log-1787052752515",
+      "timestamp": "১৮/৮/২০২৬, ৫:৩২:৩২ PM",
+      "userId": "guest",
+      "userName": "ভিজিটর (Visitor)",
+      "userRole": "visitor",
+      "action": "লগইন (Login)",
+      "target": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "details": "super_admin হিসেবে সফলভাবে প্রবেশ করেছেন।"
+    },
+    {
+      "id": "log-1787052751003",
+      "timestamp": "১৮/৮/২০২৬, ৫:৩২:৩১ PM",
+      "userId": "usr-3",
+      "userName": "ডাঃ আহমেদ উল্ল্যা (প্রতিষ্ঠাতা)",
+      "userRole": "founder",
+      "action": "লগআউট (Logout)",
+      "target": "ডাঃ আহমেদ উল্ল্যা (প্রতিষ্ঠাতা)",
+      "details": "সিস্টেম থেকে লগআউট সম্পন্ন হয়েছে।"
+    },
+    {
+      "id": "log-1787052735341",
+      "timestamp": "১৮/৮/২০২৬, ৫:৩২:১৫ PM",
+      "userId": "usr-3",
+      "userName": "ডাঃ আহমেদ উল্ল্যা (প্রতিষ্ঠাতা)",
+      "userRole": "founder",
+      "action": "প্রতিষ্ঠাতা প্রোফাইল সম্পাদনা",
+      "target": "ডাঃ আহমেদ উল্ল্যা",
+      "details": "প্রতিষ্ঠাতা তাঁর নিজস্ব প্রোফাইল, অবদান ও জীবনী আপডেট করেছেন।"
+    },
+    {
+      "id": "log-1787052731259",
+      "timestamp": "১৮/৮/২০২৬, ৫:৩২:১১ PM",
+      "userId": "usr-3",
+      "userName": "ডাঃ আহমেদ উল্ল্যা (প্রতিষ্ঠাতা)",
+      "userRole": "founder",
+      "action": "প্রতিষ্ঠাতা প্রোফাইল সম্পাদনা",
+      "target": "ডাঃ আহমেদ উল্ল্যা",
+      "details": "প্রতিষ্ঠাতা তাঁর নিজস্ব প্রোফাইল, অবদান ও জীবনী আপডেট করেছেন।"
+    },
+    {
+      "id": "log-1787052726899",
+      "timestamp": "১৮/৮/২০২৬, ৫:৩২:০৬ PM",
+      "userId": "guest",
+      "userName": "ভিজিটর (Visitor)",
+      "userRole": "visitor",
+      "action": "লগইন (Login)",
+      "target": "ডাঃ আহমেদ উল্ল্যা (প্রতিষ্ঠাতা)",
+      "details": "founder হিসেবে সফলভাবে প্রবেশ করেছেন।"
+    },
+    {
+      "id": "log-1787052725819",
+      "timestamp": "১৮/৮/২০২৬, ৫:৩২:০৫ PM",
+      "userId": "usr-1",
+      "userName": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "userRole": "super_admin",
+      "action": "লগআউট (Logout)",
+      "target": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "details": "সিস্টেম থেকে লগআউট সম্পন্ন হয়েছে।"
+    },
+    {
+      "id": "log-1787052484401",
+      "timestamp": "১৮/৮/২০২৬, ৫:২৮:০৪ PM",
+      "userId": "usr-1",
+      "userName": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "userRole": "super_admin",
+      "action": "প্রাতিষ্ঠানিক সেটিংস সংরক্ষণ",
+      "target": "ডাঃ আহমেদ উল্ল্যা-ছালেহা আল-জাদিদ মাদ্রাসা",
+      "details": "নাম, নামাজের সময় ও যোগাযোগ তথ্য আপডেট করা হয়েছে।"
+    },
+    {
+      "id": "log-1787052476561",
+      "timestamp": "১৮/৮/২০২৬, ৫:২৭:৫৬ PM",
+      "userId": "usr-1",
+      "userName": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "userRole": "super_admin",
+      "action": "প্রাতিষ্ঠানিক সেটিংস সংরক্ষণ",
+      "target": "ডাঃ আহমেদ উল্ল্যা-ছালেহা আল-জাদিদ মাদ্রাসা",
+      "details": "নাম, নামাজের সময় ও যোগাযোগ তথ্য আপডেট করা হয়েছে।"
+    },
+    {
+      "id": "log-1787051984175",
+      "timestamp": "১৮/৮/২০২৬, ৫:১৯:৪৪ PM",
+      "userId": "usr-1",
+      "userName": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "userRole": "super_admin",
+      "action": "ব্যাকআপ ডাউনলোড",
+      "target": "সিস্টেম ব্যাকআপ",
+      "details": "JSON ডেটাবেজ এক্সপোর্ট সম্পন্ন (৭৬.৮ KB)"
+    },
+    {
+      "id": "log-1787051972796",
+      "timestamp": "১৮/৮/২০২৬, ৫:১৯:৩২ PM",
+      "userId": "guest",
+      "userName": "ভিজিটর (Visitor)",
+      "userRole": "visitor",
+      "action": "লগইন (Login)",
+      "target": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "details": "super_admin হিসেবে সফলভাবে প্রবেশ করেছেন।"
+    },
+    {
+      "id": "log-1787050139820",
+      "timestamp": "8/18/2026, 4:48:59 PM",
+      "userId": "usr-3",
+      "userName": "ডাঃ আহমেদ উল্ল্যা (প্রতিষ্ঠাতা)",
+      "userRole": "founder",
+      "action": "লগআউট (Logout)",
+      "target": "ডাঃ আহমেদ উল্ল্যা (প্রতিষ্ঠাতা)",
+      "details": "সিস্টেম থেকে লগআউট সম্পন্ন হয়েছে।"
+    },
+    {
+      "id": "log-1787049165738",
+      "timestamp": "8/18/2026, 4:32:45 PM",
+      "userId": "guest",
+      "userName": "ভিজিটর (Visitor)",
+      "userRole": "visitor",
+      "action": "লগইন (Login)",
+      "target": "ডাঃ আহমেদ উল্ল্যা (প্রতিষ্ঠাতা)",
+      "details": "founder হিসেবে সফলভাবে প্রবেশ করেছেন।"
+    },
+    {
+      "id": "log-1787049163530",
+      "timestamp": "8/18/2026, 4:32:43 PM",
+      "userId": "usr-1",
+      "userName": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "userRole": "super_admin",
+      "action": "লগআউট (Logout)",
+      "target": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "details": "সিস্টেম থেকে লগআউট সম্পন্ন হয়েছে।"
+    },
+    {
+      "id": "log-1787049052221",
+      "timestamp": "8/18/2026, 4:30:52 PM",
+      "userId": "guest",
+      "userName": "ভিজিটর (Visitor)",
+      "userRole": "visitor",
+      "action": "লগইন (Login)",
+      "target": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "details": "super_admin হিসেবে সফলভাবে প্রবেশ করেছেন।"
+    },
+    {
+      "id": "log-1787049050877",
+      "timestamp": "8/18/2026, 4:30:50 PM",
+      "userId": "usr-2",
+      "userName": "মিডিয়া ও কন্টেন্ট অ্যাডমিন",
+      "userRole": "admin",
+      "action": "লগআউট (Logout)",
+      "target": "মিডিয়া ও কন্টেন্ট অ্যাডমিন",
+      "details": "সিস্টেম থেকে লগআউট সম্পন্ন হয়েছে।"
+    },
+    {
+      "id": "log-1787048851651",
+      "timestamp": "8/18/2026, 4:27:31 PM",
+      "userId": "guest",
+      "userName": "ভিজিটর (Visitor)",
+      "userRole": "visitor",
+      "action": "লগইন (Login)",
+      "target": "মিডিয়া ও কন্টেন্ট অ্যাডমিন",
+      "details": "admin হিসেবে সফলভাবে প্রবেশ করেছেন।"
+    },
+    {
+      "id": "log-1787048849427",
+      "timestamp": "8/18/2026, 4:27:29 PM",
+      "userId": "usr-1",
+      "userName": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "userRole": "super_admin",
+      "action": "লগআউট (Logout)",
+      "target": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "details": "সিস্টেম থেকে লগআউট সম্পন্ন হয়েছে।"
+    },
+    {
+      "id": "log-1",
+      "timestamp": "২০২৬-০৮-১৬ ১০:০০:১৫",
+      "userId": "usr-1",
+      "userName": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "userRole": "super_admin",
+      "action": "লগইন (Login)",
+      "target": "সিস্টেম ড্যাশবোর্ড",
+      "details": "সুপার অ্যাডমিন অ্যাকাউন্টে সফল লগইন।"
+    },
+    {
+      "id": "log-2",
+      "timestamp": "২০২৬-০৮-১৬ ১১:১৫:৪০",
+      "userId": "usr-1",
+      "userName": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "userRole": "super_admin",
+      "action": "নোটিশ প্রকাশ (Publish Notice)",
+      "target": "২০২৬ শিক্ষাবর্ষে ভর্তি বিজ্ঞপ্তি",
+      "details": "হিফজ ও নূরানী বিভাগের ভর্তি বিজ্ঞপ্তি পিন করে প্রকাশ করা হয়েছে।"
+    },
+    {
+      "id": "log-3",
+      "timestamp": "২০২৬-০৮-১৬ ১২:৩০:১০",
+      "userId": "usr-3",
+      "userName": "ডাঃ আহমেদ উল্ল্যা",
+      "userRole": "founder",
+      "action": "প্রোফাইল আপডেট আবেদন (Profile Update)",
+      "target": "প্রতিষ্ঠাতা প্রোফাইল",
+      "details": "প্রতিষ্ঠাতা তাঁর জীবনী ও সমাজসেবামূলক কাজের নতুন বিবরণী পর্যালোচনার জন্য সাবমিট করেছেন।"
+    }
+  ]
+}

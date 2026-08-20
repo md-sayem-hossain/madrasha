@@ -1,0 +1,6 @@
+{
+  "name": "ডাঃ আহমেদ উল্ল্যা-ছালেহা আল-জাদিদ মাদ্রাসা",
+  "description": "অফিসিয়াল ওয়েবসাইট ও ডায়নামিক সিএমএস - Dr. Ahmed Ullah-Saleha Al-Jadid Madrasa Official Multilingual Website & CMS",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

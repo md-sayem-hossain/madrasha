@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    font-family: 'Hind Siliguri', 'Plus Jakarta Sans', system-ui, sans-serif;
+    background-color: #f8f9fa;
+    color: #1a2e1a;
+  }
+  html[lang="ar"] {
+    font-family: 'Amiri', 'Scheherazade New', serif;
+  }
+  html[lang="en"] {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+}
+
+.islamic-pattern {
+  background-color: #0a4d28;
+  background-image: radial-gradient(#d4af37 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.islamic-pattern-dark {
+  background-color: #1a2e1a;
+  background-image: radial-gradient(rgba(212, 175, 55, 0.15) 1.2px, transparent 0);
+  background-size: 20px 20px;
+}
+
+.islamic-pattern-light {
+  background-color: #f8f9fa;
+  background-image: radial-gradient(rgba(10, 77, 40, 0.08) 1.2px, transparent 0);
+  background-size: 20px 20px;
+}
+
+.gold-gradient {
+  background: linear-gradient(135deg, #d4af37 0%, #b89326 100%);
+}
+
+.emerald-gradient {
+  background: linear-gradient(135deg, #0a4d28 0%, #06381c 100%);
+}
+
+.border-accent-gold {
+  border-color: #d4af37;
+}
+
+.border-accent-green {
+  border-color: #0a4d28;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Audio wave animation */
+@keyframes audioWave {
+  0%, 100% { height: 4px; }
+  50% { height: 18px; }
+}
+
+.animate-wave-1 { animation: audioWave 1s ease-in-out infinite 0.1s; }
+.animate-wave-2 { animation: audioWave 1s ease-in-out infinite 0.3s; }
+.animate-wave-3 { animation: audioWave 1s ease-in-out infinite 0.5s; }
+.animate-wave-4 { animation: audioWave 1s ease-in-out infinite 0.2s; }
