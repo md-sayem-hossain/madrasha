@@ -175,7 +175,7 @@ export const translations = {
     role_visitor: 'ভিজিটর (Visitor)',
 
     // Footer
-    footer_quick_links: 'দ্রুত লিংক',
+    footer_quick_links: 'দ্রুত লিংক ',
     footer_departments: 'শিক্ষা বিভাগসমূহ',
     footer_about: 'মাদ্রাসা পরিচিতি',
     footer_rights: 'সর্বস্বত্ব সংরক্ষিত।',
