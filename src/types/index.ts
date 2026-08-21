@@ -1,4 +1,5 @@
 export type Language = 'bn' | 'en' | 'ar';
+export type ThemeMode = 'light' | 'dark';
 
 export interface LocalizedString {
   bn: string;

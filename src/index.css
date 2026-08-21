@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   html {
     font-family: 'Hind Siliguri', 'Plus Jakarta Sans', system-ui, sans-serif;
@@ -7,6 +9,12 @@
     color: #1a2e1a;
     margin-top: 0 !important;
     direction: ltr;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+  html.dark {
+    background-color: #08110b;
+    color: #f1f5f9;
+    color-scheme: dark;
   }
   html[lang="ar"] {
     font-family: 'Amiri', 'Scheherazade New', serif;
@@ -20,7 +28,12 @@
     padding: 0;
     top: 0 !important;
     position: static !important;
-    transition: direction 0.2s ease;
+    transition: direction 0.2s ease, background-color 0.25s ease, color 0.25s ease;
+  }
+
+  html.dark body {
+    background-color: #08110b;
+    color: #f1f5f9;
   }
 
   /* RTL / Arabic Direction */
@@ -30,6 +43,209 @@
   html[dir="rtl"] body {
     direction: rtl;
   }
+}
+
+/* =========================================
+   HIGH-CONTRAST DARK MODE SURFACE OVERRIDES
+========================================= */
+.dark #madrasa-app-root {
+  background-color: #08110b !important;
+  color: #f1f5f9 !important;
+}
+
+.dark #site-header {
+  background-color: rgba(11, 22, 16, 0.95) !important;
+  border-color: rgba(212, 175, 55, 0.25) !important;
+}
+
+.dark #admin-portal-header {
+  background-color: rgba(11, 22, 16, 0.95) !important;
+  border-color: rgba(212, 175, 55, 0.25) !important;
+}
+
+.dark #admin-portal-root,
+.dark #admin-portal-login-root {
+  background-color: #08110b !important;
+  color: #f1f5f9 !important;
+}
+
+/* Dark mode card and container surfaces */
+.dark .bg-white {
+  background-color: #101d16 !important;
+  color: #f1f5f9;
+}
+
+.dark .bg-slate-50,
+.dark .bg-slate-50\/50,
+.dark .bg-slate-50\/80 {
+  background-color: #0c1610 !important;
+}
+
+.dark .bg-slate-100,
+.dark .bg-slate-100\/70,
+.dark .bg-slate-100\/80 {
+  background-color: #15241c !important;
+  color: #e2e8f0;
+}
+
+.dark .bg-slate-200 {
+  background-color: #1c3025 !important;
+}
+
+/* Dark mode text colors with crisp high contrast */
+.dark .text-slate-900 {
+  color: #f8fafc !important;
+}
+
+.dark .text-slate-800 {
+  color: #f1f5f9 !important;
+}
+
+.dark .text-slate-700 {
+  color: #e2e8f0 !important;
+}
+
+.dark .text-slate-600 {
+  color: #cbd5e1 !important;
+}
+
+.dark .text-slate-500 {
+  color: #94a3b8 !important;
+}
+
+.dark .text-slate-400 {
+  color: #94a3b8 !important;
+}
+
+.dark .text-[#0a4d28] {
+  color: #34d399 !important;
+}
+
+.dark .text-[#06381c] {
+  color: #6ee7b7 !important;
+}
+
+.dark .text-emerald-900,
+.dark .text-emerald-800 {
+  color: #6ee7b7 !important;
+}
+
+.dark .text-emerald-700 {
+  color: #34d399 !important;
+}
+
+/* Dark mode borders */
+.dark .border-slate-100,
+.dark .border-slate-150,
+.dark .border-slate-200,
+.dark .border-slate-300 {
+  border-color: rgba(45, 85, 60, 0.45) !important;
+}
+
+.dark .border-emerald-100,
+.dark .border-emerald-200 {
+  border-color: rgba(52, 211, 153, 0.3) !important;
+}
+
+/* Dark mode inputs, textareas, selects */
+.dark input:not([type="checkbox"]):not([type="radio"]),
+.dark textarea,
+.dark select {
+  background-color: #0c1711 !important;
+  color: #f8fafc !important;
+  border-color: rgba(212, 175, 55, 0.35) !important;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #64748b !important;
+}
+
+/* Dark mode emerald tints and badges */
+.dark .bg-emerald-50,
+.dark .bg-emerald-50\/70,
+.dark .bg-emerald-50\/80,
+.dark .bg-emerald-50\/90 {
+  background-color: rgba(10, 77, 40, 0.35) !important;
+  color: #6ee7b7 !important;
+}
+
+.dark .bg-emerald-100 {
+  background-color: rgba(10, 77, 40, 0.5) !important;
+  color: #a7f3d0 !important;
+}
+
+/* Dark mode amber/gold tints */
+.dark .bg-amber-50 {
+  background-color: rgba(212, 175, 55, 0.15) !important;
+  color: #fef08a !important;
+}
+
+.dark .bg-blue-50 {
+  background-color: rgba(30, 58, 138, 0.3) !important;
+  color: #93c5fd !important;
+}
+
+.dark .bg-purple-50 {
+  background-color: rgba(88, 28, 135, 0.3) !important;
+  color: #d8b4fe !important;
+}
+
+.dark .bg-red-50 {
+  background-color: rgba(153, 27, 27, 0.3) !important;
+  color: #fca5a5 !important;
+}
+
+/* Dark mode patterns */
+.dark .islamic-pattern-light {
+  background-color: #08110b !important;
+  background-image: radial-gradient(rgba(212, 175, 55, 0.18) 1.2px, transparent 0) !important;
+}
+
+.dark .islamic-pattern {
+  background-color: #07190f !important;
+  background-image: radial-gradient(#d4af37 1px, transparent 1px) !important;
+}
+
+/* Dark mode tables and lists */
+.dark table {
+  color: #f1f5f9;
+}
+.dark th {
+  background-color: #0c1711 !important;
+  color: #d4af37 !important;
+  border-color: rgba(45, 85, 60, 0.45) !important;
+}
+.dark td {
+  border-color: rgba(45, 85, 60, 0.3) !important;
+}
+.dark tr:hover td {
+  background-color: rgba(16, 29, 22, 0.6) !important;
+}
+
+/* Dark mode dropdowns and flyouts */
+.dark .language-menu,
+.dark [id^="nav-dropdown-panel-"] {
+  background-color: #101d16 !important;
+  border-color: rgba(212, 175, 55, 0.25) !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.7), 0 8px 10px -6px rgba(0, 0, 0, 0.7) !important;
+}
+
+.dark .language-option:hover,
+.dark .language-option.hover\:bg-slate-100:hover {
+  background-color: #1a2f23 !important;
+  color: #f8fafc !important;
+}
+
+/* Custom scrollbar dark */
+.dark ::-webkit-scrollbar-track {
+  background: #08110b;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #1e382b;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #2d5540;
 }
 
 /* =========================================

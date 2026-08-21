@@ -7,6 +7,7 @@ import {
 } from '../lib/googleTranslate';
 import {
   Language,
+  ThemeMode,
   MadrasaDatabase,
   UserAccount,
   AdminPermission,
@@ -27,6 +28,9 @@ import { initialMadrasaData } from '../data/initialData';
 interface MadrasaContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
+  theme: ThemeMode;
+  setTheme: (theme: ThemeMode) => void;
+  toggleTheme: () => void;
   currentUser: UserAccount | null;
   setCurrentUser: (user: UserAccount | null) => void;
   activeTab: string;
@@ -113,6 +117,58 @@ const normalizeMadrasaData = (incoming: Partial<MadrasaDatabase> | null | undefi
 };
 
 export const MadrasaProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [theme, setThemeState] = useState<ThemeMode>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const saved = localStorage.getItem('al_jadid_theme') as ThemeMode;
+        if (saved === 'dark' || saved === 'light') {
+          return saved;
+        }
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+      } catch {
+        // ignore
+      }
+    }
+    return 'light';
+  });
+
+  const setTheme = (newTheme: ThemeMode) => {
+    setThemeState(newTheme);
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem('al_jadid_theme', newTheme);
+      } catch {
+        // ignore
+      }
+      if (newTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    }
+  };
+
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
+
+  // Sync theme to DOM on mount & state change
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    }
+  }, [theme]);
+
   const [language, setLanguageState] = useState<Language>(() => {
     const saved = localStorage.getItem(LANG_STORAGE_KEY) as Language;
     return saved === 'en' || saved === 'ar' || saved === 'bn' ? saved : 'bn';
@@ -601,6 +657,9 @@ const [data, setData] = useState<MadrasaDatabase>(() => {
       value={{
         language,
         setLanguage,
+        theme,
+        setTheme,
+        toggleTheme,
         currentUser,
         setCurrentUser,
         activeTab,

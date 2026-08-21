@@ -3,6 +3,7 @@ import { MadrasaProvider, useMadrasa } from './context/MadrasaContext';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { AudioPlayerBar } from './components/layout/AudioPlayerBar';
+import { ScrollToTop } from './components/layout/ScrollToTop';
 
 // Views
 import { HomeView } from './components/home/HomeView';
@@ -80,6 +81,9 @@ const MainAppContent: React.FC = () => {
 
       {/* Floating Global Audio Player */}
       <AudioPlayerBar />
+
+      {/* Floating Scroll To Top Button */}
+      <ScrollToTop />
 
       {/* Universal Search Modal */}
       <SearchModal />
