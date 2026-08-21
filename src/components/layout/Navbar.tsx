@@ -25,9 +25,7 @@ import {
   Bell,
   Calendar,
   FileText,
-  Building2,
-  Sun,
-  Moon
+  Building2
 } from 'lucide-react';
 import { useMadrasa } from '../../context/MadrasaContext';
 import { translations, getLocalized, formatDigits } from '../../lib/translations';
@@ -52,8 +50,6 @@ export const Navbar: React.FC = () => {
   const {
     language,
     setLanguage,
-    theme,
-    toggleTheme,
     activeTab,
     setActiveTab,
     currentUser,
@@ -251,28 +247,6 @@ export const Navbar: React.FC = () => {
               <span>{data.settings.email}</span>
             </a>
 
-            {/* Global Dark Mode Theme Toggle */}
-            <button
-              type="button"
-              id="theme-toggle-top-btn"
-              onClick={toggleTheme}
-              className="flex items-center gap-1.5 bg-[#0a4d28] hover:bg-[#083e20] text-[#d4af37] hover:text-amber-200 px-2.5 py-1 rounded-lg text-xs font-semibold transition-all border border-[#d4af37]/40 shadow-xs cursor-pointer"
-              title={theme === 'dark' ? 'হালকা থিমে ফিরুন (Switch to Light Mode)' : 'ডার্ক মোড সক্রিয় করুন (Switch to Dark Mode)'}
-              aria-label="Toggle Dark Mode"
-            >
-              {theme === 'dark' ? (
-                <>
-                  <Sun className="w-3.5 h-3.5 text-amber-300" />
-                  <span className="hidden sm:inline">লাইট মোড</span>
-                </>
-              ) : (
-                <>
-                  <Moon className="w-3.5 h-3.5 text-[#d4af37]" />
-                  <span className="hidden sm:inline">ডার্ক মোড</span>
-                </>
-              )}
-            </button>
-
             {/* Language Selector Dropdown with Flags */}
             <div className="relative" id="language">
               <button
@@ -396,26 +370,10 @@ export const Navbar: React.FC = () => {
             <button
               id="search-trigger-btn"
               onClick={() => setIsSearchOpen(true)}
-              className="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors cursor-pointer"
+              className="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors"
               aria-label="Search"
             >
               <Search className="w-4 h-4" />
-            </button>
-
-            {/* Dark/Light Theme Toggle Action Button */}
-            <button
-              id="theme-toggle-main-btn"
-              type="button"
-              onClick={toggleTheme}
-              className="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors cursor-pointer"
-              title={theme === 'dark' ? 'Light Theme' : 'Dark Theme'}
-              aria-label="Toggle Dark Mode"
-            >
-              {theme === 'dark' ? (
-                <Sun className="w-4 h-4 text-amber-400" />
-              ) : (
-                <Moon className="w-4 h-4 text-slate-700" />
-              )}
             </button>
 
             {/* Portal Login / Dashboard Button */}
@@ -450,35 +408,21 @@ export const Navbar: React.FC = () => {
             </button>
           </div>
 
-          {/* Mobile menu, theme toggle and search buttons */}
+          {/* Mobile menu and search buttons */}
           <div className="flex items-center gap-1.5 lg:hidden">
             <button
               id="mobile-search-btn"
               onClick={() => setIsSearchOpen(true)}
-              className="p-2 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer"
+              className="p-2 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200"
               aria-label="Search"
             >
               <Search className="w-4 h-4" />
             </button>
 
             <button
-              id="mobile-theme-toggle-btn"
-              onClick={toggleTheme}
-              className="p-2 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer"
-              aria-label="Toggle Dark Mode"
-              title={theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
-            >
-              {theme === 'dark' ? (
-                <Sun className="w-4 h-4 text-amber-400" />
-              ) : (
-                <Moon className="w-4 h-4 text-slate-700" />
-              )}
-            </button>
-
-            <button
               id="mobile-menu-toggle-btn"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg bg-[#0a4d28] text-white hover:bg-[#083e20] cursor-pointer"
+              className="p-2 rounded-lg bg-[#0a4d28] text-white hover:bg-[#083e20]"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -598,7 +542,7 @@ export const Navbar: React.FC = () => {
       {mobileMenuOpen && (
         <div id="mobile-drawer" className="lg:hidden bg-white border-b border-slate-200 shadow-xl px-4 py-4 max-h-[80vh] overflow-y-auto">
           {/* Mobile Language Selector */}
-          <div className="mb-3 pb-3 border-b border-slate-150 flex items-center justify-between">
+          <div className="mb-4 pb-3 border-b border-slate-150 flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-500 flex items-center gap-1.5">
               <Globe className="w-3.5 h-3.5 text-emerald-800" />
               <span>ভাষা পরিবর্তন (Language):</span>
@@ -630,34 +574,6 @@ export const Navbar: React.FC = () => {
               >
                 <span>🇸🇦</span>
                 <span>عربي</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Mobile Theme Switcher */}
-          <div className="mb-4 pb-3 border-b border-slate-150 flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500 flex items-center gap-1.5">
-              {theme === 'dark' ? <Moon className="w-3.5 h-3.5 text-amber-400" /> : <Sun className="w-3.5 h-3.5 text-amber-500" />}
-              <span>থিম মোড (Theme):</span>
-            </span>
-            <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl">
-              <button
-                onClick={() => theme === 'dark' && toggleTheme()}
-                className={`px-3 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
-                  theme === 'light' ? 'bg-[#0a4d28] text-white shadow-xs' : 'text-slate-700 hover:text-slate-900'
-                }`}
-              >
-                <Sun className="w-3.5 h-3.5" />
-                <span>লাইট</span>
-              </button>
-              <button
-                onClick={() => theme === 'light' && toggleTheme()}
-                className={`px-3 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
-                  theme === 'dark' ? 'bg-[#0a4d28] text-[#d4af37] shadow-xs' : 'text-slate-700 hover:text-slate-900'
-                }`}
-              >
-                <Moon className="w-3.5 h-3.5" />
-                <span>ডার্ক</span>
               </button>
             </div>
           </div>

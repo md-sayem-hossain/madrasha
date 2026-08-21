@@ -38,9 +38,7 @@ import {
   LayoutDashboard,
   Building2,
   FolderArchive,
-  GraduationCap,
-  Sun,
-  Moon
+  GraduationCap
 } from 'lucide-react';
 import { useMadrasa } from '../../context/MadrasaContext';
 import { AdminPermission, Language } from '../../types';
@@ -109,9 +107,7 @@ export const AdminPortal: React.FC = () => {
     isSaving,
     setActiveTab,
     language,
-    setLanguage,
-    theme,
-    toggleTheme
+    setLanguage
   } = useMadrasa();
 
   // Login form state
@@ -364,23 +360,12 @@ export const AdminPortal: React.FC = () => {
               <span className="text-[11px] font-semibold text-[#d4af37]">
                 ডাঃ আহমেদ উল্ল্যা-ছালেহা আল-জাদিদ মাদ্রাসা
               </span>
-              <div className="flex items-center gap-3">
-                <button
-                  type="button"
-                  onClick={toggleTheme}
-                  className="text-[11px] font-semibold text-amber-300 hover:text-white flex items-center gap-1 cursor-pointer transition-colors"
-                  title={theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
-                >
-                  {theme === 'dark' ? <Sun className="w-3 h-3 text-amber-300" /> : <Moon className="w-3 h-3 text-emerald-200" />}
-                  <span>{theme === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড'}</span>
-                </button>
-                <button
-                  onClick={() => setActiveTab('home')}
-                  className="text-[11px] font-medium text-emerald-200 hover:text-white transition-colors cursor-pointer"
-                >
-                  ← মূল ওয়েবসাইটে ফিরে যান
-                </button>
-              </div>
+              <button
+                onClick={() => setActiveTab('home')}
+                className="text-[11px] font-medium text-emerald-200 hover:text-white transition-colors cursor-pointer"
+              >
+                ← মূল ওয়েবসাইটে ফিরে যান
+              </button>
             </div>
           </div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
@@ -540,18 +525,6 @@ export const AdminPortal: React.FC = () => {
 
             {/* Right: Quick actions */}
             <div className="flex items-center gap-2 ml-auto">
-              {/* Theme Toggle in Admin Top Bar */}
-              <button
-                type="button"
-                onClick={toggleTheme}
-                className="flex items-center gap-1 bg-[#0a4d28] hover:bg-[#083e20] text-[#d4af37] hover:text-amber-200 px-2 py-0.5 rounded-md text-[11px] font-semibold transition-all border border-[#d4af37]/40 cursor-pointer"
-                title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-                aria-label="Toggle Dark Mode"
-              >
-                {theme === 'dark' ? <Sun className="w-3 h-3 text-amber-300" /> : <Moon className="w-3 h-3 text-[#d4af37]" />}
-                <span className="hidden sm:inline">{theme === 'dark' ? 'লাইট' : 'ডার্ক'}</span>
-              </button>
-
               {/* Language Switcher Dropdown */}
               <div className="relative">
                 <button
