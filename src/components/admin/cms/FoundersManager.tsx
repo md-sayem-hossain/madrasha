@@ -27,6 +27,12 @@ export const FoundersManager: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'all' | 'pending'>('all');
   const [deleteTarget, setDeleteTarget] = useState<Founder | null>(null);
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const [toastMsg, setToastMsg] = useState<string | null>(null);
+
+  const showToast = (msg: string) => {
+    setToastMsg(msg);
+    setTimeout(() => setToastMsg(null), 3500);
+  };
 
   const canManage = hasPermission(currentUser, 'manage_founders');
 
@@ -119,15 +125,24 @@ export const FoundersManager: React.FC = () => {
       linkedUserId: f.linkedUserId
     };
 
-    // Save with server-side auto-translation
+    // Save with server-side auto-translation & persist image to disk / DB
     const saved = await saveEntityWithTranslation('founder', cleanFounder);
 
+    updateData(prev => {
+      const exists = prev.founders.some(item => item.id === cleanFounder.id);
+      const updatedList = exists
+        ? prev.founders.map(item => item.id === cleanFounder.id ? (saved || cleanFounder) : item)
+        : [...prev.founders, (saved || cleanFounder)];
+      return { ...prev, founders: updatedList };
+    });
+
     addActivityLog(
-      f.id ? 'প্রতিষ্ঠাতা আপডেট' : 'নতুন প্রতিষ্ঠাতা যোগ',
+      f.id ? 'প্রতিষ্ঠাতা তথ্য ও ছবি আপডেট' : 'নতুন প্রতিষ্ঠাতা যোগ',
       saved?.name?.bn || cleanFounder.name.bn,
-      `পদবী: ${saved?.designation?.bn || cleanFounder.designation.bn}`
+      `পদবী: ${saved?.designation?.bn || cleanFounder.designation.bn}, ছবি সংরক্ষিত`
     );
 
+    showToast('প্রতিষ্ঠাতার তথ্য ও ছবি সফলভাবে প্রজেক্টে সংরক্ষিত হয়েছে!');
     setEditingFounder(null);
   };
 
@@ -149,7 +164,7 @@ export const FoundersManager: React.FC = () => {
     setDeleteTarget(null);
   };
 
-  const handleApprovePendingUpdate = (founderId: string) => {
+  const handleApprovePendingUpdate = async (founderId: string) => {
     const target = data.founders.find(f => f.id === founderId);
     if (!target || !target.pendingUpdate) return;
 
@@ -161,12 +176,15 @@ export const FoundersManager: React.FC = () => {
       isApproved: true
     };
 
+    const saved = await saveEntityWithTranslation('founder', merged);
+
     updateData(prev => ({
       ...prev,
-      founders: prev.founders.map(f => f.id === founderId ? merged : f)
+      founders: prev.founders.map(f => f.id === founderId ? (saved || merged) : f)
     }));
 
     addActivityLog('প্রতিষ্ঠাতা প্রোফাইল অনুমোদন', merged.name.bn, 'প্রতিষ্ঠাতার প্রেরিত প্রোফাইল আপডেট অনুমোদন করা হয়েছে।');
+    showToast('প্রতিষ্ঠাতার প্রোফাইল আপডেট অনুমোদিত ও সংরক্ষিত হয়েছে!');
   };
 
   const pendingUpdates = data.founders.filter(f => f.pendingUpdate);
@@ -201,7 +219,14 @@ export const FoundersManager: React.FC = () => {
         </button>
       </div>
 
-      {/* Tabs */}
+      {/* Tabs & Toast */}
+      {toastMsg && (
+        <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-2xl text-emerald-800 text-xs font-bold flex items-center gap-2 animate-in fade-in">
+          <CheckCircle className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+          <span>{toastMsg}</span>
+        </div>
+      )}
+
       <div className="flex items-center gap-2 border-b border-slate-100 pb-2">
         <button
           onClick={() => setActiveTab('all')}
@@ -454,7 +479,9 @@ export const FoundersManager: React.FC = () => {
                   value={editingFounder.image || ''}
                   onChange={img => setEditingFounder({ ...editingFounder, image: img })}
                   label="প্রতিষ্ঠাতার ছবি (Image Upload / Selection)"
+                  helperText="JPG, PNG, WEBP ফরম্যাট (প্রজেক্ট ফোল্ডারে সংরক্ষিত হবে)"
                   previewHeight="h-32"
+                  folder="founders"
                 />
               </div>
 
@@ -462,14 +489,14 @@ export const FoundersManager: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setEditingFounder(null)}
-                  className="px-4 py-2 bg-slate-200 rounded-xl font-semibold text-slate-700"
+                  className="px-4 py-2 bg-slate-200 rounded-xl font-semibold text-slate-700 cursor-pointer"
                 >
                   বাতিল
                 </button>
                 <button
                   type="button"
                   onClick={() => handleSaveFounder(editingFounder)}
-                  className="px-5 py-2 bg-emerald-800 hover:bg-emerald-700 text-white rounded-xl font-bold shadow-xs"
+                  className="px-5 py-2 bg-emerald-800 hover:bg-emerald-700 text-white rounded-xl font-bold shadow-xs cursor-pointer"
                 >
                   সংরক্ষণ করুন
                 </button>
@@ -487,7 +514,10 @@ export const FoundersManager: React.FC = () => {
                 <img
                   src={founder.image}
                   alt={founder.name.bn}
-                  className="w-16 h-16 rounded-2xl object-cover border border-slate-200 flex-shrink-0"
+                  className="w-16 h-16 rounded-2xl object-cover border border-slate-200 flex-shrink-0 bg-slate-100"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400';
+                  }}
                 />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between gap-1">

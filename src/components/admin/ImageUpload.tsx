@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Upload, Image as ImageIcon, X, Link, RefreshCw, Check } from 'lucide-react';
+import { Upload, Image as ImageIcon, X, Link, RefreshCw, Check, HardDrive, CheckCircle2, AlertCircle } from 'lucide-react';
 
 interface ImageUploadProps {
   id?: string;
@@ -9,6 +9,7 @@ interface ImageUploadProps {
   helperText?: string;
   aspectRatio?: 'square' | 'video' | 'any';
   previewHeight?: string;
+  folder?: 'teachers' | 'founders' | 'gallery' | 'general';
 }
 
 export const ImageUpload: React.FC<ImageUploadProps> = ({
@@ -16,14 +17,50 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
   value,
   onChange,
   label = 'ছবি আপলোড করুন (Upload Image)',
-  helperText = 'JPG, PNG, WEBP ফরম্যাট (সর্বোচ্চ ৫ MB)',
+  helperText = 'JPG, PNG, WEBP ফরম্যাট (প্রজেক্ট ফোল্ডারে সংরক্ষিত হবে)',
   aspectRatio = 'any',
-  previewHeight = 'h-36'
+  previewHeight = 'h-36',
+  folder = 'general'
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [showUrlInput, setShowUrlInput] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [statusMessage, setStatusMessage] = useState<string | null>(null);
+
+  const uploadToServer = async (base64Data: string, originalName?: string) => {
+    setIsProcessing(true);
+    setStatusMessage('প্রজেক্ট ফোল্ডারে সেভ হচ্ছে...');
+    try {
+      const response = await fetch('/api/upload-image', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          image: base64Data,
+          folder: folder,
+          filename: originalName || `${folder}-photo`
+        })
+      });
+      const data = await response.json();
+      if (data.success && data.url) {
+        onChange(data.url);
+        setStatusMessage('প্রজেক্ট ফোল্ডারে সফলভাবে সেভ হয়েছে!');
+        setTimeout(() => setStatusMessage(null), 3000);
+      } else {
+        // Fallback to base64 if server returned error
+        onChange(base64Data);
+        setStatusMessage('লোকাল ডাটা হিসেবে সংরক্ষিত');
+        setTimeout(() => setStatusMessage(null), 3000);
+      }
+    } catch (err) {
+      console.warn('Direct upload error, applying fallback:', err);
+      onChange(base64Data);
+      setStatusMessage('লোকাল ডাটা হিসেবে সংরক্ষিত');
+      setTimeout(() => setStatusMessage(null), 3000);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
   const processFile = (file: File) => {
     if (!file.type.startsWith('image/')) {
@@ -31,16 +68,18 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
       return;
     }
 
-    if (file.size > 8 * 1024 * 1024) {
-      alert('ছবির সাইজ ৮ মেগাবাইটের কম হতে হবে।');
+    if (file.size > 15 * 1024 * 1024) {
+      alert('ছবির সাইজ ১৫ মেগাবাইটের কম হতে হবে।');
       return;
     }
 
     setIsProcessing(true);
+    setStatusMessage('ছবি প্রসেসিং হচ্ছে...');
     const reader = new FileReader();
     reader.onload = (e) => {
       const result = e.target?.result as string;
-      // Optimize image size using canvas if large
+      
+      // Optimize image size using canvas if very large
       const img = new Image();
       img.onload = () => {
         const maxWidth = 1200;
@@ -63,18 +102,15 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
           const ctx = canvas.getContext('2d');
           if (ctx) {
             ctx.drawImage(img, 0, 0, width, height);
-            const compressed = canvas.toDataURL('image/jpeg', 0.85);
-            onChange(compressed);
-            setIsProcessing(false);
+            const compressed = canvas.toDataURL('image/jpeg', 0.88);
+            uploadToServer(compressed, file.name);
             return;
           }
         }
-        onChange(result);
-        setIsProcessing(false);
+        uploadToServer(result, file.name);
       };
       img.onerror = () => {
-        onChange(result);
-        setIsProcessing(false);
+        uploadToServer(result, file.name);
       };
       img.src = result;
     };
@@ -105,6 +141,8 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
     }
   };
 
+  const isLocalProjectFile = value && value.startsWith('/uploads/');
+
   return (
     <div className="space-y-1.5" id={id || 'image-upload-field'}>
       <div className="flex items-center justify-between">
@@ -114,7 +152,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
         <button
           type="button"
           onClick={() => setShowUrlInput(!showUrlInput)}
-          className="text-[11px] text-emerald-700 hover:text-emerald-800 flex items-center gap-1 font-medium"
+          className="text-[11px] text-emerald-700 hover:text-emerald-800 flex items-center gap-1 font-medium cursor-pointer"
         >
           <Link className="w-3 h-3" />
           <span>{showUrlInput ? 'ফাইল আপলোড মোড' : 'বা ইমেজ URL লিংক'}</span>
@@ -128,14 +166,14 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
               type="url"
               value={value}
               onChange={(e) => onChange(e.target.value)}
-              placeholder="https://images.unsplash.com/..."
+              placeholder="https://images.unsplash.com/... বা /uploads/..."
               className="flex-1 text-xs p-2.5 rounded-xl border border-slate-300 bg-white focus:ring-2 focus:ring-emerald-500 outline-none font-mono"
             />
             {value && (
               <button
                 type="button"
                 onClick={() => onChange('')}
-                className="p-2.5 rounded-xl bg-slate-100 hover:bg-red-100 text-slate-600 hover:text-red-700"
+                className="p-2.5 rounded-xl bg-slate-100 hover:bg-red-100 text-slate-600 hover:text-red-700 cursor-pointer"
                 title="মুছে ফেলুন"
               >
                 <X className="w-4 h-4" />
@@ -143,15 +181,21 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
             )}
           </div>
           {value && (
-            <div className="relative w-24 h-24 rounded-xl border border-slate-200 overflow-hidden bg-slate-50">
-              <img
-                src={value}
-                alt="Preview"
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1544717305-2782549b5136?w=400';
-                }}
-              />
+            <div className="flex items-center gap-3 p-2 rounded-xl bg-slate-50 border border-slate-200">
+              <div className="relative w-16 h-16 rounded-lg border border-slate-200 overflow-hidden bg-slate-100 flex-shrink-0">
+                <img
+                  src={value}
+                  alt="Preview"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1544717305-2782549b5136?w=400';
+                  }}
+                />
+              </div>
+              <div className="text-[11px] text-slate-600 min-w-0 flex-1">
+                <p className="font-semibold text-slate-800 truncate">{value}</p>
+                <p className="text-[10px] text-slate-400 mt-0.5">বাহ্যিক বা লোকাল লিংক সক্রিয় রয়েছে</p>
+              </div>
             </div>
           )}
         </div>
@@ -168,7 +212,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
           {value ? (
             <div className="p-3 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-between gap-3">
               <div className="flex items-center gap-3 min-w-0">
-                <div className={`relative ${previewHeight} w-28 rounded-xl overflow-hidden border-2 border-emerald-500/30 bg-slate-900 flex-shrink-0 shadow-xs`}>
+                <div className={`relative ${previewHeight} w-28 rounded-xl overflow-hidden border-2 border-emerald-500/40 bg-slate-900 flex-shrink-0 shadow-xs`}>
                   <img
                     src={value}
                     alt="Uploaded"
@@ -186,22 +230,40 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
                     <ImageIcon className="w-3.5 h-3.5 text-emerald-700" />
                     <span>ছবি নির্বাচিত রয়েছে</span>
                   </div>
-                  <p className="text-[11px] text-slate-500 mt-0.5">
-                    ডিভাইস থেকে সরাসরি সফলভাবে যুক্ত হয়েছে
-                  </p>
+
+                  {isLocalProjectFile ? (
+                    <div className="inline-flex items-center gap-1 text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full mt-1 border border-emerald-200">
+                      <HardDrive className="w-2.5 h-2.5" />
+                      <span className="truncate">প্রজেক্ট ফোল্ডার: {value}</span>
+                    </div>
+                  ) : (
+                    <p className="text-[11px] text-slate-500 mt-0.5 truncate">
+                      সফলভাবে যুক্ত হয়েছে
+                    </p>
+                  )}
+
+                  {statusMessage && (
+                    <p className="text-[11px] text-emerald-700 font-semibold mt-1 flex items-center gap-1 animate-in fade-in">
+                      <CheckCircle2 className="w-3 h-3" />
+                      <span>{statusMessage}</span>
+                    </p>
+                  )}
+
                   <div className="flex items-center gap-2 mt-2">
                     <button
                       type="button"
+                      disabled={isProcessing}
                       onClick={() => fileInputRef.current?.click()}
-                      className="text-[11px] px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100 font-semibold flex items-center gap-1"
+                      className="text-[11px] px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100 font-semibold flex items-center gap-1 cursor-pointer disabled:opacity-50"
                     >
-                      <RefreshCw className="w-3 h-3" />
-                      <span>পরিবর্তন করুন</span>
+                      <RefreshCw className={`w-3 h-3 ${isProcessing ? 'animate-spin' : ''}`} />
+                      <span>{isProcessing ? 'আপলোড হচ্ছে...' : 'পরিবর্তন করুন'}</span>
                     </button>
                     <button
                       type="button"
+                      disabled={isProcessing}
                       onClick={() => onChange('')}
-                      className="text-[11px] px-2.5 py-1 rounded-lg bg-red-50 text-red-700 border border-red-200 hover:bg-red-100 font-semibold flex items-center gap-1"
+                      className="text-[11px] px-2.5 py-1 rounded-lg bg-red-50 text-red-700 border border-red-200 hover:bg-red-100 font-semibold flex items-center gap-1 cursor-pointer"
                     >
                       <X className="w-3 h-3" />
                       <span>মুছে ফেলুন</span>
@@ -215,7 +277,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
-              onClick={() => fileInputRef.current?.click()}
+              onClick={() => !isProcessing && fileInputRef.current?.click()}
               className={`p-6 border-2 border-dashed rounded-2xl cursor-pointer text-center transition-all flex flex-col items-center justify-center gap-2 ${
                 isDragging
                   ? 'border-emerald-600 bg-emerald-50 scale-[1.01]'
@@ -224,22 +286,23 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
             >
               <div className="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center">
                 {isProcessing ? (
-                  <RefreshCw className="w-5 h-5 animate-spin" />
+                  <RefreshCw className="w-5 h-5 animate-spin text-emerald-700" />
                 ) : (
-                  <Upload className="w-5 h-5" />
+                  <Upload className="w-5 h-5 text-emerald-700" />
                 )}
               </div>
               <div>
                 <p className="text-xs font-bold text-slate-800">
-                  {isProcessing ? 'ছবি প্রসেসিং হচ্ছে...' : 'ছবি আপলোড করতে এখানে ক্লিক করুন'}
+                  {isProcessing ? (statusMessage || 'প্রজেক্ট ফোল্ডারে সেভ হচ্ছে...') : 'ছবি আপলোড করতে এখানে ক্লিক করুন'}
                 </p>
                 <p className="text-[11px] text-slate-500 mt-0.5">
                   বা ফাইল টেনে এনে এখানে ছেড়ে দিন (Drag & Drop)
                 </p>
               </div>
-              <span className="text-[10px] text-slate-400 font-medium">
-                {helperText}
-              </span>
+              <div className="flex items-center gap-1.5 text-[10px] text-slate-500 font-medium">
+                <HardDrive className="w-3 h-3 text-emerald-600" />
+                <span>{helperText}</span>
+              </div>
             </div>
           )}
         </div>

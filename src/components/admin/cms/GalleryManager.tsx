@@ -176,8 +176,9 @@ export const GalleryManager: React.FC = () => {
               value={editingGallery.imageUrl || ''}
               onChange={img => setEditingGallery({ ...editingGallery, imageUrl: img })}
               label="গ্যালারি ছবি নির্বাচন / আপলোড (Upload Gallery Photo) *"
-              helperText="এইচডি কোয়ালিটির ছবি নির্বাচন করুন (সর্বোচ্চ ৫ MB)"
+              helperText="এইচডি কোয়ালিটির ছবি নির্বাচন করুন (প্রজেক্ট ফোল্ডারে সংরক্ষিত হবে)"
               previewHeight="h-36"
+              folder="gallery"
             />
           </div>
 

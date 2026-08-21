@@ -37,6 +37,9 @@ export const FounderDetailModal: React.FC = () => {
             <img
               src={selectedFounder.image}
               alt={getLocalized(selectedFounder.name, language)}
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80';
+              }}
               className="w-24 h-24 rounded-2xl object-cover border-4 border-white shadow-lg bg-emerald-100 flex-shrink-0"
             />
             <div className="pb-1">

@@ -37,6 +37,9 @@ export const TeacherDetailModal: React.FC = () => {
             <img
               src={selectedTeacher.image}
               alt={getLocalized(selectedTeacher.name, language)}
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1544717305-2782549b5136?w=600&auto=format&fit=crop&q=80';
+              }}
               className="w-24 h-24 rounded-2xl object-cover border-4 border-white shadow-lg bg-emerald-100 flex-shrink-0"
             />
             <div className="pb-1">

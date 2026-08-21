@@ -21,7 +21,7 @@ import { toLocal, getLocalized } from '../../lib/translations';
 import { ImageUpload } from './ImageUpload';
 
 export const FounderProfileEditor: React.FC = () => {
-  const { currentUser, data, updateData, addActivityLog, language } = useMadrasa();
+  const { currentUser, data, updateData, addActivityLog, language, saveEntityWithTranslation } = useMadrasa();
 
   // Find linked founder or fallback to first founder
   const linkedFounder = data.founders.find(
@@ -54,30 +54,32 @@ export const FounderProfileEditor: React.FC = () => {
     setTimeout(() => setToastMsg(null), 3000);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!formState.name.bn.trim()) {
       alert('অনুগ্রহ করে আপনার পূর্ণ নাম লিখুন');
       return;
     }
 
+    const saved = await saveEntityWithTranslation('founder', formState);
+
     updateData(prev => {
       const exists = prev.founders.some(f => f.id === formState.id);
       let updatedFounders;
       if (exists) {
-        updatedFounders = prev.founders.map(f => (f.id === formState.id ? formState : f));
+        updatedFounders = prev.founders.map(f => (f.id === formState.id ? (saved || formState) : f));
       } else {
-        updatedFounders = [...prev.founders, formState];
+        updatedFounders = [...prev.founders, (saved || formState)];
       }
       return { ...prev, founders: updatedFounders };
     });
 
     addActivityLog(
       'প্রতিষ্ঠাতা প্রোফাইল সম্পাদনা',
-      formState.name.bn,
-      'প্রতিষ্ঠাতা তাঁর নিজস্ব প্রোফাইল, অবদান ও জীবনী আপডেট করেছেন।'
+      saved?.name?.bn || formState.name.bn,
+      'প্রতিষ্ঠাতা তাঁর নিজস্ব প্রোফাইল, ছবি, অবদান ও জীবনী আপডেট করেছেন।'
     );
 
-    showToast('আপনার প্রোফাইল তথ্য সফলভাবে সংরক্ষিত ও লাইভ করা হয়েছে!');
+    showToast('আপনার প্রোফাইল তথ্য ও ছবি সফলভাবে প্রজেক্টে সংরক্ষিত ও লাইভ করা হয়েছে!');
   };
 
   return (
@@ -190,6 +192,7 @@ export const FounderProfileEditor: React.FC = () => {
                 label="প্রোফাইল ছবি আপলোড (Upload Profile Photo)"
                 helperText="আপনার পাসপোর্ট বা স্পষ্ট পোর্ট্রেট ছবি আপলোড করুন"
                 previewHeight="h-28"
+                folder="founders"
               />
             </div>
           </div>

@@ -28,6 +28,12 @@ export const TeachersManager: React.FC = () => {
   const [selectedDept, setSelectedDept] = useState<string>('all');
   const [deleteTarget, setDeleteTarget] = useState<Teacher | null>(null);
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  const [toastMsg, setToastMsg] = useState<string | null>(null);
+
+  const showToast = (msg: string) => {
+    setToastMsg(msg);
+    setTimeout(() => setToastMsg(null), 3500);
+  };
 
   const canManage = hasPermission(currentUser, 'manage_teachers');
 
@@ -119,15 +125,24 @@ export const TeachersManager: React.FC = () => {
       order: t.order || data.teachers.length + 1
     };
 
-    // Auto-translate on save in backend and persist to DB
+    // Auto-translate on save in backend, persist image to project folder & DB
     const saved = await saveEntityWithTranslation('teacher', cleanTeacher);
 
+    updateData(prev => {
+      const exists = prev.teachers.some(item => item.id === cleanTeacher.id);
+      const updatedList = exists
+        ? prev.teachers.map(item => item.id === cleanTeacher.id ? (saved || cleanTeacher) : item)
+        : [...prev.teachers, (saved || cleanTeacher)];
+      return { ...prev, teachers: updatedList };
+    });
+
     addActivityLog(
-      t.id ? 'শিক্ষক তথ্য আপডেট' : 'নতুন শিক্ষক যোগ',
+      t.id ? 'শিক্ষক তথ্য ও ছবি আপডেট' : 'নতুন শিক্ষক যোগ',
       saved?.name?.bn || cleanTeacher.name.bn,
-      `পদবী: ${saved?.designation?.bn || cleanTeacher.designation.bn}`
+      `পদবী: ${saved?.designation?.bn || cleanTeacher.designation.bn}, ছবি সংরক্ষিত`
     );
 
+    showToast('শিক্ষকের তথ্য ও ছবি সফলভাবে প্রজেক্টে সংরক্ষিত হয়েছে!');
     setEditingTeacher(null);
   };
 
@@ -187,6 +202,13 @@ export const TeachersManager: React.FC = () => {
           <span>নতুন শিক্ষক যোগ করুন</span>
         </button>
       </div>
+
+      {toastMsg && (
+        <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-2xl text-emerald-800 text-xs font-bold flex items-center gap-2 animate-in fade-in">
+          <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+          <span>{toastMsg}</span>
+        </div>
+      )}
 
       {/* Inline Editor */}
       {editingTeacher && (
@@ -394,7 +416,9 @@ export const TeachersManager: React.FC = () => {
               value={editingTeacher.image || ''}
               onChange={img => setEditingTeacher({ ...editingTeacher, image: img })}
               label="শিক্ষকের ছবি (Image Upload / Selection)"
+              helperText="JPG, PNG, WEBP ফরম্যাট (প্রজেক্ট ফোল্ডারে সংরক্ষিত হবে)"
               previewHeight="h-32"
+              folder="teachers"
             />
           </div>
 
@@ -402,14 +426,14 @@ export const TeachersManager: React.FC = () => {
             <button
               type="button"
               onClick={() => setEditingTeacher(null)}
-              className="px-4 py-2 bg-slate-200 rounded-xl font-semibold text-slate-700"
+              className="px-4 py-2 bg-slate-200 rounded-xl font-semibold text-slate-700 cursor-pointer"
             >
               বাতিল
             </button>
             <button
               type="button"
               onClick={() => handleSaveTeacher(editingTeacher)}
-              className="px-5 py-2 bg-emerald-800 hover:bg-emerald-700 text-white rounded-xl font-bold shadow-xs"
+              className="px-5 py-2 bg-emerald-800 hover:bg-emerald-700 text-white rounded-xl font-bold shadow-xs cursor-pointer"
             >
               সংরক্ষণ করুন
             </button>
@@ -445,7 +469,10 @@ export const TeachersManager: React.FC = () => {
             <img
               src={teacher.image}
               alt={teacher.name.bn}
-              className="w-16 h-16 rounded-2xl object-cover border border-slate-200 flex-shrink-0"
+              className="w-16 h-16 rounded-2xl object-cover border border-slate-200 flex-shrink-0 bg-slate-100"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1544717305-2782549b5136?w=400';
+              }}
             />
             <div className="flex-1 min-w-0">
               <div className="flex items-start justify-between gap-1">

@@ -230,8 +230,9 @@ export const EventsManager: React.FC = () => {
               value={editingEvent.image || ''}
               onChange={img => setEditingEvent({ ...editingEvent, image: img })}
               label="ইভেন্টের ব্যানার বা পোস্টার ছবি আপলোড (Upload Event Banner)"
-              helperText="অনুষ্ঠানের পোস্টার বা ব্যানার ছবি (JPG, PNG, WEBP)"
+              helperText="অনুষ্ঠানের পোস্টার বা ব্যানার ছবি (JPG, PNG, WEBP - প্রজেক্ট ফোল্ডারে সংরক্ষিত হবে)"
               previewHeight="h-32"
+              folder="events"
             />
           </div>
 
