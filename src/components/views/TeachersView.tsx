@@ -11,7 +11,7 @@ import {
   Filter
 } from 'lucide-react';
 import { useMadrasa } from '../../context/MadrasaContext';
-import { getLocalized, translations } from '../../i18n/translations';
+import { getLocalized, translations } from '../../lib/translations';
 
 export const TeachersView: React.FC = () => {
   const { data, language, setSelectedTeacher } = useMadrasa();

@@ -1,7 +1,7 @@
 import React from 'react';
 import { X, Calendar, User, Video } from 'lucide-react';
 import { useMadrasa } from '../../context/MadrasaContext';
-import { getLocalized, translations } from '../../i18n/translations';
+import { getLocalized, translations } from '../../lib/translations';
 
 export const VideoPlayerModal: React.FC = () => {
   const { selectedVideo, setSelectedVideo, language } = useMadrasa();

@@ -21,7 +21,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import { useMadrasa } from '../../context/MadrasaContext';
-import { getLocalized, translations } from '../../i18n/translations';
+import { getLocalized, translations, formatDigits, formatDate } from '../../lib/translations';
 
 export const HomeView: React.FC = () => {
   const {
@@ -62,7 +62,7 @@ export const HomeView: React.FC = () => {
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24 md:py-28 text-center flex flex-col items-center">
             {/* Bismillah Calligraphy */}
-            <div className="inline-block mb-4 px-5 py-1.5 rounded-full bg-[#1a2e1a]/80 border border-[#d4af37]/40 text-[#d4af37] font-serif text-sm sm:text-base tracking-widest shadow-md">
+            <div className="inline-block mb-4 px-5 py-1.5 rounded-full bg-[#1a2e1a]/80 border border-[#d4af37]/40 text-[#d4af37] font-serif text-sm sm:text-base tracking-widest shadow-md notranslate" translate="no">
               {t.hero_bismillah}
             </div>
 
@@ -79,7 +79,7 @@ export const HomeView: React.FC = () => {
             {/* Location Pill */}
             <div className="mt-4 inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1a2e1a]/70 border border-[#d4af37]/40 text-xs text-[#d4af37] font-medium shadow-sm">
               <MapPin className="w-3.5 h-3.5 text-[#d4af37]" />
-              <span>{getLocalized(data.settings.district, language)}, {getLocalized(data.settings.upazila, language)} ({t.top_established})</span>
+              <span>{getLocalized(data.settings.district, language)}, {getLocalized(data.settings.upazila, language)} (স্থাপিত: {formatDigits(data.settings.establishedYear, language)} খ্রি.)</span>
             </div>
 
             {/* CTA Buttons */}
@@ -154,7 +154,7 @@ export const HomeView: React.FC = () => {
               <div className="w-12 h-12 mx-auto rounded-xl bg-emerald-50 text-[#0a4d28] flex items-center justify-center mb-3">
                 <Users className="w-6 h-6" />
               </div>
-              <div className="text-2xl sm:text-3xl font-extrabold text-[#1b3a1b]">৩৫০+</div>
+              <div className="text-2xl sm:text-3xl font-extrabold text-[#1b3a1b] font-mono">{formatDigits('350+', language)}</div>
               <div className="text-xs text-slate-500 font-medium mt-1">{t.hero_stat_students}</div>
             </div>
 
@@ -162,7 +162,7 @@ export const HomeView: React.FC = () => {
               <div className="w-12 h-12 mx-auto rounded-xl bg-amber-50 text-[#d4af37] flex items-center justify-center mb-3">
                 <Award className="w-6 h-6" />
               </div>
-              <div className="text-2xl sm:text-3xl font-extrabold text-[#1b3a1b]">২০০+</div>
+              <div className="text-2xl sm:text-3xl font-extrabold text-[#1b3a1b] font-mono">{formatDigits('200+', language)}</div>
               <div className="text-xs text-slate-500 font-medium mt-1">{t.hero_stat_hifz}</div>
             </div>
 
@@ -170,7 +170,7 @@ export const HomeView: React.FC = () => {
               <div className="w-12 h-12 mx-auto rounded-xl bg-emerald-50 text-[#0a4d28] flex items-center justify-center mb-3">
                 <GraduationCap className="w-6 h-6" />
               </div>
-              <div className="text-2xl sm:text-3xl font-extrabold text-[#1b3a1b]">১৫+</div>
+              <div className="text-2xl sm:text-3xl font-extrabold text-[#1b3a1b] font-mono">{formatDigits('15+', language)}</div>
               <div className="text-xs text-slate-500 font-medium mt-1">{t.hero_stat_teachers}</div>
             </div>
 
@@ -178,12 +178,65 @@ export const HomeView: React.FC = () => {
               <div className="w-12 h-12 mx-auto rounded-xl bg-amber-50 text-[#0a4d28] flex items-center justify-center mb-3">
                 <Calendar className="w-6 h-6" />
               </div>
-              <div className="text-2xl sm:text-3xl font-extrabold text-[#1b3a1b]">২৫+</div>
+              <div className="text-2xl sm:text-3xl font-extrabold text-[#1b3a1b] font-mono">{formatDigits('25+', language)}</div>
               <div className="text-xs text-slate-500 font-medium mt-1">{t.hero_stat_years}</div>
             </div>
           </div>
         </section>
       )}
+
+      {/* 3.1 Today's Prayer Schedule Section */}
+      <section id="home-prayer-schedule-section" className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="bg-gradient-to-br from-[#1a2e1a] via-[#0a4d28] to-[#152515] rounded-3xl p-6 sm:p-8 text-white shadow-lg border-2 border-[#d4af37]/40">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-4 text-center lg:text-left">
+              <div className="p-3.5 rounded-2xl bg-[#d4af37]/20 text-[#d4af37] border border-[#d4af37]/40 shadow-inner flex-shrink-0">
+                <Clock className="w-8 h-8" />
+              </div>
+              <div>
+                <div className="flex items-center justify-center lg:justify-start gap-2">
+                  <h3 className="text-lg sm:text-xl font-bold text-white tracking-wide">
+                    {t.top_prayer_times}
+                  </h3>
+                  <span className="text-[10px] font-bold bg-[#d4af37] text-[#0a4d28] px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                    দৈনিক জামাত
+                  </span>
+                </div>
+                <p className="text-xs sm:text-sm text-emerald-200/90 mt-1">
+                  মাদ্রাসার কেন্দ্রীয় মসজিদে পাঁচ ওয়াক্ত জামাত ও জুমুআর নির্ধারিত সময়
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-3 sm:grid-cols-6 gap-2.5 sm:gap-3 w-full lg:w-auto">
+              <div className="bg-black/25 backdrop-blur-sm p-3 rounded-2xl border border-white/10 text-center">
+                <span className="block text-xs font-semibold text-emerald-300 mb-1">{t.top_fajr}</span>
+                <span className="block text-sm sm:text-base font-bold text-white font-mono">{formatDigits(data.settings.prayerTimes.fajr, language)}</span>
+              </div>
+              <div className="bg-black/25 backdrop-blur-sm p-3 rounded-2xl border border-white/10 text-center">
+                <span className="block text-xs font-semibold text-emerald-300 mb-1">{t.top_dhuhr}</span>
+                <span className="block text-sm sm:text-base font-bold text-white font-mono">{formatDigits(data.settings.prayerTimes.dhuhr, language)}</span>
+              </div>
+              <div className="bg-black/25 backdrop-blur-sm p-3 rounded-2xl border border-white/10 text-center">
+                <span className="block text-xs font-semibold text-emerald-300 mb-1">{t.top_asr}</span>
+                <span className="block text-sm sm:text-base font-bold text-white font-mono">{formatDigits(data.settings.prayerTimes.asr, language)}</span>
+              </div>
+              <div className="bg-black/25 backdrop-blur-sm p-3 rounded-2xl border border-white/10 text-center">
+                <span className="block text-xs font-semibold text-emerald-300 mb-1">{t.top_maghrib}</span>
+                <span className="block text-sm sm:text-base font-bold text-white font-mono">{formatDigits(data.settings.prayerTimes.maghrib, language)}</span>
+              </div>
+              <div className="bg-black/25 backdrop-blur-sm p-3 rounded-2xl border border-white/10 text-center">
+                <span className="block text-xs font-semibold text-emerald-300 mb-1">{t.top_isha}</span>
+                <span className="block text-sm sm:text-base font-bold text-white font-mono">{formatDigits(data.settings.prayerTimes.isha, language)}</span>
+              </div>
+              <div className="bg-[#d4af37]/25 backdrop-blur-sm p-3 rounded-2xl border border-[#d4af37]/50 text-center">
+                <span className="block text-xs font-bold text-[#d4af37] mb-1">{t.top_jummah}</span>
+                <span className="block text-sm sm:text-base font-extrabold text-amber-200 font-mono">{formatDigits(data.settings.prayerTimes.jummah, language)}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* 4. About & Brief History Highlight */}
       {isSectionEnabled('intro') && (
@@ -406,7 +459,7 @@ export const HomeView: React.FC = () => {
                       </div>
                       <span className="text-[11px] text-slate-400 font-mono flex items-center gap-1">
                         <Clock className="w-3 h-3" />
-                        {notice.date}
+                        {formatDate(notice.date, language)}
                       </span>
                     </div>
                     <h4 className="font-bold text-xs sm:text-sm text-slate-900 group-hover:text-emerald-800 line-clamp-1">
@@ -454,8 +507,8 @@ export const HomeView: React.FC = () => {
                         alt={getLocalized(data.events[0].title, language)}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                       />
-                      <div className="absolute top-2 right-2 bg-amber-500 text-emerald-950 font-bold text-[11px] px-2 py-0.5 rounded shadow">
-                        {data.events[0].date}
+                      <div className="absolute top-2 right-2 bg-amber-500 text-emerald-950 font-bold text-[11px] px-2 py-0.5 rounded shadow font-mono">
+                        {formatDate(data.events[0].date, language)}
                       </div>
                     </div>
                     <div className="p-4">

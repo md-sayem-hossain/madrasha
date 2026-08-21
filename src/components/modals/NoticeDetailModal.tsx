@@ -1,7 +1,7 @@
 import React from 'react';
 import { X, Calendar, User, FileText, Download, AlertCircle, Pin } from 'lucide-react';
 import { useMadrasa } from '../../context/MadrasaContext';
-import { getLocalized, translations } from '../../i18n/translations';
+import { getLocalized, translations, formatDate } from '../../lib/translations';
 
 export const NoticeDetailModal: React.FC = () => {
   const { selectedNotice, setSelectedNotice, language } = useMadrasa();
@@ -48,9 +48,9 @@ export const NoticeDetailModal: React.FC = () => {
         <div className="p-6 space-y-4">
           {/* Metadata */}
           <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 pb-3 border-b border-slate-100">
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1.5 font-mono">
               <Calendar className="w-3.5 h-3.5 text-emerald-700" />
-              <span>{t.notice_published_date} {selectedNotice.date}</span>
+              <span>{t.notice_published_date} {formatDate(selectedNotice.date, language)}</span>
             </div>
             <div className="flex items-center gap-1.5">
               <User className="w-3.5 h-3.5 text-emerald-700" />

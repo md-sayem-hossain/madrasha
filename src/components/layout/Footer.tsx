@@ -12,7 +12,7 @@ import {
   Heart
 } from 'lucide-react';
 import { useMadrasa } from '../../context/MadrasaContext';
-import { translations, getLocalized } from '../../i18n/translations';
+import { translations, getLocalized, formatDigits } from '../../lib/translations';
 
 export const Footer: React.FC = () => {
   const { language, data, setActiveTab } = useMadrasa();
@@ -30,8 +30,11 @@ export const Footer: React.FC = () => {
       <div className="bg-[#0a4d28]/70 border-b border-[#0a4d28] py-8 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4 text-center md:text-left">
-            <div className="w-14 h-14 rounded-2xl bg-[#d4af37]/20 border-2 border-[#d4af37] text-[#d4af37] flex items-center justify-center text-2xl font-serif font-bold shadow-inner flex-shrink-0">
-              م
+            <div className="w-14 h-14 rounded-2xl bg-[#d4af37]/20 border-2 border-[#d4af37] text-[#d4af37] flex items-center justify-center text-2xl font-serif font-bold shadow-inner flex-shrink-0 notranslate" translate="no">
+              <div className="text-center notranslate" translate="no">
+                <span className="block text-[10px] text-[#d4af37] leading-tight font-arabic notranslate" translate="no">الجديد</span>
+                <span className="block text-2xl leading-none notranslate" translate="no">م</span>
+              </div>
             </div>
             <div>
               <h2 className="text-xl sm:text-2xl font-bold text-white">
@@ -172,27 +175,27 @@ export const Footer: React.FC = () => {
               <div className="grid grid-cols-3 gap-1.5 text-[11px] text-emerald-200 text-center">
                 <div className="bg-[#1a2e1a]/80 p-1 rounded">
                   <div className="text-emerald-300 font-medium">{t.top_fajr}</div>
-                  <div>{data.settings.prayerTimes.fajr}</div>
+                  <div>{formatDigits(data.settings.prayerTimes.fajr, language)}</div>
                 </div>
                 <div className="bg-[#1a2e1a]/80 p-1 rounded">
                   <div className="text-emerald-300 font-medium">{t.top_dhuhr}</div>
-                  <div>{data.settings.prayerTimes.dhuhr}</div>
+                  <div>{formatDigits(data.settings.prayerTimes.dhuhr, language)}</div>
                 </div>
                 <div className="bg-[#1a2e1a]/80 p-1 rounded">
                   <div className="text-emerald-300 font-medium">{t.top_asr}</div>
-                  <div>{data.settings.prayerTimes.asr}</div>
+                  <div>{formatDigits(data.settings.prayerTimes.asr, language)}</div>
                 </div>
                 <div className="bg-[#1a2e1a]/80 p-1 rounded">
                   <div className="text-emerald-300 font-medium">{t.top_maghrib}</div>
-                  <div>{data.settings.prayerTimes.maghrib}</div>
+                  <div>{formatDigits(data.settings.prayerTimes.maghrib, language)}</div>
                 </div>
                 <div className="bg-[#1a2e1a]/80 p-1 rounded">
                   <div className="text-emerald-300 font-medium">{t.top_isha}</div>
-                  <div>{data.settings.prayerTimes.isha}</div>
+                  <div>{formatDigits(data.settings.prayerTimes.isha, language)}</div>
                 </div>
                 <div className="bg-[#1a2e1a]/80 p-1 rounded">
                   <div className="text-emerald-300 font-medium">{t.top_jummah}</div>
-                  <div>{data.settings.prayerTimes.jummah}</div>
+                  <div>{formatDigits(data.settings.prayerTimes.jummah, language)}</div>
                 </div>
               </div>
             </div>

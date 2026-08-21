@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Video, Play, Filter, User, Calendar, Clock } from 'lucide-react';
 import { useMadrasa } from '../../context/MadrasaContext';
-import { getLocalized, translations } from '../../i18n/translations';
+import { getLocalized, translations } from '../../lib/translations';
 
 export const VideoView: React.FC = () => {
   const { data, language, setSelectedVideo } = useMadrasa();

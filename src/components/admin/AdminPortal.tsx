@@ -28,8 +28,13 @@ import {
   HardDrive,
   Check,
   ChevronRight,
+  ChevronDown,
+  Menu,
+  X,
   ShieldAlert,
-  Search
+  Search,
+  Globe,
+  Layers
 } from 'lucide-react';
 import { useMadrasa } from '../../context/MadrasaContext';
 import { AdminPermission } from '../../types';
@@ -61,7 +66,8 @@ export const AdminPortal: React.FC = () => {
     saveDataToServer,
     isSaving,
     setActiveTab,
-    language
+    language,
+    setLanguage
   } = useMadrasa();
 
   // Login form state
@@ -90,6 +96,7 @@ export const AdminPortal: React.FC = () => {
   >('overview');
 
   const [toastMsg, setToastMsg] = useState<string | null>(null);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   const showToast = (msg: string) => {
     setToastMsg(msg);
@@ -364,20 +371,20 @@ export const AdminPortal: React.FC = () => {
       )}
 
       {/* Top Banner with User Status */}
-      <div className="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        <div className="flex items-center gap-3.5">
-          <div className={`w-12 h-12 rounded-2xl flex items-center justify-center text-white font-bold shadow-xs ${
+      <div className="bg-white rounded-3xl p-4 sm:p-6 border border-slate-200 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div className="flex items-center gap-3.5 min-w-0 w-full md:w-auto">
+          <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center text-white font-bold shadow-xs flex-shrink-0 ${
             isSuperAdmin
               ? 'bg-emerald-900 text-amber-300'
               : isFounder
               ? 'bg-amber-600 text-white'
               : 'bg-blue-700 text-white'
           }`}>
-            {isSuperAdmin ? <Shield className="w-6 h-6" /> : isFounder ? <UserCheck className="w-6 h-6" /> : <Key className="w-6 h-6" />}
+            {isSuperAdmin ? <Shield className="w-5 h-5 sm:w-6 sm:h-6" /> : isFounder ? <UserCheck className="w-5 h-5 sm:w-6 sm:h-6" /> : <Key className="w-5 h-5 sm:w-6 sm:h-6" />}
           </div>
-          <div>
+          <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2 flex-wrap">
-              <h1 className="text-lg sm:text-xl font-bold text-slate-900">
+              <h1 className="text-base sm:text-xl font-bold text-slate-900 truncate">
                 {currentUser.name}
               </h1>
               <span className={`text-[10px] font-bold px-2 py-0.5 rounded uppercase ${
@@ -390,36 +397,76 @@ export const AdminPortal: React.FC = () => {
                 {isSuperAdmin ? 'Super Admin' : isFounder ? 'Founder' : 'Admin'}
               </span>
             </div>
-            <p className="text-xs text-slate-500 mt-0.5">
-              {currentUser.email} • {isSuperAdmin ? 'পূর্ণ প্রশাসনিক অধিকারপ্রাপ্ত' : isFounder ? 'প্রতিষ্ঠাতা প্রোফাইল নিয়ন্ত্রণ' : `অনুমোদিত মডিউল: ${(currentUser.permissions || []).length} টি`}
+            <p className="text-xs text-slate-500 mt-0.5 truncate">
+              {currentUser.email} • {isSuperAdmin ? 'পূর্ণ প্রশাসনিক অধিকার' : isFounder ? 'প্রতিষ্ঠাতা প্রোফাইল নিয়ন্ত্রণ' : `অনুমোদিত মডিউল: ${(currentUser.permissions || []).length} টি`}
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 flex-wrap self-end md:self-auto">
+        <div className="flex items-center gap-2 flex-wrap w-full md:w-auto justify-start md:justify-end">
+          {/* Admin Panel Language Switcher */}
+          <div className="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200">
+            <Globe className="w-3.5 h-3.5 text-slate-500 ml-1.5 mr-1" />
+            <button
+              onClick={() => setLanguage('bn')}
+              className={`px-2 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1 ${
+                language === 'bn'
+                  ? 'bg-emerald-900 text-white shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <span>🇧🇩</span>
+              <span className="hidden sm:inline">বাংলা</span>
+            </button>
+            <button
+              onClick={() => setLanguage('en')}
+              className={`px-2 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1 ${
+                language === 'en'
+                  ? 'bg-emerald-900 text-white shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <span>🇬🇧</span>
+              <span>EN</span>
+            </button>
+            <button
+              onClick={() => setLanguage('ar')}
+              className={`px-2 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1 ${
+                language === 'ar'
+                  ? 'bg-emerald-900 text-white shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <span>🇸🇦</span>
+              <span className="hidden sm:inline">العربية</span>
+            </button>
+          </div>
+
           <button
             onClick={async () => {
               await saveDataToServer();
               showToast('সার্ভারে ডেটা সিঙ্ক সম্পন্ন হয়েছে!');
             }}
             disabled={isSaving}
-            className="px-4 py-2 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100 font-bold text-xs flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+            className="px-3 sm:px-4 py-2 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100 font-bold text-xs flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+            title="সার্ভার সিঙ্ক"
           >
             <Save className="w-3.5 h-3.5" />
-            <span>{isSaving ? 'সংরক্ষণ হচ্ছে...' : 'সার্ভার সিঙ্ক'}</span>
+            <span>{isSaving ? 'সংরক্ষণ হচ্ছে...' : 'সিঙ্ক'}</span>
           </button>
 
           <button
             onClick={() => setActiveTab('home')}
-            className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs flex items-center gap-1 cursor-pointer"
+            className="px-3 sm:px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs flex items-center gap-1 cursor-pointer"
           >
             <Eye className="w-3.5 h-3.5" />
-            <span>লাইভ সাইট</span>
+            <span className="hidden sm:inline">লাইভ সাইট</span>
+            <span className="sm:hidden">সাইট</span>
           </button>
 
           <button
             onClick={logout}
-            className="px-4 py-2 rounded-xl bg-red-50 text-red-700 border border-red-200 hover:bg-red-100 font-semibold text-xs flex items-center gap-1 cursor-pointer"
+            className="px-3 sm:px-4 py-2 rounded-xl bg-red-50 text-red-700 border border-red-200 hover:bg-red-100 font-semibold text-xs flex items-center gap-1 cursor-pointer"
           >
             <LogOut className="w-3.5 h-3.5" />
             <span>লগআউট</span>
@@ -427,10 +474,135 @@ export const AdminPortal: React.FC = () => {
         </div>
       </div>
 
-      {/* Main Admin Layout: Sidebar Tabs + Content Area */}
+      {/* Mobile / Tablet Quick Navigation Bar (< lg) */}
+      <div className="lg:hidden space-y-3" id="admin-mobile-nav-section">
+        {/* Active Module Header & Menu Trigger Button */}
+        <div className="bg-white rounded-2xl p-3 border border-slate-200 shadow-xs flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-900 flex items-center justify-center flex-shrink-0">
+              <Layers className="w-5 h-5" />
+            </div>
+            <div className="min-w-0">
+              <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">বর্তমান মডিউল</div>
+              <div className="text-xs sm:text-sm font-bold text-slate-900 truncate">
+                {navItems.find(i => i.id === activeSection)?.label || 'ড্যাশবোর্ড'}
+              </div>
+            </div>
+          </div>
+
+          <button
+            onClick={() => setMobileNavOpen(true)}
+            className="px-3 py-2 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-xs flex-shrink-0 cursor-pointer"
+          >
+            <Menu className="w-4 h-4" />
+            <span>মডিউল মেনু</span>
+          </button>
+        </div>
+
+        {/* Quick Horizontal Scrolling Tabs for Mobile & Tablet */}
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+          {navItems
+            .filter(item => item.allowed)
+            .map(item => {
+              const Icon = item.icon;
+              const isActive = activeSection === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveSection(item.id as any)}
+                  className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap flex items-center gap-1.5 transition-all flex-shrink-0 cursor-pointer ${
+                    isActive
+                      ? 'bg-emerald-800 text-white shadow-xs'
+                      : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50'
+                  }`}
+                >
+                  <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-amber-300' : item.color}`} />
+                  <span>{item.label}</span>
+                  {item.count !== null && (
+                    <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full font-bold ${
+                      isActive ? 'bg-emerald-950 text-amber-300' : 'bg-slate-100 text-slate-600'
+                    }`}>
+                      {item.count}
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+        </div>
+      </div>
+
+      {/* Mobile Module Drawer Modal */}
+      {mobileNavOpen && (
+        <div
+          id="admin-mobile-drawer-backdrop"
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-950/60 backdrop-blur-xs animate-in fade-in duration-150"
+          onClick={() => setMobileNavOpen(false)}
+        >
+          <div
+            id="admin-mobile-drawer-content"
+            className="w-full sm:max-w-lg bg-white rounded-t-3xl sm:rounded-3xl p-5 shadow-2xl border border-slate-200 space-y-4 max-h-[85vh] flex flex-col animate-in slide-in-from-bottom-5 duration-200"
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-xl bg-emerald-900 text-amber-300 flex items-center justify-center">
+                  <Shield className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-slate-900 text-sm">প্রশাসনিক মডিউলসমূহ</h3>
+                  <p className="text-[11px] text-slate-400">যে কোনো মডিউলে দ্রুত প্রবেশ করুন</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setMobileNavOpen(false)}
+                className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 overflow-y-auto pr-1">
+              {navItems
+                .filter(item => item.allowed)
+                .map(item => {
+                  const Icon = item.icon;
+                  const isActive = activeSection === item.id;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => {
+                        setActiveSection(item.id as any);
+                        setMobileNavOpen(false);
+                      }}
+                      className={`p-3 rounded-2xl text-xs font-semibold flex items-center justify-between transition-all text-left cursor-pointer ${
+                        isActive
+                          ? 'bg-emerald-800 text-white shadow-xs'
+                          : 'bg-slate-50 border border-slate-200/80 text-slate-800 hover:bg-slate-100'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <Icon className={`w-4 h-4 flex-shrink-0 ${isActive ? 'text-amber-300' : item.color}`} />
+                        <span className="truncate">{item.label}</span>
+                      </div>
+                      {item.count !== null && (
+                        <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-bold ${
+                          isActive ? 'bg-emerald-950 text-amber-300' : 'bg-slate-200 text-slate-700'
+                        }`}>
+                          {item.count}
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Main Admin Layout: Desktop Sidebar + Content Area */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        {/* Sidebar Navigation */}
-        <div className="lg:col-span-3 bg-white rounded-3xl p-3 border border-slate-200 shadow-xs space-y-1">
+        {/* Desktop Sidebar Navigation */}
+        <div className="hidden lg:block lg:col-span-3 bg-white rounded-3xl p-3 border border-slate-200 shadow-xs space-y-1 sticky top-20">
           <div className="px-3 py-2 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
             নিয়ন্ত্রণ মডিউলসমূহ
           </div>
@@ -472,7 +644,7 @@ export const AdminPortal: React.FC = () => {
         </div>
 
         {/* Content Panel */}
-        <div className="lg:col-span-9 bg-white rounded-3xl p-6 border border-slate-200 shadow-xs min-h-[600px]">
+        <div className="w-full lg:col-span-9 bg-white rounded-3xl p-4 sm:p-6 lg:p-7 border border-slate-200 shadow-xs min-h-[500px]">
           {/* 1. Overview */}
           {activeSection === 'overview' && !isFounder && (
             <div className="space-y-6 animate-in fade-in duration-150">

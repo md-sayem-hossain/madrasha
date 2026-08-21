@@ -9,7 +9,7 @@ import {
 } from 'lucide-react';
 import { useMadrasa } from '../../../context/MadrasaContext';
 import { HistoryMilestone, HistoryContent } from '../../../types';
-import { getLocalized, toLocal } from '../../../i18n/translations';
+import { getLocalized, toLocal } from '../../../lib/translations';
 import { ImageUpload } from '../ImageUpload';
 import { hasPermission } from '../../../lib/security';
 import { DeleteConfirmModal } from '../DeleteConfirmModal';

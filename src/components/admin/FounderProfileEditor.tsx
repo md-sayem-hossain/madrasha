@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 import { useMadrasa } from '../../context/MadrasaContext';
 import { Founder } from '../../types';
-import { toLocal, getLocalized } from '../../i18n/translations';
+import { toLocal, getLocalized } from '../../lib/translations';
 import { ImageUpload } from './ImageUpload';
 
 export const FounderProfileEditor: React.FC = () => {

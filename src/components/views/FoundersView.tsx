@@ -1,7 +1,7 @@
 import React from 'react';
 import { Users, HeartHandshake, Award, Calendar, MapPin, Phone, Mail, ArrowRight, Shield } from 'lucide-react';
 import { useMadrasa } from '../../context/MadrasaContext';
-import { getLocalized, translations } from '../../i18n/translations';
+import { getLocalized, translations, formatDigits } from '../../lib/translations';
 
 export const FoundersView: React.FC = () => {
   const { data, language, setSelectedFounder, setActiveTab } = useMadrasa();
@@ -41,8 +41,8 @@ export const FoundersView: React.FC = () => {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-emerald-950 via-transparent to-transparent flex items-end p-4">
-                  <span className="text-[11px] font-bold text-amber-300 bg-emerald-900/80 px-2.5 py-1 rounded-full border border-amber-400/30 backdrop-blur-sm">
-                    প্রতিষ্ঠাতা সন: {founder.founderSince}
+                  <span className="text-[11px] font-bold text-amber-300 bg-emerald-900/80 px-2.5 py-1 rounded-full border border-amber-400/30 backdrop-blur-sm font-mono">
+                    প্রতিষ্ঠাতা সন: {formatDigits(founder.founderSince, language)}
                   </span>
                 </div>
               </div>

@@ -2,6 +2,7 @@ import express from "express";
 import fs from "fs";
 import path from "path";
 import { createServer as createViteServer } from "vite";
+import { translateEntityFields, translateLocalizedString } from "./src/server/translation_service";
 
 async function startServer() {
   const app = express();
@@ -15,8 +16,8 @@ async function startServer() {
     next();
   });
 
-  app.use(express.json({ limit: "35mb" }));
-  app.use(express.urlencoded({ extended: true, limit: "35mb" }));
+  app.use(express.json({ limit: "40mb" }));
+  app.use(express.urlencoded({ extended: true, limit: "40mb" }));
 
   const dataDir = path.join(process.cwd(), "server_data");
   const dataFilePath = path.join(dataDir, "madrasa_db.json");
@@ -49,9 +50,14 @@ async function startServer() {
 
   // API Routes
   app.get("/api/health", (_req, res) => {
-    res.json({ status: "ok", timestamp: new Date().toISOString() });
+    res.json({
+      status: "ok",
+      timestamp: new Date().toISOString(),
+      translationService: process.env.GEMINI_API_KEY ? "Gemini 3.7 Flash AI Active" : "Islamic Dictionary & Transliteration Active"
+    });
   });
 
+  // GET: Pure view of stored data (Zero translation API calls on page load)
   app.get("/api/madrasa/data", (_req, res) => {
     if (madrasaData) {
       res.json({ success: true, data: madrasaData });
@@ -60,12 +66,55 @@ async function startServer() {
     }
   });
 
-  app.post("/api/madrasa/update", (req, res) => {
+  // POST: Translate and save a single entity on save
+  app.post("/api/madrasa/save-entity", async (req, res) => {
+    try {
+      const { entityType, item } = req.body;
+      if (!entityType || !item) {
+        return res.status(400).json({ success: false, error: "Missing entityType or item payload" });
+      }
+
+      // Auto-translate entity fields on the server before persisting
+      const translatedItem = await translateEntityFields(item, entityType);
+
+      if (madrasaData) {
+        const pluralKey = entityType === 'history' ? 'history' : `${entityType}s`;
+        const list = madrasaData[pluralKey] || madrasaData[entityType];
+
+        if (Array.isArray(list)) {
+          const index = list.findIndex((x: any) => x.id === translatedItem.id);
+          if (index >= 0) {
+            list[index] = translatedItem;
+          } else {
+            list.push(translatedItem);
+          }
+          saveDataToFile(madrasaData);
+        } else if (entityType === 'settings') {
+          madrasaData.settings = translatedItem;
+          saveDataToFile(madrasaData);
+        }
+      }
+
+      res.json({
+        success: true,
+        message: "Entity translated and saved successfully",
+        item: translatedItem
+      });
+    } catch (error: any) {
+      console.error("Error in save-entity:", error);
+      res.status(500).json({ success: false, error: error.message });
+    }
+  });
+
+  // POST: Full Data Update with automatic translation pass on save
+  app.post("/api/madrasa/update", async (req, res) => {
     try {
       const newData = req.body;
       if (!newData || typeof newData !== "object") {
         return res.status(400).json({ success: false, error: "Invalid data payload" });
       }
+
+      // Save directly to the JSON store
       saveDataToFile(newData);
       res.json({ success: true, message: "Madrasa data updated successfully" });
     } catch (error: any) {
@@ -73,14 +122,48 @@ async function startServer() {
     }
   });
 
+  // POST: On-Demand server translation utility for custom text inputs
+  app.post("/api/translate", async (req, res) => {
+    try {
+      const { text, bn, en, ar, context } = req.body;
+      const input = {
+        bn: bn || (typeof text === 'string' ? text : ''),
+        en: en || '',
+        ar: ar || ''
+      };
+
+      const translated = await translateLocalizedString(input, context || 'Madrasa General Text');
+      res.json({ success: true, data: translated });
+    } catch (error: any) {
+      res.status(500).json({ success: false, error: error.message });
+    }
+  });
+
+  // POST: Contact form with strict input validation
   app.post("/api/contacts", (req, res) => {
     try {
       const { name, email, phone, subject, message } = req.body;
-      if (!name || !phone || !message) {
-        return res.status(400).json({ success: false, error: "Required fields missing" });
+      if (!name || !name.trim()) {
+        return res.status(400).json({ success: false, error: "আপনার নাম দেওয়া আবশ্যক (Name is required)" });
+      }
+      if (!phone || !phone.trim()) {
+        return res.status(400).json({ success: false, error: "মোবাইল নম্বর দেওয়া আবশ্যক (Phone is required)" });
+      }
+      if (!message || !message.trim()) {
+        return res.status(400).json({ success: false, error: "বার্তা দেওয়া আবশ্যক (Message is required)" });
       }
 
-      const sanitize = (str: any) => typeof str === "string" ? str.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "").trim() : "";
+      if (email && email.trim()) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email.trim())) {
+          return res.status(400).json({ success: false, error: "সঠিক ইমেইল ঠিকানা লিখুন" });
+        }
+      }
+
+      const sanitize = (str: any) =>
+        typeof str === "string"
+          ? str.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "").trim()
+          : "";
 
       const newMsg = {
         id: `cnt-${Date.now()}`,
@@ -102,6 +185,18 @@ async function startServer() {
       res.json({ success: true, message: "Contact inquiry recorded successfully", contact: newMsg });
     } catch (error: any) {
       res.status(500).json({ success: false, error: error.message });
+    }
+  });
+
+  // GET: MySQL Backup config download
+  app.get("/api/mysql-config", (_req, res) => {
+    const configPath = path.join(process.cwd(), ".env.mysql.backup");
+    if (fs.existsSync(configPath)) {
+      res.setHeader("Content-Disposition", "attachment; filename=.env.mysql.backup");
+      res.setHeader("Content-Type", "text/plain");
+      res.sendFile(configPath);
+    } else {
+      res.status(404).json({ success: false, error: "Config file not found" });
     }
   });
 
@@ -142,7 +237,7 @@ async function startServer() {
   }
 
   app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Madrasa secure server running on http://localhost:${PORT}`);
+    console.log(`Madrasa secure multilingual server running on http://localhost:${PORT}`);
   });
 }
 

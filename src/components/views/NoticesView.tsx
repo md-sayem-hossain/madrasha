@@ -12,7 +12,7 @@ import {
   ArrowRight
 } from 'lucide-react';
 import { useMadrasa } from '../../context/MadrasaContext';
-import { getLocalized, translations } from '../../i18n/translations';
+import { getLocalized, translations, formatDate } from '../../lib/translations';
 
 export const NoticesView: React.FC = () => {
   const { data, language, setSelectedNotice } = useMadrasa();
@@ -122,7 +122,7 @@ export const NoticesView: React.FC = () => {
                   </span>
                   <span className="text-xs text-slate-400 font-mono flex items-center gap-1">
                     <Calendar className="w-3.5 h-3.5" />
-                    {notice.date}
+                    {formatDate(notice.date, language)}
                   </span>
                 </div>
 

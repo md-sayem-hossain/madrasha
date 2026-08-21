@@ -12,7 +12,7 @@ import {
   Maximize2
 } from 'lucide-react';
 import { useMadrasa } from '../../context/MadrasaContext';
-import { getLocalized, translations } from '../../i18n/translations';
+import { getLocalized, translations } from '../../lib/translations';
 
 export const AudioPlayerBar: React.FC = () => {
   const { currentTrack, isPlayingAudio, togglePlayAudio, stopAudio, language, setActiveTab } = useMadrasa();

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Calendar, MapPin, Clock, User, Award, CheckCircle2, Filter } from 'lucide-react';
 import { useMadrasa } from '../../context/MadrasaContext';
-import { getLocalized, translations } from '../../i18n/translations';
+import { getLocalized, translations, formatDate, formatTime } from '../../lib/translations';
 
 export const EventsView: React.FC = () => {
   const { data, language } = useMadrasa();
@@ -72,8 +72,8 @@ export const EventsView: React.FC = () => {
                   alt={getLocalized(event.title, language)}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute top-3 right-3 bg-amber-500 text-emerald-950 font-bold text-xs px-3 py-1 rounded-full shadow">
-                  {event.date}
+                <div className="absolute top-3 right-3 bg-amber-500 text-emerald-950 font-bold text-xs px-3 py-1 rounded-full shadow font-mono">
+                  {formatDate(event.date, language)}
                 </div>
                 <div className="absolute top-3 left-3">
                   <span
@@ -101,7 +101,7 @@ export const EventsView: React.FC = () => {
                 <div className="space-y-2 pt-2 border-t border-slate-100 text-xs text-slate-700">
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4 text-emerald-700 flex-shrink-0" />
-                    <span>সময়: {event.time}</span>
+                    <span>সময়: {formatTime(event.time, language)}</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <MapPin className="w-4 h-4 text-emerald-700 flex-shrink-0 mt-0.5" />

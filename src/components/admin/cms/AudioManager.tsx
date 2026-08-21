@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { useMadrasa } from '../../../context/MadrasaContext';
 import { AudioTrack } from '../../../types';
-import { getLocalized } from '../../../i18n/translations';
+import { getLocalized } from '../../../lib/translations';
 import { FileUpload } from '../FileUpload';
 import { hasPermission } from '../../../lib/security';
 import { DeleteConfirmModal } from '../DeleteConfirmModal';

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Image, Filter, Eye, Calendar, Sparkles } from 'lucide-react';
 import { useMadrasa } from '../../context/MadrasaContext';
-import { getLocalized, translations } from '../../i18n/translations';
+import { getLocalized, translations } from '../../lib/translations';
 
 export const GalleryView: React.FC = () => {
   const { data, language, setGalleryLightboxIndex } = useMadrasa();

@@ -12,7 +12,7 @@ import {
   ArrowRight
 } from 'lucide-react';
 import { useMadrasa } from '../../context/MadrasaContext';
-import { getLocalized, translations } from '../../i18n/translations';
+import { getLocalized, translations } from '../../lib/translations';
 
 export const SearchModal: React.FC = () => {
   const {
@@ -141,11 +141,7 @@ export const SearchModal: React.FC = () => {
               <p className="text-sm">{t.search_heading}</p>
               <div className="flex flex-wrap items-center justify-center gap-2 mt-4 text-xs">
                 <span className="text-slate-500">{t.search_examples_label}</span>
-                {(language === 'ar' 
-                  ? ['حفظ', 'القبول', 'أحمد الله', 'مفتي', 'محفل', 'نوراني'] 
-                  : language === 'en' 
-                  ? ['Hifz', 'Admission', 'Dr. Ahmed', 'Mufti', 'Mahfil', 'Noorani'] 
-                  : ['হিফজ', 'ভর্তি', 'ডাঃ আহমেদ', 'মুফতি', 'মাহফিল', 'নূরানী']).map(k => (
+                {['হিফজ', 'ভর্তি', 'ডাঃ আহমেদ', 'মুফতি', 'মাহফিল', 'নূরানী'].map(k => (
                   <button
                     key={k}
                     onClick={() => setQuery(k)}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { X, Mail, Phone, MapPin, Award, BookOpen, Clock, Calendar } from 'lucide-react';
 import { useMadrasa } from '../../context/MadrasaContext';
-import { getLocalized, translations } from '../../i18n/translations';
+import { getLocalized, translations, formatDigits } from '../../lib/translations';
 
 export const TeacherDetailModal: React.FC = () => {
   const { selectedTeacher, setSelectedTeacher, language } = useMadrasa();
@@ -75,8 +75,8 @@ export const TeacherDetailModal: React.FC = () => {
                   <Calendar className="w-3.5 h-3.5 text-emerald-700" />
                   <span>{t.modal_joining_year}</span>
                 </div>
-                <div className="font-bold text-slate-800">
-                  {selectedTeacher.joiningDate}
+                <div className="font-bold text-slate-800 font-mono">
+                  {formatDigits(selectedTeacher.joiningDate, language)}
                 </div>
               </div>
             </div>
@@ -101,7 +101,7 @@ export const TeacherDetailModal: React.FC = () => {
                 <div className="flex items-center gap-1.5">
                   <Phone className="w-3.5 h-3.5 text-emerald-700" />
                   <a href={`tel:${selectedTeacher.phone}`} className="hover:text-emerald-800 font-mono font-medium">
-                    {selectedTeacher.phone}
+                    {formatDigits(selectedTeacher.phone, language)}
                   </a>
                 </div>
               )}

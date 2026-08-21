@@ -9,21 +9,24 @@ import {
   AlertTriangle,
   FileText,
   Calendar,
-  Eye
+  Eye,
+  Sparkles
 } from 'lucide-react';
 import { useMadrasa } from '../../../context/MadrasaContext';
 import { Notice } from '../../../types';
-import { getLocalized } from '../../../i18n/translations';
+import { getLocalized } from '../../../lib/translations';
 import { FileUpload } from '../FileUpload';
 import { hasPermission } from '../../../lib/security';
 import { DeleteConfirmModal } from '../DeleteConfirmModal';
+import { validateRequiredText } from '../../../lib/validation';
 
 export const NoticesManager: React.FC = () => {
-  const { data, updateData, currentUser, addActivityLog, language, setSelectedNotice } = useMadrasa();
+  const { data, updateData, currentUser, addActivityLog, language, setSelectedNotice, saveEntityWithTranslation, isSaving } = useMadrasa();
   const [editingNotice, setEditingNotice] = useState<Partial<Notice> | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
   const [deleteTarget, setDeleteTarget] = useState<Notice | null>(null);
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
   const canManage = hasPermission(currentUser, 'manage_notices');
 
@@ -39,24 +42,36 @@ export const NoticesManager: React.FC = () => {
     );
   }
 
-  const handleSaveNotice = (notice: Partial<Notice>) => {
-    if (!notice.title?.bn || !notice.description?.bn) {
-      alert('নোটিশের শিরোনাম এবং বিবরণ আবশ্যক।');
+  const handleSaveNotice = async (notice: Partial<Notice>) => {
+    const errors: Record<string, string> = {};
+
+    const titleBnVal = validateRequiredText(notice.title?.bn, 'নোটিশের শিরোনাম (বাংলা)');
+    if (!titleBnVal.isValid) errors.titleBn = titleBnVal.error || '';
+
+    const titleEnVal = validateRequiredText(notice.title?.en, 'Notice Title (English)');
+    if (!titleEnVal.isValid) errors.titleEn = titleEnVal.error || '';
+
+    const descBnVal = validateRequiredText(notice.description?.bn, 'নোটিশের মূল বক্তব্য / বিবরণ');
+    if (!descBnVal.isValid) errors.descriptionBn = descBnVal.error || '';
+
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
       return;
     }
+    setFormErrors({});
 
     const newId = notice.id || `not-${Date.now()}`;
     const cleanNotice: Notice = {
       id: newId,
       title: {
-        bn: notice.title?.bn || '',
-        en: notice.title?.en || notice.title?.bn || '',
-        ar: notice.title?.ar || notice.title?.bn || ''
+        bn: notice.title?.bn?.trim() || '',
+        en: notice.title?.en?.trim() || '',
+        ar: notice.title?.ar?.trim() || ''
       },
       description: {
-        bn: notice.description?.bn || '',
-        en: notice.description?.en || notice.description?.bn || '',
-        ar: notice.description?.ar || notice.description?.bn || ''
+        bn: notice.description?.bn?.trim() || '',
+        en: notice.description?.en?.trim() || '',
+        ar: notice.description?.ar?.trim() || ''
       },
       category: notice.category || 'general',
       date: notice.date || new Date().toISOString().split('T')[0],
@@ -72,17 +87,11 @@ export const NoticesManager: React.FC = () => {
       }
     };
 
-    updateData(prev => {
-      const exists = prev.notices.some(n => n.id === cleanNotice.id);
-      const notices = exists
-        ? prev.notices.map(n => n.id === cleanNotice.id ? cleanNotice : n)
-        : [cleanNotice, ...prev.notices];
-      return { ...prev, notices };
-    });
+    const saved = await saveEntityWithTranslation('notice', cleanNotice);
 
     addActivityLog(
       notice.id ? 'নোটিশ সম্পাদন' : 'নতুন নোটিশ প্রকাশ',
-      cleanNotice.title.bn,
+      saved?.title?.bn || cleanNotice.title.bn,
       `ক্যাটাগরি: ${cleanNotice.category}, পিন করা: ${cleanNotice.isPinned ? 'হ্যাঁ' : 'না'}`
     );
 
@@ -162,26 +171,52 @@ export const NoticesManager: React.FC = () => {
             </button>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block font-semibold mb-1 text-slate-800">নোটিশ শিরোনাম (বাংলা) *</label>
-              <input
-                type="text"
-                placeholder="যেমন: নতুন শিক্ষাবর্ষের ভর্তি কার্যক্রম সংক্রান্ত জরুরি বিজ্ঞপ্তি"
-                value={editingNotice.title?.bn || ''}
-                onChange={e => setEditingNotice({ ...editingNotice, title: { bn: e.target.value, en: editingNotice.title?.en || '', ar: editingNotice.title?.ar || '' } })}
-                className="w-full p-2.5 rounded-xl border border-amber-300 bg-white focus:ring-2 focus:ring-amber-500 outline-none"
-              />
+          {/* 2-Field Title Entry Section */}
+          <div className="bg-white p-4 rounded-2xl border border-amber-200 space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="font-bold text-slate-800 flex items-center gap-1.5 text-xs">
+                <span>নোটিশের শিরোনাম (Title - বাংলা ও ইংরেজি ইনপুট)</span>
+                <span className="text-red-500 font-bold">*</span>
+              </span>
+              <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                <Sparkles className="w-3 h-3 text-amber-500" />
+                <span>আরবি অনুবাদ ও সংরক্ষণ স্বয়ংক্রিয়ভাবে হবে (Auto-Translated)</span>
+              </span>
             </div>
-            <div>
-              <label className="block font-semibold mb-1 text-slate-800">নোটিশ শিরোনাম (English)</label>
-              <input
-                type="text"
-                placeholder="e.g. Urgent Notice Regarding Admission Session"
-                value={editingNotice.title?.en || ''}
-                onChange={e => setEditingNotice({ ...editingNotice, title: { bn: editingNotice.title?.bn || '', en: e.target.value, ar: editingNotice.title?.ar || '' } })}
-                className="w-full p-2.5 rounded-xl border border-amber-300 bg-white focus:ring-2 focus:ring-amber-500 outline-none"
-              />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block font-semibold mb-1 text-slate-800">১. শিরোনাম (বাংলা) *</label>
+                <input
+                  type="text"
+                  placeholder="যেমন: নতুন শিক্ষাবর্ষের ভর্তি কার্যক্রম সংক্রান্ত জরুরি বিজ্ঞপ্তি"
+                  value={editingNotice.title?.bn || ''}
+                  onChange={e => {
+                    setEditingNotice({ ...editingNotice, title: { bn: e.target.value, en: editingNotice.title?.en || '', ar: editingNotice.title?.ar || '' } });
+                    if (formErrors.titleBn) setFormErrors(prev => ({ ...prev, titleBn: '' }));
+                  }}
+                  className={`w-full p-2.5 rounded-xl border ${formErrors.titleBn ? 'border-red-500 bg-red-50/30' : 'border-amber-300 bg-white'} focus:ring-2 focus:ring-amber-500 outline-none`}
+                />
+                {formErrors.titleBn && (
+                  <p className="text-[11px] text-red-600 mt-1 font-semibold">{formErrors.titleBn}</p>
+                )}
+              </div>
+              <div>
+                <label className="block font-semibold mb-1 text-slate-800">২. Title (English) *</label>
+                <input
+                  type="text"
+                  placeholder="e.g. Urgent Notice Regarding Admission Session"
+                  value={editingNotice.title?.en || ''}
+                  onChange={e => {
+                    setEditingNotice({ ...editingNotice, title: { bn: editingNotice.title?.bn || '', en: e.target.value, ar: editingNotice.title?.ar || '' } });
+                    if (formErrors.titleEn) setFormErrors(prev => ({ ...prev, titleEn: '' }));
+                  }}
+                  className={`w-full p-2.5 rounded-xl border ${formErrors.titleEn ? 'border-red-500 bg-red-50/30' : 'border-amber-300 bg-white'} focus:ring-2 focus:ring-amber-500 outline-none`}
+                />
+                {formErrors.titleEn && (
+                  <p className="text-[11px] text-red-600 mt-1 font-semibold">{formErrors.titleEn}</p>
+                )}
+              </div>
             </div>
           </div>
 
@@ -231,9 +266,15 @@ export const NoticesManager: React.FC = () => {
               rows={4}
               placeholder="নোটিশের বিস্তারিত বক্তব্য, নির্দেশনা ও নিয়মাবলী লিখুন..."
               value={editingNotice.description?.bn || ''}
-              onChange={e => setEditingNotice({ ...editingNotice, description: { bn: e.target.value, en: editingNotice.description?.en || '', ar: editingNotice.description?.ar || '' } })}
-              className="w-full p-2.5 rounded-xl border border-amber-300 bg-white"
+              onChange={e => {
+                setEditingNotice({ ...editingNotice, description: { bn: e.target.value, en: editingNotice.description?.en || '', ar: editingNotice.description?.ar || '' } });
+                if (formErrors.descriptionBn) setFormErrors(prev => ({ ...prev, descriptionBn: '' }));
+              }}
+              className={`w-full p-2.5 rounded-xl border ${formErrors.descriptionBn ? 'border-red-500 bg-red-50/30' : 'border-amber-300 bg-white'}`}
             />
+            {formErrors.descriptionBn && (
+              <p className="text-[11px] text-red-600 mt-1 font-semibold">{formErrors.descriptionBn}</p>
+            )}
           </div>
 
           <div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { X, MapPin, Mail, Phone, Calendar, HeartHandshake, Award } from 'lucide-react';
 import { useMadrasa } from '../../context/MadrasaContext';
-import { getLocalized, translations } from '../../i18n/translations';
+import { getLocalized, translations, formatDigits } from '../../lib/translations';
 
 export const FounderDetailModal: React.FC = () => {
   const { selectedFounder, setSelectedFounder, language } = useMadrasa();
@@ -40,9 +40,9 @@ export const FounderDetailModal: React.FC = () => {
               className="w-24 h-24 rounded-2xl object-cover border-4 border-white shadow-lg bg-emerald-100 flex-shrink-0"
             />
             <div className="pb-1">
-              <div className="text-xs font-semibold text-amber-900 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded inline-flex items-center gap-1">
+              <div className="text-xs font-semibold text-amber-900 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded inline-flex items-center gap-1 font-mono">
                 <Calendar className="w-3.5 h-3.5 text-amber-700" />
-                <span>{t.modal_founder_since} {selectedFounder.founderSince}</span>
+                <span>{t.modal_founder_since} {formatDigits(selectedFounder.founderSince, language)}</span>
               </div>
             </div>
           </div>
@@ -100,7 +100,7 @@ export const FounderDetailModal: React.FC = () => {
                 <div className="flex items-center gap-1.5">
                   <Phone className="w-3.5 h-3.5 text-emerald-700" />
                   <a href={`tel:${selectedFounder.phone}`} className="hover:text-emerald-800 font-mono">
-                    {selectedFounder.phone}
+                    {formatDigits(selectedFounder.phone, language)}
                   </a>
                 </div>
               )}

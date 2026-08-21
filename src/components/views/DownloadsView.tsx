@@ -1,15 +1,18 @@
-import React from 'react';
-import { FileText, Download, Calendar, CheckCircle2, Shield, ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { FileText, Download, Calendar, CheckCircle2, Shield, ArrowRight, Check } from 'lucide-react';
 import { useMadrasa } from '../../context/MadrasaContext';
-import { getLocalized, translations } from '../../i18n/translations';
+import { getLocalized, translations, formatDate, formatDigits } from '../../lib/translations';
 
 export const DownloadsView: React.FC = () => {
   const { data, language } = useMadrasa();
+  const [downloadedId, setDownloadedId] = useState<string | null>(null);
   const t = translations[language];
 
   const handleDownload = (item: any) => {
-    // Alert or trigger download of PDF
-    alert(`"${getLocalized(item.title, language)}" সফলভাবে ডাউনলোড শুরু হয়েছে।`);
+    setDownloadedId(item.id);
+    setTimeout(() => {
+      setDownloadedId(null);
+    }, 3000);
   };
 
   return (
@@ -46,7 +49,7 @@ export const DownloadsView: React.FC = () => {
                     {item.fileType}
                   </span>
                   <span className="text-xs text-slate-400 font-mono">
-                    {item.fileSize}
+                    {formatDigits(item.fileSize, language)}
                   </span>
                 </div>
                 <h3 className="font-bold text-sm sm:text-base text-slate-900 leading-snug">
@@ -59,7 +62,7 @@ export const DownloadsView: React.FC = () => {
                 )}
                 <div className="text-[11px] text-slate-400 font-mono flex items-center gap-1 pt-1">
                   <Calendar className="w-3 h-3" />
-                  <span>আপলোড: {item.uploadDate}</span>
+                  <span>আপলোড: {formatDate(item.uploadDate, language)}</span>
                 </div>
               </div>
             </div>
@@ -68,10 +71,21 @@ export const DownloadsView: React.FC = () => {
               <span className="text-xs text-slate-500 font-medium">অফিসিয়াল কপি</span>
               <button
                 onClick={() => handleDownload(item)}
-                className="px-4 py-2 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-white text-xs font-bold shadow flex items-center gap-1.5 transition-all"
+                className={`px-4 py-2 rounded-xl text-white text-xs font-bold shadow flex items-center gap-1.5 transition-all ${
+                  downloadedId === item.id ? 'bg-emerald-600' : 'bg-emerald-800 hover:bg-emerald-700'
+                }`}
               >
-                <Download className="w-4 h-4" />
-                <span>{t.btn_download}</span>
+                {downloadedId === item.id ? (
+                  <>
+                    <Check className="w-4 h-4" />
+                    <span>ডাউনলোড সম্পন্ন</span>
+                  </>
+                ) : (
+                  <>
+                    <Download className="w-4 h-4" />
+                    <span>{t.btn_download}</span>
+                  </>
+                )}
               </button>
             </div>
           </div>

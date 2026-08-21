@@ -28,7 +28,7 @@ import {
   Building2
 } from 'lucide-react';
 import { useMadrasa } from '../../context/MadrasaContext';
-import { translations, getLocalized } from '../../i18n/translations';
+import { translations, getLocalized, formatDigits } from '../../lib/translations';
 import { Language } from '../../types';
 
 interface NavDropdownItem {
@@ -82,75 +82,75 @@ export const Navbar: React.FC = () => {
     },
     {
       type: 'dropdown',
-      label: language === 'bn' ? 'পরিচিতি ও প্রশাসন' : language === 'ar' ? 'عن المؤسسة' : 'About & Administration',
+      label: 'পরিচিতি ও প্রশাসন',
       key: 'about_group',
       items: [
         {
           key: 'about',
           label: t.nav_about,
-          desc: language === 'bn' ? 'মাদ্রাসার ইতিহাস, লক্ষ্য ও মাইলফলক' : 'History, Mission & Milestones',
+          desc: 'মাদ্রাসার ইতিহাস, লক্ষ্য ও মাইলফলক',
           icon: BookOpen
         },
         {
           key: 'founders',
           label: t.nav_founders,
-          desc: language === 'bn' ? 'প্রতিষ্ঠাতা ও আজীবন পৃষ্ঠপোষকবৃন্দ' : 'Founders & Lifetime Donors',
+          desc: 'প্রতিষ্ঠাতা ও আজীবন পৃষ্ঠপোষকবৃন্দ',
           icon: Users
         },
         {
           key: 'teachers',
           label: t.nav_teachers,
-          desc: language === 'bn' ? 'সম্মানিত উস্তাদ ও শিক্ষকমণ্ডলী' : 'Respected Faculty & Teachers',
+          desc: 'সম্মানিত উস্তাদ ও শিক্ষকমণ্ডলী',
           icon: GraduationCap
         },
         {
           key: 'departments',
           label: t.nav_departments,
-          desc: language === 'bn' ? 'হিফজ, কিতাব ও অন্যান্য বিভাগসমূহ' : 'Academic Departments & Syllabi',
+          desc: 'হিফজ, কিতাব ও অন্যান্য বিভাগসমূহ',
           icon: Building2
         }
       ]
     },
     {
       type: 'dropdown',
-      label: language === 'bn' ? 'মিডিয়া ও গ্যালারি' : language === 'ar' ? 'الإعلام والمعرض' : 'Media & Gallery',
+      label: 'মিডিয়া ও গ্যালারি',
       key: 'media_group',
       items: [
         {
           key: 'audio',
           label: t.nav_audio,
-          desc: language === 'bn' ? 'কুরআন তিলাওয়াত, হামদ-নাত ও বয়ান' : 'Quran Tilawat, Nasheed & Waz',
+          desc: 'কুরআন তিলাওয়াত, হামদ-নাত ও বয়ান',
           icon: Music
         },
         {
           key: 'video',
           label: t.nav_video,
-          desc: language === 'bn' ? 'ভিডিও ওয়াজ ও প্রাতিষ্ঠানিক ডকুমেন্টারি' : 'Video Lectures & Documentaries',
+          desc: 'ভিডিও ওয়াজ ও প্রাতিষ্ঠানিক ডকুমেন্টারি',
           icon: Video
         },
         {
           key: 'gallery',
           label: t.nav_gallery,
-          desc: language === 'bn' ? 'ক্যাম্পাস, অনুষ্ঠান ও স্মৃতি অ্যালবাম' : 'Campus, Programs & Event Photos',
+          desc: 'ক্যাম্পাস, অনুষ্ঠান ও স্মৃতি অ্যালবাম',
           icon: ImageIcon
         }
       ]
     },
     {
       type: 'dropdown',
-      label: language === 'bn' ? 'বিজ্ঞপ্তি ও কার্যক্রম' : language === 'ar' ? 'الإعلانات والأنشطة' : 'Notices & Events',
+      label: 'বিজ্ঞপ্তি ও কার্যক্রম',
       key: 'activities_group',
       items: [
         {
           key: 'notices',
           label: t.nav_notices,
-          desc: language === 'bn' ? 'ভর্তি, পরীক্ষা ও সাধারণ নোটিশ' : 'Admission, Exam & General Notices',
+          desc: 'ভর্তি, পরীক্ষা ও সাধারণ নোটিশ',
           icon: Bell
         },
         {
           key: 'events',
           label: t.nav_events,
-          desc: language === 'bn' ? 'বার্ষিক মাহফিল, দস্তারবন্দি ও সেমিনার' : 'Annual Mahfils & Seminars',
+          desc: 'বার্ষিক মাহফিল, দস্তারবন্দি ও সেমিনার',
           icon: Calendar
         }
       ]
@@ -216,7 +216,7 @@ export const Navbar: React.FC = () => {
           <div className="flex items-center gap-3 overflow-hidden text-ellipsis whitespace-nowrap">
             <span className="inline-flex items-center gap-1 font-semibold text-[#d4af37] bg-[#d4af37]/15 px-2.5 py-0.5 rounded text-[11px] border border-[#d4af37]/30">
               <Clock className="w-3 h-3" />
-              {t.top_established}
+              <span>স্থাপিত: {formatDigits(data.settings.establishedYear, language)} খ্রি.</span>
             </span>
             <span className="hidden sm:inline-flex items-center gap-1 text-emerald-100/90">
               <MapPin className="w-3 h-3 text-[#d4af37]" />
@@ -237,7 +237,7 @@ export const Navbar: React.FC = () => {
               className="hidden md:inline-flex items-center gap-1 hover:text-[#d4af37] transition-colors"
             >
               <Phone className="w-3 h-3 text-[#d4af37]" />
-              <span>{data.settings.phone}</span>
+              <span>{formatDigits(data.settings.phone, language)}</span>
             </a>
             <a
               href={`mailto:${data.settings.email}`}
@@ -247,48 +247,67 @@ export const Navbar: React.FC = () => {
               <span>{data.settings.email}</span>
             </a>
 
-            {/* Language Switcher */}
-            <div className="relative">
+            {/* Language Selector Dropdown with Flags */}
+            <div className="relative" id="language">
               <button
-                id="language-switcher-btn"
+                type="button"
+                id="languageBtn"
                 onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-                className="flex items-center gap-1.5 bg-[#0a4d28] hover:bg-[#083e20] text-white px-2.5 py-1 rounded text-xs font-medium transition-colors border border-[#d4af37]/40 shadow-sm"
-                aria-label="Change language"
+                className="flex items-center gap-1.5 bg-[#0a4d28] hover:bg-[#083e20] text-white px-2.5 py-1 rounded-lg text-xs font-semibold transition-all border border-[#d4af37]/40 shadow-xs cursor-pointer"
+                aria-label="Select language"
               >
-                <Globe className="w-3.5 h-3.5 text-[#d4af37]" />
-                <span>
+                <span className="text-sm">
+                  {language === 'bn' ? '🇧🇩' : language === 'ar' ? '🇸🇦' : '🇬🇧'}
+                </span>
+                <span id="currentLanguage">
                   {language === 'bn' ? 'বাংলা' : language === 'ar' ? 'العربية' : 'English'}
                 </span>
-                <ChevronDown className="w-3 h-3 text-emerald-200" />
+                <span className={`text-[10px] text-emerald-200 transition-transform duration-200 ${langDropdownOpen ? 'rotate-180' : ''}`}>
+                  ▼
+                </span>
               </button>
 
               {langDropdownOpen && (
-                <div className="absolute right-0 mt-1 w-36 bg-white text-slate-800 rounded-md shadow-xl border border-slate-200 py-1 z-50 text-xs">
+                <div
+                  className="language-menu absolute right-0 mt-1.5 w-40 bg-white text-slate-800 rounded-xl shadow-xl border border-slate-200 p-1 z-50 text-xs animate-in fade-in slide-in-from-top-1"
+                >
                   <button
+                    type="button"
+                    data-lang="bn"
+                    data-name="বাংলা"
                     onClick={() => handleLangChange('bn')}
-                    className={`w-full text-left px-3 py-1.5 flex items-center justify-between hover:bg-emerald-50 ${
-                      language === 'bn' ? 'text-[#0a4d28] font-bold bg-emerald-50/60' : ''
+                    className={`language-option w-full text-left px-3 py-2 rounded-lg flex items-center gap-2 transition-colors cursor-pointer ${
+                      language === 'bn' ? 'active bg-emerald-50 text-[#0a4d28] font-bold' : 'hover:bg-slate-100 text-slate-700'
                     }`}
                   >
-                    <span>বাংলা (Bangla)</span>
+                    <span>🇧🇩</span>
+                    <span className="flex-1">বাংলা</span>
                     {language === 'bn' && <span className="w-1.5 h-1.5 rounded-full bg-[#0a4d28]"></span>}
                   </button>
                   <button
+                    type="button"
+                    data-lang="en"
+                    data-name="English"
                     onClick={() => handleLangChange('en')}
-                    className={`w-full text-left px-3 py-1.5 flex items-center justify-between hover:bg-emerald-50 ${
-                      language === 'en' ? 'text-[#0a4d28] font-bold bg-emerald-50/60' : ''
+                    className={`language-option w-full text-left px-3 py-2 rounded-lg flex items-center gap-2 transition-colors cursor-pointer ${
+                      language === 'en' ? 'active bg-emerald-50 text-[#0a4d28] font-bold' : 'hover:bg-slate-100 text-slate-700'
                     }`}
                   >
-                    <span>English</span>
+                    <span>🇬🇧</span>
+                    <span className="flex-1">English</span>
                     {language === 'en' && <span className="w-1.5 h-1.5 rounded-full bg-[#0a4d28]"></span>}
                   </button>
                   <button
+                    type="button"
+                    data-lang="ar"
+                    data-name="العربية"
                     onClick={() => handleLangChange('ar')}
-                    className={`w-full text-left px-3 py-1.5 flex items-center justify-between hover:bg-emerald-50 ${
-                      language === 'ar' ? 'text-[#0a4d28] font-bold bg-emerald-50/60' : ''
+                    className={`language-option w-full text-left px-3 py-2 rounded-lg flex items-center gap-2 transition-colors cursor-pointer ${
+                      language === 'ar' ? 'active bg-emerald-50 text-[#0a4d28] font-bold' : 'hover:bg-slate-100 text-slate-700'
                     }`}
                   >
-                    <span>العربية (Arabic)</span>
+                    <span>🇸🇦</span>
+                    <span className="flex-1">العربية</span>
                     {language === 'ar' && <span className="w-1.5 h-1.5 rounded-full bg-[#0a4d28]"></span>}
                   </button>
                 </div>
@@ -307,11 +326,11 @@ export const Navbar: React.FC = () => {
             onClick={() => handleNavClick('home')}
             className="flex items-center gap-3 cursor-pointer group"
           >
-            {/* Islamic Floral Emblem Icon */}
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0a4d28] to-[#1a2e1a] text-[#d4af37] flex items-center justify-center shadow-md border-2 border-[#d4af37] group-hover:scale-105 transition-transform flex-shrink-0">
-              <div className="text-center font-bold">
-                <span className="block text-[9px] uppercase tracking-tighter text-[#d4af37]">الجديد</span>
-                <span className="block text-xl font-serif leading-none text-[#d4af37]">م</span>
+            {/* Islamic Floral Emblem Icon - Preserved Arabic Logo */}
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0a4d28] to-[#1a2e1a] text-[#d4af37] flex items-center justify-center shadow-md border-2 border-[#d4af37] group-hover:scale-105 transition-transform flex-shrink-0 notranslate" translate="no">
+              <div className="text-center font-bold notranslate" translate="no">
+                <span className="block text-[9px] uppercase tracking-tighter text-[#d4af37] notranslate" translate="no">الجديد</span>
+                <span className="block text-xl font-serif leading-none text-[#d4af37] notranslate" translate="no">م</span>
               </div>
             </div>
 
@@ -522,6 +541,43 @@ export const Navbar: React.FC = () => {
       {/* Mobile Drawer Navigation with Accordions */}
       {mobileMenuOpen && (
         <div id="mobile-drawer" className="lg:hidden bg-white border-b border-slate-200 shadow-xl px-4 py-4 max-h-[80vh] overflow-y-auto">
+          {/* Mobile Language Selector */}
+          <div className="mb-4 pb-3 border-b border-slate-150 flex items-center justify-between">
+            <span className="text-xs font-semibold text-slate-500 flex items-center gap-1.5">
+              <Globe className="w-3.5 h-3.5 text-emerald-800" />
+              <span>ভাষা পরিবর্তন (Language):</span>
+            </span>
+            <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl">
+              <button
+                onClick={() => handleLangChange('bn')}
+                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
+                  language === 'bn' ? 'bg-[#0a4d28] text-white shadow-xs' : 'text-slate-700 hover:text-slate-900'
+                }`}
+              >
+                <span>🇧🇩</span>
+                <span>বাং</span>
+              </button>
+              <button
+                onClick={() => handleLangChange('en')}
+                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
+                  language === 'en' ? 'bg-[#0a4d28] text-white shadow-xs' : 'text-slate-700 hover:text-slate-900'
+                }`}
+              >
+                <span>🇬🇧</span>
+                <span>EN</span>
+              </button>
+              <button
+                onClick={() => handleLangChange('ar')}
+                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
+                  language === 'ar' ? 'bg-[#0a4d28] text-white shadow-xs' : 'text-slate-700 hover:text-slate-900'
+                }`}
+              >
+                <span>🇸🇦</span>
+                <span>عربي</span>
+              </button>
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 gap-1.5 pb-3">
             {navStructure.map(group => {
               if (group.type === 'link') {

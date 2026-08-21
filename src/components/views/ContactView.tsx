@@ -11,7 +11,7 @@ import {
   Building
 } from 'lucide-react';
 import { useMadrasa } from '../../context/MadrasaContext';
-import { getLocalized, translations } from '../../i18n/translations';
+import { getLocalized, translations, formatDigits } from '../../lib/translations';
 
 export const ContactView: React.FC = () => {
   const { data, language } = useMadrasa();
@@ -25,13 +25,15 @@ export const ContactView: React.FC = () => {
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formState.name || !formState.phone || !formState.message) {
-      alert('দয়া করে আপনার নাম, মোবাইল নম্বর এবং বার্তা সঠিকভাবে পূরণ করুন।');
+    if (!formState.name.trim() || !formState.phone.trim() || !formState.message.trim()) {
+      setErrorMsg('দয়া করে আপনার নাম, মোবাইল নম্বর এবং বার্তা সঠিকভাবে পূরণ করুন।');
       return;
     }
+    setErrorMsg(null);
     setSubmitted(true);
   };
 
@@ -79,7 +81,7 @@ export const ContactView: React.FC = () => {
                 <div>
                   <div className="font-bold text-slate-900">{t.contact_hotline_label}</div>
                   <a href={`tel:${data.settings.phone}`} className="text-emerald-800 font-bold font-mono mt-0.5 block hover:underline">
-                    {data.settings.phone}
+                    {formatDigits(data.settings.phone, language)}
                   </a>
                 </div>
               </div>
@@ -131,11 +133,11 @@ export const ContactView: React.FC = () => {
               </div>
               <div className="flex justify-between">
                 <span className="text-emerald-300">{t.contact_acc_no_label}</span>
-                <span className="font-bold text-amber-300">20507770100123456</span>
+                <span className="font-bold text-amber-300">{formatDigits("20507770100123456", language)}</span>
               </div>
               <div className="flex justify-between pt-1 border-t border-emerald-800">
                 <span className="text-emerald-300">{t.contact_bkash_label}</span>
-                <span className="font-bold text-amber-300">01711-XXXXXX</span>
+                <span className="font-bold text-amber-300">{formatDigits("01711-XXXXXX", language)}</span>
               </div>
             </div>
           </div>
@@ -151,6 +153,12 @@ export const ContactView: React.FC = () => {
               {t.contact_form_sub}
             </p>
           </div>
+
+          {errorMsg && (
+            <div className="p-3 bg-red-50 text-red-700 rounded-xl text-xs border border-red-200">
+              {errorMsg}
+            </div>
+          )}
 
           {submitted ? (
             <div className="p-8 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-3">

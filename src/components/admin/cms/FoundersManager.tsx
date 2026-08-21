@@ -15,16 +15,18 @@ import {
 } from 'lucide-react';
 import { useMadrasa } from '../../../context/MadrasaContext';
 import { Founder } from '../../../types';
-import { getLocalized, toLocal } from '../../../i18n/translations';
+import { getLocalized, toLocal } from '../../../lib/translations';
 import { ImageUpload } from '../ImageUpload';
 import { hasPermission } from '../../../lib/security';
 import { DeleteConfirmModal } from '../DeleteConfirmModal';
+import { validateEmail, validatePhone, validateRequiredText } from '../../../lib/validation';
 
 export const FoundersManager: React.FC = () => {
-  const { data, updateData, currentUser, addActivityLog, language } = useMadrasa();
+  const { data, updateData, currentUser, addActivityLog, language, saveEntityWithTranslation, isSaving } = useMadrasa();
   const [editingFounder, setEditingFounder] = useState<Partial<Founder> | null>(null);
   const [activeTab, setActiveTab] = useState<'all' | 'pending'>('all');
   const [deleteTarget, setDeleteTarget] = useState<Founder | null>(null);
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
   const canManage = hasPermission(currentUser, 'manage_founders');
 
@@ -40,24 +42,75 @@ export const FoundersManager: React.FC = () => {
     );
   }
 
-  const handleSaveFounder = (f: Partial<Founder>) => {
-    if (!f.name?.bn) {
-      alert('প্রতিষ্ঠাতার নাম দেওয়া আবশ্যক।');
+  const handleSaveFounder = async (f: Partial<Founder>) => {
+    const errors: Record<string, string> = {};
+
+    const nameBnVal = validateRequiredText(f.name?.bn, 'প্রতিষ্ঠাতার বাংলা নাম');
+    if (!nameBnVal.isValid) errors.nameBn = nameBnVal.error || '';
+
+    const nameEnVal = validateRequiredText(f.name?.en, 'Founder English Name');
+    if (!nameEnVal.isValid) errors.nameEn = nameEnVal.error || '';
+
+    if (f.email && f.email.trim()) {
+      const emailVal = validateEmail(f.email, false);
+      if (!emailVal.isValid) errors.email = emailVal.error || '';
+    }
+
+    if (f.phone && f.phone.trim()) {
+      const phoneVal = validatePhone(f.phone, false);
+      if (!phoneVal.isValid) errors.phone = phoneVal.error || '';
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
       return;
     }
+    setFormErrors({});
 
     const newId = f.id || `founder-${Date.now()}`;
     const cleanFounder: Founder = {
       id: newId,
-      name: f.name ? toLocal(f.name.bn, f.name.en, f.name.ar) : toLocal(''),
-      designation: f.designation ? toLocal(f.designation.bn, f.designation.en, f.designation.ar) : toLocal('আজীবন প্রতিষ্ঠাতা সদস্য'),
+      name: {
+        bn: f.name?.bn?.trim() || '',
+        en: f.name?.en?.trim() || '',
+        ar: f.name?.ar?.trim() || ''
+      },
+      designation: {
+        bn: f.designation?.bn?.trim() || 'আজীবন প্রতিষ্ঠাতা সদস্য',
+        en: f.designation?.en?.trim() || 'Lifetime Founder Member',
+        ar: f.designation?.ar?.trim() || 'عضو مؤسس مدى الحياة'
+      },
       image: f.image || 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600',
-      address: f.address ? toLocal(f.address.bn, f.address.en, f.address.ar) : toLocal('সন্দ্বীপ, চট্টগ্রাম'),
-      about: f.about ? toLocal(f.about.bn, f.about.en, f.about.ar) : toLocal('মাদ্রাসার সম্মানিত প্রতিষ্ঠাতা সদস্য।'),
-      biography: f.biography ? toLocal(f.biography.bn, f.biography.en, f.biography.ar) : toLocal(''),
-      historyContribution: f.historyContribution ? toLocal(f.historyContribution.bn, f.historyContribution.en, f.historyContribution.ar) : toLocal(''),
-      educationalBackground: f.educationalBackground ? toLocal(f.educationalBackground.bn, f.educationalBackground.en, f.educationalBackground.ar) : toLocal(''),
-      professionalBackground: f.professionalBackground ? toLocal(f.professionalBackground.bn, f.professionalBackground.en, f.professionalBackground.ar) : toLocal(''),
+      address: {
+        bn: f.address?.bn?.trim() || 'সন্দ্বীপ, চট্টগ্রাম',
+        en: f.address?.en?.trim() || 'Sandwip, Chittagong',
+        ar: f.address?.ar?.trim() || 'ساندويب'
+      },
+      about: {
+        bn: f.about?.bn?.trim() || 'মাদ্রাসার সম্মানিত প্রতিষ্ঠাতা সদস্য।',
+        en: f.about?.en?.trim() || '',
+        ar: f.about?.ar?.trim() || ''
+      },
+      biography: {
+        bn: f.biography?.bn?.trim() || '',
+        en: f.biography?.en?.trim() || '',
+        ar: f.biography?.ar?.trim() || ''
+      },
+      historyContribution: {
+        bn: f.historyContribution?.bn?.trim() || '',
+        en: f.historyContribution?.en?.trim() || '',
+        ar: f.historyContribution?.ar?.trim() || ''
+      },
+      educationalBackground: {
+        bn: f.educationalBackground?.bn?.trim() || '',
+        en: f.educationalBackground?.en?.trim() || '',
+        ar: f.educationalBackground?.ar?.trim() || ''
+      },
+      professionalBackground: {
+        bn: f.professionalBackground?.bn?.trim() || '',
+        en: f.professionalBackground?.en?.trim() || '',
+        ar: f.professionalBackground?.ar?.trim() || ''
+      },
       founderSince: f.founderSince || '২০১০',
       phone: f.phone || '',
       email: f.email || '',
@@ -66,18 +119,13 @@ export const FoundersManager: React.FC = () => {
       linkedUserId: f.linkedUserId
     };
 
-    updateData(prev => {
-      const exists = prev.founders.some(item => item.id === cleanFounder.id);
-      const founders = exists
-        ? prev.founders.map(item => item.id === cleanFounder.id ? cleanFounder : item)
-        : [...prev.founders, cleanFounder];
-      return { ...prev, founders };
-    });
+    // Save with server-side auto-translation
+    const saved = await saveEntityWithTranslation('founder', cleanFounder);
 
     addActivityLog(
       f.id ? 'প্রতিষ্ঠাতা আপডেট' : 'নতুন প্রতিষ্ঠাতা যোগ',
-      cleanFounder.name.bn,
-      `পদবী: ${cleanFounder.designation.bn}`
+      saved?.name?.bn || cleanFounder.name.bn,
+      `পদবী: ${saved?.designation?.bn || cleanFounder.designation.bn}`
     );
 
     setEditingFounder(null);
@@ -243,20 +291,80 @@ export const FoundersManager: React.FC = () => {
                 </button>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div>
-                  <label className="block font-semibold mb-1 text-slate-700">পূর্ণ নাম (বাংলা) *</label>
-                  <input
-                    type="text"
-                    value={editingFounder.name?.bn || ''}
-                    onChange={e => setEditingFounder({ ...editingFounder, name: { bn: e.target.value, en: editingFounder.name?.en || '', ar: editingFounder.name?.ar || '' } })}
-                    className="w-full p-2.5 rounded-xl border border-slate-300 bg-white"
-                  />
+              {/* 2-Field Name Entry Section */}
+              <div className="bg-white p-4 rounded-2xl border border-slate-200 space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="font-bold text-slate-800 flex items-center gap-1.5 text-xs">
+                    <span>প্রতিষ্ঠাতার নাম (Name Entry - ২ ফিল্ড ইনপুট)</span>
+                    <span className="text-red-500 font-bold">*</span>
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                    <Sparkles className="w-3 h-3 text-amber-500" />
+                    <span>আরবি নাম স্বয়ংক্রিয়ভাবে জেনারেট ও সংরক্ষিত হবে (Auto-Generated Arabic)</span>
+                  </span>
                 </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block font-semibold mb-1 text-slate-700">
+                      ১. নাম (বাংলা) *
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="যেমন: আলহাজ্ব মোঃ আহমেদ উল্ল্যা"
+                      value={editingFounder.name?.bn || ''}
+                      onChange={e => {
+                        setEditingFounder({
+                          ...editingFounder,
+                          name: {
+                            bn: e.target.value,
+                            en: editingFounder.name?.en || '',
+                            ar: editingFounder.name?.ar || ''
+                          }
+                        });
+                        if (formErrors.nameBn) setFormErrors(prev => ({ ...prev, nameBn: '' }));
+                      }}
+                      className={`w-full p-2.5 rounded-xl border ${formErrors.nameBn ? 'border-red-500 bg-red-50/30' : 'border-slate-300 bg-white'} outline-none focus:ring-2 focus:ring-emerald-500`}
+                    />
+                    {formErrors.nameBn && (
+                      <p className="text-[11px] text-red-600 mt-1 font-semibold">{formErrors.nameBn}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label className="block font-semibold mb-1 text-slate-700">
+                      ২. Name (English) *
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Alhaj Md. Ahmed Ullah"
+                      value={editingFounder.name?.en || ''}
+                      onChange={e => {
+                        setEditingFounder({
+                          ...editingFounder,
+                          name: {
+                            bn: editingFounder.name?.bn || '',
+                            en: e.target.value,
+                            ar: editingFounder.name?.ar || ''
+                          }
+                        });
+                        if (formErrors.nameEn) setFormErrors(prev => ({ ...prev, nameEn: '' }));
+                      }}
+                      className={`w-full p-2.5 rounded-xl border ${formErrors.nameEn ? 'border-red-500 bg-red-50/30' : 'border-slate-300 bg-white'} outline-none focus:ring-2 focus:ring-emerald-500`}
+                    />
+                    {formErrors.nameEn && (
+                      <p className="text-[11px] text-red-600 mt-1 font-semibold">{formErrors.nameEn}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-semibold mb-1 text-slate-700">পদবী (বাংলা)</label>
+                  <label className="block font-semibold mb-1 text-slate-700">পদবী (Designation)</label>
                   <input
                     type="text"
+                    placeholder="যেমন: আজীবন প্রতিষ্ঠাতা সদস্য ও পৃষ্ঠপোষক"
                     value={editingFounder.designation?.bn || ''}
                     onChange={e => setEditingFounder({ ...editingFounder, designation: { bn: e.target.value, en: editingFounder.designation?.en || '', ar: editingFounder.designation?.ar || '' } })}
                     className="w-full p-2.5 rounded-xl border border-slate-300 bg-white"
@@ -266,6 +374,7 @@ export const FoundersManager: React.FC = () => {
                   <label className="block font-semibold mb-1 text-slate-700">প্রতিষ্ঠার সাল / সংযোগ সাল</label>
                   <input
                     type="text"
+                    placeholder="২০১০"
                     value={editingFounder.founderSince || ''}
                     onChange={e => setEditingFounder({ ...editingFounder, founderSince: e.target.value })}
                     className="w-full p-2.5 rounded-xl border border-slate-300 bg-white"
@@ -273,11 +382,12 @@ export const FoundersManager: React.FC = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
-                  <label className="block font-semibold mb-1 text-slate-700">ঠিকানা (বাংলা)</label>
+                  <label className="block font-semibold mb-1 text-slate-700">ঠিকানা (Address)</label>
                   <input
                     type="text"
+                    placeholder="সন্দ্বীপ, চট্টগ্রাম"
                     value={editingFounder.address?.bn || ''}
                     onChange={e => setEditingFounder({ ...editingFounder, address: { bn: e.target.value, en: editingFounder.address?.en || '', ar: editingFounder.address?.ar || '' } })}
                     className="w-full p-2.5 rounded-xl border border-slate-300 bg-white"
@@ -287,10 +397,33 @@ export const FoundersManager: React.FC = () => {
                   <label className="block font-semibold mb-1 text-slate-700">মোবাইল নম্বর (ঐচ্ছিক)</label>
                   <input
                     type="text"
+                    placeholder="018XXXXXXXX"
                     value={editingFounder.phone || ''}
-                    onChange={e => setEditingFounder({ ...editingFounder, phone: e.target.value })}
-                    className="w-full p-2.5 rounded-xl border border-slate-300 bg-white font-mono"
+                    onChange={e => {
+                      setEditingFounder({ ...editingFounder, phone: e.target.value });
+                      if (formErrors.phone) setFormErrors(prev => ({ ...prev, phone: '' }));
+                    }}
+                    className={`w-full p-2.5 rounded-xl border ${formErrors.phone ? 'border-red-500 bg-red-50/30' : 'border-slate-300 bg-white'} font-mono`}
                   />
+                  {formErrors.phone && (
+                    <p className="text-[11px] text-red-600 mt-1 font-semibold">{formErrors.phone}</p>
+                  )}
+                </div>
+                <div>
+                  <label className="block font-semibold mb-1 text-slate-700">ইমেইল (ঐচ্ছিক)</label>
+                  <input
+                    type="email"
+                    placeholder="founder@example.com"
+                    value={editingFounder.email || ''}
+                    onChange={e => {
+                      setEditingFounder({ ...editingFounder, email: e.target.value });
+                      if (formErrors.email) setFormErrors(prev => ({ ...prev, email: '' }));
+                    }}
+                    className={`w-full p-2.5 rounded-xl border ${formErrors.email ? 'border-red-500 bg-red-50/30' : 'border-slate-300 bg-white'} font-mono`}
+                  />
+                  {formErrors.email && (
+                    <p className="text-[11px] text-red-600 mt-1 font-semibold">{formErrors.email}</p>
+                  )}
                 </div>
               </div>
 

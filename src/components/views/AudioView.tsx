@@ -11,7 +11,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import { useMadrasa } from '../../context/MadrasaContext';
-import { getLocalized, translations } from '../../i18n/translations';
+import { getLocalized, translations } from '../../lib/translations';
 
 export const AudioView: React.FC = () => {
   const { data, language, currentTrack, isPlayingAudio, playTrack, togglePlayAudio } = useMadrasa();

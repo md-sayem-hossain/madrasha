@@ -9,21 +9,25 @@ import {
   Mail,
   MapPin,
   Calendar,
-  AlertTriangle
+  AlertTriangle,
+  Sparkles,
+  CheckCircle2
 } from 'lucide-react';
 import { useMadrasa } from '../../../context/MadrasaContext';
 import { Teacher } from '../../../types';
-import { getLocalized, toLocal } from '../../../i18n/translations';
+import { getLocalized, toLocal } from '../../../lib/translations';
 import { ImageUpload } from '../ImageUpload';
 import { hasPermission } from '../../../lib/security';
 import { DeleteConfirmModal } from '../DeleteConfirmModal';
+import { validateEmail, validatePhone, validateRequiredText } from '../../../lib/validation';
 
 export const TeachersManager: React.FC = () => {
-  const { data, updateData, currentUser, addActivityLog, language } = useMadrasa();
+  const { data, updateData, currentUser, addActivityLog, language, saveEntityWithTranslation, isSaving } = useMadrasa();
   const [editingTeacher, setEditingTeacher] = useState<Partial<Teacher> | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedDept, setSelectedDept] = useState<string>('all');
   const [deleteTarget, setDeleteTarget] = useState<Teacher | null>(null);
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
   const canManage = hasPermission(currentUser, 'manage_teachers');
 
@@ -39,23 +43,74 @@ export const TeachersManager: React.FC = () => {
     );
   }
 
-  const handleSaveTeacher = (t: Partial<Teacher>) => {
-    if (!t.name?.bn) {
-      alert('শিক্ষকের নাম দেওয়া আবশ্যক।');
+  const handleSaveTeacher = async (t: Partial<Teacher>) => {
+    const errors: Record<string, string> = {};
+
+    const nameBnVal = validateRequiredText(t.name?.bn, 'শিক্ষকের বাংলা নাম');
+    if (!nameBnVal.isValid) errors.nameBn = nameBnVal.error || '';
+
+    const nameEnVal = validateRequiredText(t.name?.en, 'Teacher English Name');
+    if (!nameEnVal.isValid) errors.nameEn = nameEnVal.error || '';
+
+    if (t.email && t.email.trim()) {
+      const emailVal = validateEmail(t.email, false);
+      if (!emailVal.isValid) errors.email = emailVal.error || '';
+    }
+
+    if (t.phone && t.phone.trim()) {
+      const phoneVal = validatePhone(t.phone, false);
+      if (!phoneVal.isValid) errors.phone = phoneVal.error || '';
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
       return;
     }
+    setFormErrors({});
 
     const newId = t.id || `teacher-${Date.now()}`;
     const cleanTeacher: Teacher = {
       id: newId,
-      name: t.name ? toLocal(t.name.bn, t.name.en, t.name.ar) : toLocal(''),
-      designation: t.designation ? toLocal(t.designation.bn, t.designation.en, t.designation.ar) : toLocal('উস্তাদ'),
-      department: t.department ? toLocal(t.department.bn, t.department.en, t.department.ar) : toLocal('হিফজুল কুরআন বিভাগ'),
-      subject: t.subject ? toLocal(t.subject.bn, t.subject.en, t.subject.ar) : toLocal('কুরআন মাজিদ ও তাজবিদ'),
-      qualifications: t.qualifications ? toLocal(t.qualifications.bn, t.qualifications.en, t.qualifications.ar) : toLocal('দাওরায়ে হাদিস'),
-      experience: t.experience ? toLocal(t.experience.bn, t.experience.en, t.experience.ar) : toLocal('৫ বছর'),
-      biography: t.biography ? toLocal(t.biography.bn, t.biography.en, t.biography.ar) : toLocal(''),
-      address: t.address ? toLocal(t.address.bn, t.address.en, t.address.ar) : toLocal('সন্দ্বীপ, চট্টগ্রাম'),
+      name: {
+        bn: t.name?.bn?.trim() || '',
+        en: t.name?.en?.trim() || '',
+        ar: t.name?.ar?.trim() || ''
+      },
+      designation: {
+        bn: t.designation?.bn?.trim() || 'উস্তাদ',
+        en: t.designation?.en?.trim() || 'Teacher / Ustad',
+        ar: t.designation?.ar?.trim() || 'أستاذ'
+      },
+      department: {
+        bn: t.department?.bn?.trim() || 'হিফজুল কুরআন বিভাগ',
+        en: t.department?.en?.trim() || 'Hifzul Quran Dept',
+        ar: t.department?.ar?.trim() || 'قسم تحفيظ القرآن الكريم'
+      },
+      subject: {
+        bn: t.subject?.bn?.trim() || 'কুরআন মাজিদ ও তাজবিদ',
+        en: t.subject?.en?.trim() || 'Quran Majeed & Tajweed',
+        ar: t.subject?.ar?.trim() || 'القرآن المجيد والتجويد'
+      },
+      qualifications: {
+        bn: t.qualifications?.bn?.trim() || 'দাওরায়ে হাদিস',
+        en: t.qualifications?.en?.trim() || 'Dawra-e-Hadith',
+        ar: t.qualifications?.ar?.trim() || 'دورة الحديث الشريف'
+      },
+      experience: {
+        bn: t.experience?.bn?.trim() || '৫ বছর',
+        en: t.experience?.en?.trim() || '5 Years',
+        ar: t.experience?.ar?.trim() || '٥ سنوات'
+      },
+      biography: {
+        bn: t.biography?.bn?.trim() || '',
+        en: t.biography?.en?.trim() || '',
+        ar: t.biography?.ar?.trim() || ''
+      },
+      address: {
+        bn: t.address?.bn?.trim() || 'সন্দ্বীপ, চট্টগ্রাম',
+        en: t.address?.en?.trim() || 'Sandwip, Chittagong',
+        ar: t.address?.ar?.trim() || 'ساندويب'
+      },
       joiningDate: t.joiningDate || '২০২০',
       image: t.image || 'https://images.unsplash.com/photo-1544717305-2782549b5136?w=600&auto=format&fit=crop&q=80',
       phone: t.phone || '',
@@ -64,18 +119,13 @@ export const TeachersManager: React.FC = () => {
       order: t.order || data.teachers.length + 1
     };
 
-    updateData(prev => {
-      const exists = prev.teachers.some(item => item.id === cleanTeacher.id);
-      const teachers = exists
-        ? prev.teachers.map(item => item.id === cleanTeacher.id ? cleanTeacher : item)
-        : [...prev.teachers, cleanTeacher];
-      return { ...prev, teachers };
-    });
+    // Auto-translate on save in backend and persist to DB
+    const saved = await saveEntityWithTranslation('teacher', cleanTeacher);
 
     addActivityLog(
       t.id ? 'শিক্ষক তথ্য আপডেট' : 'নতুন শিক্ষক যোগ',
-      cleanTeacher.name.bn,
-      `পদবী: ${cleanTeacher.designation.bn}`
+      saved?.name?.bn || cleanTeacher.name.bn,
+      `পদবী: ${saved?.designation?.bn || cleanTeacher.designation.bn}`
     );
 
     setEditingTeacher(null);
@@ -154,31 +204,106 @@ export const TeachersManager: React.FC = () => {
             </button>
           </div>
 
+          {/* 2-Field Name Entry Section */}
+          <div className="bg-white p-4 rounded-2xl border border-slate-200 space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="font-bold text-slate-800 flex items-center gap-1.5 text-xs">
+                <span>শিক্ষকের নাম (Name Entry - ২ ফিল্ড ইনপুট)</span>
+                <span className="text-red-500 font-bold">*</span>
+              </span>
+              <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                <Sparkles className="w-3 h-3 text-amber-500" />
+                <span>আরবি নাম স্বয়ংক্রিয়ভাবে জেনারেট ও সংরক্ষিত হবে (Auto-Generated Arabic)</span>
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="block font-semibold mb-1 text-slate-700">
+                  ১. নাম (বাংলা) *
+                </label>
+                <input
+                  type="text"
+                  placeholder="যেমন: মুফতী মাওলানা মোহাম্মদ আব্দুল্লাহ"
+                  value={editingTeacher.name?.bn || ''}
+                  onChange={e => {
+                    setEditingTeacher({
+                      ...editingTeacher,
+                      name: {
+                        bn: e.target.value,
+                        en: editingTeacher.name?.en || '',
+                        ar: editingTeacher.name?.ar || ''
+                      }
+                    });
+                    if (formErrors.nameBn) {
+                      setFormErrors(prev => ({ ...prev, nameBn: '' }));
+                    }
+                  }}
+                  className={`w-full p-2.5 rounded-xl border ${formErrors.nameBn ? 'border-red-500 bg-red-50/30' : 'border-slate-300 bg-white'} outline-none focus:ring-2 focus:ring-emerald-500`}
+                />
+                {formErrors.nameBn && (
+                  <p className="text-[11px] text-red-600 mt-1 font-semibold">{formErrors.nameBn}</p>
+                )}
+              </div>
+
+              <div>
+                <label className="block font-semibold mb-1 text-slate-700">
+                  ২. Name (English) *
+                </label>
+                <input
+                  type="text"
+                  placeholder="e.g. Mufti Mawlana Mohammad Abdullah"
+                  value={editingTeacher.name?.en || ''}
+                  onChange={e => {
+                    setEditingTeacher({
+                      ...editingTeacher,
+                      name: {
+                        bn: editingTeacher.name?.bn || '',
+                        en: e.target.value,
+                        ar: editingTeacher.name?.ar || ''
+                      }
+                    });
+                    if (formErrors.nameEn) {
+                      setFormErrors(prev => ({ ...prev, nameEn: '' }));
+                    }
+                  }}
+                  className={`w-full p-2.5 rounded-xl border ${formErrors.nameEn ? 'border-red-500 bg-red-50/30' : 'border-slate-300 bg-white'} outline-none focus:ring-2 focus:ring-emerald-500`}
+                />
+                {formErrors.nameEn && (
+                  <p className="text-[11px] text-red-600 mt-1 font-semibold">{formErrors.nameEn}</p>
+                )}
+              </div>
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
-              <label className="block font-semibold mb-1 text-slate-700">শিক্ষকের নাম (বাংলা) *</label>
+              <label className="block font-semibold mb-1 text-slate-700">পদবী (Designation)</label>
               <input
                 type="text"
-                value={editingTeacher.name?.bn || ''}
-                onChange={e => setEditingTeacher({ ...editingTeacher, name: { bn: e.target.value, en: editingTeacher.name?.en || '', ar: editingTeacher.name?.ar || '' } })}
-                className="w-full p-2.5 rounded-xl border border-slate-300 bg-white"
-              />
-            </div>
-            <div>
-              <label className="block font-semibold mb-1 text-slate-700">পদবী (বাংলা)</label>
-              <input
-                type="text"
+                placeholder="যেমন: মুহাদ্দিস ও সিনিয়র শিক্ষক"
                 value={editingTeacher.designation?.bn || ''}
                 onChange={e => setEditingTeacher({ ...editingTeacher, designation: { bn: e.target.value, en: editingTeacher.designation?.en || '', ar: editingTeacher.designation?.ar || '' } })}
                 className="w-full p-2.5 rounded-xl border border-slate-300 bg-white"
               />
             </div>
             <div>
-              <label className="block font-semibold mb-1 text-slate-700">বিভাগ (বাংলা)</label>
+              <label className="block font-semibold mb-1 text-slate-700">বিভাগ (Department)</label>
               <input
                 type="text"
+                placeholder="যেমন: কিতাব ও হাদিস বিভাগ"
                 value={editingTeacher.department?.bn || ''}
                 onChange={e => setEditingTeacher({ ...editingTeacher, department: { bn: e.target.value, en: editingTeacher.department?.en || '', ar: editingTeacher.department?.ar || '' } })}
+                className="w-full p-2.5 rounded-xl border border-slate-300 bg-white"
+              />
+            </div>
+            <div>
+              <label className="block font-semibold mb-1 text-slate-700">পাঠদানের বিষয় (Subject)</label>
+              <input
+                type="text"
+                placeholder="যেমন: সহীহ বুখারী ও তাফসীর"
+                value={editingTeacher.subject?.bn || ''}
+                onChange={e => setEditingTeacher({ ...editingTeacher, subject: { bn: e.target.value, en: editingTeacher.subject?.en || '', ar: editingTeacher.subject?.ar || '' } })}
                 className="w-full p-2.5 rounded-xl border border-slate-300 bg-white"
               />
             </div>
@@ -186,61 +311,69 @@ export const TeachersManager: React.FC = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
-              <label className="block font-semibold mb-1 text-slate-700">পাঠদানের বিষয় (বাংলা)</label>
+              <label className="block font-semibold mb-1 text-slate-700">শিক্ষাগত যোগ্যতা (Qualifications)</label>
               <input
                 type="text"
-                value={editingTeacher.subject?.bn || ''}
-                onChange={e => setEditingTeacher({ ...editingTeacher, subject: { bn: e.target.value, en: editingTeacher.subject?.en || '', ar: editingTeacher.subject?.ar || '' } })}
-                className="w-full p-2.5 rounded-xl border border-slate-300 bg-white"
-              />
-            </div>
-            <div>
-              <label className="block font-semibold mb-1 text-slate-700">শিক্ষাগত যোগ্যতা (বাংলা)</label>
-              <input
-                type="text"
+                placeholder="যেমন: দাওরায়ে হাদিস ও ইফতা"
                 value={editingTeacher.qualifications?.bn || ''}
                 onChange={e => setEditingTeacher({ ...editingTeacher, qualifications: { bn: e.target.value, en: editingTeacher.qualifications?.en || '', ar: editingTeacher.qualifications?.ar || '' } })}
                 className="w-full p-2.5 rounded-xl border border-slate-300 bg-white"
               />
             </div>
             <div>
-              <label className="block font-semibold mb-1 text-slate-700">অভিজ্ঞতা (বাংলা)</label>
+              <label className="block font-semibold mb-1 text-slate-700">অভিজ্ঞতা (Experience)</label>
               <input
                 type="text"
+                placeholder="যেমন: ৮ বছর"
                 value={editingTeacher.experience?.bn || ''}
                 onChange={e => setEditingTeacher({ ...editingTeacher, experience: { bn: e.target.value, en: editingTeacher.experience?.en || '', ar: editingTeacher.experience?.ar || '' } })}
                 className="w-full p-2.5 rounded-xl border border-slate-300 bg-white"
               />
             </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
               <label className="block font-semibold mb-1 text-slate-700">যোগদানের সাল</label>
               <input
                 type="text"
+                placeholder="২০১৮"
                 value={editingTeacher.joiningDate || ''}
                 onChange={e => setEditingTeacher({ ...editingTeacher, joiningDate: e.target.value })}
                 className="w-full p-2.5 rounded-xl border border-slate-300 bg-white font-mono"
               />
             </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="block font-semibold mb-1 text-slate-700">মোবাইল নম্বর (ঐচ্ছিক)</label>
               <input
                 type="text"
+                placeholder="018XXXXXXXX"
                 value={editingTeacher.phone || ''}
-                onChange={e => setEditingTeacher({ ...editingTeacher, phone: e.target.value })}
-                className="w-full p-2.5 rounded-xl border border-slate-300 bg-white font-mono"
+                onChange={e => {
+                  setEditingTeacher({ ...editingTeacher, phone: e.target.value });
+                  if (formErrors.phone) setFormErrors(prev => ({ ...prev, phone: '' }));
+                }}
+                className={`w-full p-2.5 rounded-xl border ${formErrors.phone ? 'border-red-500 bg-red-50/30' : 'border-slate-300 bg-white'} font-mono`}
               />
+              {formErrors.phone && (
+                <p className="text-[11px] text-red-600 mt-1 font-semibold">{formErrors.phone}</p>
+              )}
             </div>
             <div>
               <label className="block font-semibold mb-1 text-slate-700">ইমেইল (ঐচ্ছিক)</label>
               <input
                 type="email"
+                placeholder="teacher@madrasa.edu.bd"
                 value={editingTeacher.email || ''}
-                onChange={e => setEditingTeacher({ ...editingTeacher, email: e.target.value })}
-                className="w-full p-2.5 rounded-xl border border-slate-300 bg-white font-mono"
+                onChange={e => {
+                  setEditingTeacher({ ...editingTeacher, email: e.target.value });
+                  if (formErrors.email) setFormErrors(prev => ({ ...prev, email: '' }));
+                }}
+                className={`w-full p-2.5 rounded-xl border ${formErrors.email ? 'border-red-500 bg-red-50/30' : 'border-slate-300 bg-white'} font-mono`}
               />
+              {formErrors.email && (
+                <p className="text-[11px] text-red-600 mt-1 font-semibold">{formErrors.email}</p>
+              )}
             </div>
           </div>
 

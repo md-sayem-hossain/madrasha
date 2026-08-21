@@ -1,7 +1,7 @@
 import React from 'react';
 import { X, ChevronLeft, ChevronRight, Calendar, Tag } from 'lucide-react';
 import { useMadrasa } from '../../context/MadrasaContext';
-import { getLocalized, translations } from '../../i18n/translations';
+import { getLocalized, translations } from '../../lib/translations';
 
 export const GalleryLightboxModal: React.FC = () => {
   const { galleryLightboxIndex, setGalleryLightboxIndex, data, language } = useMadrasa();

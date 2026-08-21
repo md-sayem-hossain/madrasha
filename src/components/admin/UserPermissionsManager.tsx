@@ -576,7 +576,7 @@ export const UserPermissionsManager: React.FC = () => {
                   <label className="block font-bold text-slate-700">
                     প্রাথমিক পারমিশন নির্বাচন করুন:
                   </label>
-                  <div className="grid grid-cols-2 gap-2 max-h-48 overflow-y-auto p-2 border border-slate-200 rounded-xl bg-slate-50">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 max-h-48 overflow-y-auto p-2 border border-slate-200 rounded-xl bg-slate-50">
                     {ALL_PERMISSIONS.map(perm => {
                       const checked = newUserPermissions.includes(perm.key);
                       return (

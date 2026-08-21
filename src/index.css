@@ -5,6 +5,8 @@
     font-family: 'Hind Siliguri', 'Plus Jakarta Sans', system-ui, sans-serif;
     background-color: #f8f9fa;
     color: #1a2e1a;
+    margin-top: 0 !important;
+    direction: ltr;
   }
   html[lang="ar"] {
     font-family: 'Amiri', 'Scheherazade New', serif;
@@ -12,6 +14,82 @@
   html[lang="en"] {
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   }
+
+  body {
+    margin: 0 !important;
+    padding: 0;
+    top: 0 !important;
+    position: static !important;
+    transition: direction 0.2s ease;
+  }
+
+  /* RTL / Arabic Direction */
+  html[dir="rtl"] {
+    direction: rtl;
+  }
+  html[dir="rtl"] body {
+    direction: rtl;
+  }
+}
+
+/* =========================================
+   GOOGLE TRANSLATE WIDGET - HIDDEN
+========================================= */
+#google_translate_element {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  left: -9999px !important;
+  top: -9999px !important;
+}
+
+/* Google Translate top banner & iframe hide */
+.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+iframe.goog-te-banner-frame,
+.goog-te-banner {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}
+
+/* Google injected top container & tooltip popups */
+body > .skiptranslate,
+.skiptranslate.goog-te-gadget-simple,
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf,
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf-ti6hGc,
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf.VIpgJd-ZVi9od-aZ2wEe-wOHMyf-ti6hGc,
+[class*="VIpgJd-ZVi9od"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}
+
+/* Google branding */
+.goog-logo-link {
+  display: none !important;
+}
+.goog-te-gadget {
+  font-size: 0 !important;
+}
+.goog-te-gadget span {
+  display: none !important;
+}
+.goog-te-combo {
+  display: none !important;
 }
 
 .islamic-pattern {

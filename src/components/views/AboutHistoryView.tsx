@@ -12,7 +12,7 @@ import {
   HeartHandshake
 } from 'lucide-react';
 import { useMadrasa } from '../../context/MadrasaContext';
-import { getLocalized, translations } from '../../i18n/translations';
+import { getLocalized, translations, formatDigits } from '../../lib/translations';
 
 export const AboutHistoryView: React.FC = () => {
   const { data, language, setActiveTab } = useMadrasa();
@@ -107,8 +107,8 @@ export const AboutHistoryView: React.FC = () => {
             <div key={item.id} className="relative pl-6 sm:pl-8 group">
               {/* Year marker on left (desktop) */}
               <div className="hidden sm:block absolute -left-28 top-0.5 text-right w-24">
-                <span className="text-base font-extrabold text-emerald-900 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
-                  {item.year}
+                <span className="text-base font-extrabold text-emerald-900 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200 font-mono">
+                  {formatDigits(item.year, language)}
                 </span>
               </div>
 
@@ -117,8 +117,8 @@ export const AboutHistoryView: React.FC = () => {
 
               {/* Content card */}
               <div className="bg-slate-50 rounded-2xl p-5 border border-slate-200/80 shadow-sm group-hover:border-emerald-300 transition-colors">
-                <span className="sm:hidden inline-block text-xs font-extrabold text-emerald-900 bg-emerald-100 px-2 py-0.5 rounded mb-2">
-                  সন: {item.year}
+                <span className="sm:hidden inline-block text-xs font-extrabold text-emerald-900 bg-emerald-100 px-2 py-0.5 rounded mb-2 font-mono">
+                  সন: {formatDigits(item.year, language)}
                 </span>
                 <h3 className="text-base font-bold text-slate-900 mb-1.5 group-hover:text-emerald-800">
                   {getLocalized(item.title, language)}

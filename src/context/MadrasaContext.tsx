@@ -1,5 +1,11 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import {
+  changeDirection,
+  translatePage,
+  initGoogleTranslateService,
+  LANG_STORAGE_KEY
+} from '../lib/googleTranslate';
+import {
   Language,
   MadrasaDatabase,
   UserAccount,
@@ -27,7 +33,8 @@ interface MadrasaContextType {
   setActiveTab: (tab: string) => void;
   data: MadrasaDatabase;
   updateData: (updater: (prev: MadrasaDatabase) => MadrasaDatabase) => void;
-  saveDataToServer: (newData: MadrasaDatabase) => Promise<void>;
+  saveDataToServer: (newData?: MadrasaDatabase) => Promise<void>;
+  saveEntityWithTranslation: (entityType: string, item: any) => Promise<any>;
   
   // Global Audio Player
   currentTrack: AudioTrack | null;
@@ -73,7 +80,6 @@ interface MadrasaContextType {
 }
 
 const STORAGE_KEY = 'al_jadid_madrasa_db_v2';
-const LANG_STORAGE_KEY = 'al_jadid_madrasa_lang';
 
 const MadrasaContext = createContext<MadrasaContextType | undefined>(undefined);
 
@@ -121,7 +127,69 @@ export const MadrasaProvider: React.FC<{ children: ReactNode }> = ({ children })
     }
     return null;
   });
-  const [activeTab, setActiveTab] = useState<string>('home');
+
+  const getInitialTab = (): string => {
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash.replace(/^#\/?/, '').trim();
+      const validTabs = [
+        'home', 'about', 'founders', 'teachers', 'departments',
+        'gallery', 'audio', 'video', 'notices', 'events',
+        'downloads', 'contact', 'portal'
+      ];
+      if (hash && validTabs.includes(hash)) {
+        return hash;
+      }
+      try {
+        const savedTab = localStorage.getItem('al_jadid_active_tab');
+        if (savedTab && validTabs.includes(savedTab)) {
+          return savedTab;
+        }
+      } catch {
+        // ignore
+      }
+    }
+    return 'home';
+  };
+
+  const [activeTab, setActiveTabState] = useState<string>(getInitialTab);
+
+  const setActiveTab = (tab: string) => {
+    setActiveTabState(tab);
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem('al_jadid_active_tab', tab);
+        const targetHash = tab === 'home' ? '' : `#${tab}`;
+        if (window.location.hash !== targetHash) {
+          window.history.replaceState(null, '', targetHash || window.location.pathname);
+        }
+      } catch {
+        // ignore
+      }
+    }
+  };
+
+  // Sync with browser back/forward or hash change
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace(/^#\/?/, '').trim();
+      const validTabs = [
+        'home', 'about', 'founders', 'teachers', 'departments',
+        'gallery', 'audio', 'video', 'notices', 'events',
+        'downloads', 'contact', 'portal'
+      ];
+      if (hash && validTabs.includes(hash)) {
+        setActiveTabState(hash);
+        localStorage.setItem('al_jadid_active_tab', hash);
+      } else if (!hash) {
+        setActiveTabState('home');
+        localStorage.setItem('al_jadid_active_tab', 'home');
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
   const [isSaving, setIsSaving] = useState<boolean>(false);
 
@@ -152,15 +220,31 @@ const [data, setData] = useState<MadrasaDatabase>(() => {
   return normalizeMadrasaData(initialMadrasaData);
 });
 
-  // Sync language with HTML document dir and lang attributes
+  // Initialize Google Translate Service & Monitor
+  useEffect(() => {
+    const cleanup = initGoogleTranslateService();
+    return () => {
+      if (cleanup) cleanup();
+    };
+  }, []);
+
+  // Sync language with Google Translate, HTML document dir and lang attributes
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
     localStorage.setItem(LANG_STORAGE_KEY, lang);
+    changeDirection(lang);
+    translatePage(lang);
   };
 
   useEffect(() => {
-    document.documentElement.lang = language;
-    document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+    changeDirection(language);
+    // Trigger translation after widget mount if not default
+    const timer = setTimeout(() => {
+      if (language !== 'bn') {
+        translatePage(language);
+      }
+    }, 400);
+    return () => clearTimeout(timer);
   }, [language]);
 
   // Attempt to load from server on mount
@@ -169,30 +253,74 @@ const [data, setData] = useState<MadrasaDatabase>(() => {
       .then(res => res.json())
       .then(resData => {
         if (resData.success && resData.data) {
-  const normalizedData = normalizeMadrasaData(resData.data);
-
-  setData(normalizedData);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(normalizedData));
-}
+          const normalizedData = normalizeMadrasaData(resData.data);
+          setData(normalizedData);
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(normalizedData));
+        }
       })
       .catch(() => {
         // Silently use local store
       });
   }, []);
 
-  const saveDataToServer = async (newData: MadrasaDatabase) => {
+  const saveDataToServer = async (newData?: MadrasaDatabase) => {
+    const payload = newData || data;
     setIsSaving(true);
     try {
       await fetch('/api/madrasa/update', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newData)
+        body: JSON.stringify(payload)
       });
     } catch (err) {
       console.error('Server sync error:', err);
     } finally {
       setIsSaving(false);
     }
+  };
+
+  /**
+   * Save an individual entity with server-side AI / heuristic translation
+   */
+  const saveEntityWithTranslation = async (entityType: string, item: any): Promise<any> => {
+    setIsSaving(true);
+    try {
+      const response = await fetch('/api/madrasa/save-entity', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ entityType, item })
+      });
+      const result = await response.json();
+      if (result.success && result.item) {
+        const savedItem = result.item;
+        updateData(prev => {
+          const pluralKey = entityType === 'history' ? 'history' : `${entityType}s` as keyof MadrasaDatabase;
+          const list = prev[pluralKey] as any[];
+          if (Array.isArray(list)) {
+            const index = list.findIndex(x => x.id === savedItem.id);
+            const updatedList = index >= 0
+              ? list.map((x, i) => i === index ? savedItem : x)
+              : [...list, savedItem];
+            return {
+              ...prev,
+              [pluralKey]: updatedList
+            };
+          } else if (entityType === 'settings') {
+            return {
+              ...prev,
+              settings: savedItem
+            };
+          }
+          return prev;
+        });
+        return savedItem;
+      }
+    } catch (err) {
+      console.error('Failed to save entity with translation:', err);
+    } finally {
+      setIsSaving(false);
+    }
+    return item;
   };
 
   const updateData = (updater: (prev: MadrasaDatabase) => MadrasaDatabase) => {
@@ -480,6 +608,7 @@ const [data, setData] = useState<MadrasaDatabase>(() => {
         data,
         updateData,
         saveDataToServer,
+        saveEntityWithTranslation,
         isSaving,
         login,
         logout,
