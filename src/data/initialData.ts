@@ -187,7 +187,7 @@ export const initialMadrasaData: MadrasaDatabase = {
         en: 'Chief Founder & Life Patron',
         ar: 'المؤسس الرئيسي والراعي الدائم'
       },
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80',
+      image: '/uploads/founders/founder_ahmed_ullah.jpg',
       address: {
         bn: 'আকবর পাটোয়ারীর বাড়ী, কুড়িয়ামৌড়া, সন্দ্বীপ, চট্টগ্রাম',
         en: 'Akbar Patwary Bari, Kuriyamoura, Sandwip, Chattogram',
@@ -236,7 +236,7 @@ export const initialMadrasaData: MadrasaDatabase = {
         en: 'Co-Founder & Chief Benefactor',
         ar: 'شريكة التأسيس والراعية الكبرى'
       },
-      image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&auto=format&fit=crop&q=80',
+      image: '/uploads/founders/founder_begum_saleha.png',
       address: {
         bn: 'কুড়িয়ামৌড়া, সন্দ্বীপ, চট্টগ্রাম',
         en: 'Kuriyamoura, Sandwip, Chattogram',
@@ -273,7 +273,7 @@ export const initialMadrasaData: MadrasaDatabase = {
         en: 'Co-Founder & Land Donor',
         ar: 'شريك التأسيس والواقف للأرض'
       },
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&auto=format&fit=crop&q=80',
+      image: '/uploads/founders/founder_akbar_patwary.jpg',
       address: {
         bn: 'আকবর পাটোয়ারীর বাড়ী, কুড়িয়ামৌড়া, সন্দ্বীপ',
         en: 'Akbar Patwary Bari, Kuriyamoura, Sandwip',
@@ -317,7 +317,7 @@ export const initialMadrasaData: MadrasaDatabase = {
         en: 'Administration & Hadith',
         ar: 'الإدارة وقسم الحديث'
       },
-      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&auto=format&fit=crop&q=80',
+      image: '/uploads/teachers/teacher_mufti_abdul_haq.jpg',
       subject: {
         bn: 'বুখারী শরীফ ও ইফতা',
         en: 'Sahih Bukhari & Ifta Jurisprudence',
@@ -366,7 +366,7 @@ export const initialMadrasaData: MadrasaDatabase = {
         en: 'Tahfeez Department',
         ar: 'قسم التحفيظ'
       },
-      image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80',
+      image: '/uploads/teachers/teacher_qari_nurul_islam.jpg',
       subject: {
         bn: 'হিফজুল কুরআন ও মাশকুত তাজবীদ',
         en: 'Hifz & International Tajweed',
@@ -413,7 +413,7 @@ export const initialMadrasaData: MadrasaDatabase = {
         en: 'Kitab Department',
         ar: 'قسم الكتب'
       },
-      image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&auto=format&fit=crop&q=80',
+      image: '/uploads/teachers/teacher_mahmud_hasan.jpg',
       subject: {
         bn: 'নাহু, সরফ ও আরবি সাহিত্য',
         en: 'Nahu, Sarf & Arabic Balagha',
@@ -460,7 +460,7 @@ export const initialMadrasaData: MadrasaDatabase = {
         en: 'Noorani & Primary',
         ar: 'القسم الابتدائي والنوراني'
       },
-      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=80',
+      image: '/uploads/teachers/teacher_zainal_abedin.jpg',
       subject: {
         bn: 'নূরানী কায়দা ও সুন্দর হাতের লেখা',
         en: 'Noorani Method & Calligraphy',

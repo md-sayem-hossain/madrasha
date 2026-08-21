@@ -359,7 +359,7 @@
         "en": "Chief Founder & Life Patron",
         "ar": "المؤسس الرئيسي والراعي الدائم"
       },
-      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80",
+      "image": "/uploads/founders/founder_ahmed_ullah.jpg",
       "address": {
         "bn": "আকবর পাটোয়ারীর বাড়ী, কুড়িয়ামৌড়া, সন্দ্বীপ, চট্টগ্রাম",
         "en": "Akbar Patwary Bari, Kuriyamoura, Sandwip, Chattogram",
@@ -408,7 +408,7 @@
         "en": "Co-Founder & Chief Benefactor",
         "ar": "شريكة التأسيس والراعية الكبرى"
       },
-      "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&auto=format&fit=crop&q=80",
+      "image": "/uploads/founders/founder_begum_saleha.png",
       "address": {
         "bn": "কুড়িয়ামৌড়া, সন্দ্বীপ, চট্টগ্রাম",
         "en": "Kuriyamoura, Sandwip, Chattogram",
@@ -429,7 +429,19 @@
         "en": "Endowed continuous stipends for student meals, clothing, and orphan welfare.",
         "ar": "كفالة مستمرة لطلاب العلم وتوفير وجبات الطعام والكسوة للأيتام."
       },
+      "educationalBackground": {
+        "bn": "",
+        "en": "",
+        "ar": ""
+      },
+      "professionalBackground": {
+        "bn": "",
+        "en": "",
+        "ar": ""
+      },
       "founderSince": "১৯৯৮",
+      "phone": "",
+      "email": "",
       "isApproved": true,
       "order": 2
     },
@@ -445,7 +457,7 @@
         "en": "Co-Founder & Land Donor",
         "ar": "شريك التأسيس والواقف للأرض"
       },
-      "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&auto=format&fit=crop&q=80",
+      "image": "/uploads/founders/founder_akbar_patwary.jpg",
       "address": {
         "bn": "আকবর পাটোয়ারীর বাড়ী, কুড়িয়ামৌড়া, সন্দ্বীপ",
         "en": "Akbar Patwary Bari, Kuriyamoura, Sandwip",
@@ -466,7 +478,19 @@
         "en": "Endowed original campus land and led local community mobilization.",
         "ar": "وقف الأرض الأولى للمجمع وقيادة الدعم المجتمعي."
       },
+      "educationalBackground": {
+        "bn": "",
+        "en": "",
+        "ar": ""
+      },
+      "professionalBackground": {
+        "bn": "",
+        "en": "",
+        "ar": ""
+      },
       "founderSince": "১৯৯৮",
+      "phone": "",
+      "email": "",
       "isApproved": true,
       "order": 3
     }
@@ -489,7 +513,6 @@
         "en": "Administration & Hadith",
         "ar": "الإدارة وقسم الحديث"
       },
-      "image": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&auto=format&fit=crop&q=80",
       "subject": {
         "bn": "বুখারী শরীফ ও ইফতা",
         "en": "Sahih Bukhari & Ifta Jurisprudence",
@@ -516,6 +539,7 @@
         "ar": "ساندويب، شيتاغونغ"
       },
       "joiningDate": "২০০৩",
+      "image": "/uploads/teachers/teacher_mufti_abdul_haq.jpg",
       "phone": "01811223344",
       "email": "mufti.abdulhaque@gmail.com",
       "isActive": true,
@@ -538,7 +562,6 @@
         "en": "Tahfeez Department",
         "ar": "قسم التحفيظ"
       },
-      "image": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80",
       "subject": {
         "bn": "হিফজুল কুরআন ও মাশকুত তাজবীদ",
         "en": "Hifz & International Tajweed",
@@ -565,6 +588,9 @@
         "ar": "كوريامورا، ساندويب"
       },
       "joiningDate": "২০১০",
+      "image": "/uploads/teachers/teacher_qari_nurul_islam.jpg",
+      "phone": "",
+      "email": "",
       "isActive": true,
       "order": 2
     },
@@ -585,7 +611,6 @@
         "en": "Kitab Department",
         "ar": "قسم الكتب"
       },
-      "image": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&auto=format&fit=crop&q=80",
       "subject": {
         "bn": "নাহু, সরফ ও আরবি সাহিত্য",
         "en": "Nahu, Sarf & Arabic Balagha",
@@ -612,6 +637,9 @@
         "ar": "ساندويب، شيتاغونغ"
       },
       "joiningDate": "২০১৪",
+      "image": "/uploads/teachers/teacher_mahmud_hasan.jpg",
+      "phone": "",
+      "email": "",
       "isActive": true,
       "order": 3
     },
@@ -632,7 +660,6 @@
         "en": "Noorani & Primary",
         "ar": "القسم الابتدائي والنوراني"
       },
-      "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=80",
       "subject": {
         "bn": "নূরানী কায়দা ও সুন্দর হাতের লেখা",
         "en": "Noorani Method & Calligraphy",
@@ -659,6 +686,9 @@
         "ar": "مولوي بازار، ساندويب"
       },
       "joiningDate": "২০১২",
+      "image": "/uploads/teachers/teacher_zainal_abedin.jpg",
+      "phone": "",
+      "email": "",
       "isActive": true,
       "order": 4
     }
@@ -1350,6 +1380,86 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": "log-1787303670613",
+      "timestamp": "8/21/2026, 3:14:30 PM",
+      "userId": "usr-1",
+      "userName": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "userRole": "super_admin",
+      "action": "শিক্ষক তথ্য আপডেট",
+      "target": "মাওলানা জয়নাল আবেদীন",
+      "details": "পদবী: প্রধান শিক্ষক (নূরানী বিভাগ)"
+    },
+    {
+      "id": "log-1787303661791",
+      "timestamp": "8/21/2026, 3:14:21 PM",
+      "userId": "usr-1",
+      "userName": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "userRole": "super_admin",
+      "action": "শিক্ষক তথ্য আপডেট",
+      "target": "মাওলানা মাহমুদ হাসান",
+      "details": "পদবী: সিনিয়র শিক্ষক (আরবি সাহিত্য ও ব্যাকরণ)"
+    },
+    {
+      "id": "log-1787303653144",
+      "timestamp": "8/21/2026, 3:14:13 PM",
+      "userId": "usr-1",
+      "userName": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "userRole": "super_admin",
+      "action": "শিক্ষক তথ্য আপডেট",
+      "target": "হাফেজ ক্বারী নূরুল ইসলাম",
+      "details": "পদবী: প্রধান শিক্ষক (হিফজ বিভাগ)"
+    },
+    {
+      "id": "log-1787303637323",
+      "timestamp": "8/21/2026, 3:13:57 PM",
+      "userId": "usr-1",
+      "userName": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "userRole": "super_admin",
+      "action": "শিক্ষক তথ্য আপডেট",
+      "target": "মাওলানা মুফতি আব্দুল হক আল-মাদানী",
+      "details": "পদবী: মুহতামিম ও শাইখুল হাদিস"
+    },
+    {
+      "id": "log-1787303530932",
+      "timestamp": "8/21/2026, 3:12:10 PM",
+      "userId": "usr-1",
+      "userName": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "userRole": "super_admin",
+      "action": "প্রতিষ্ঠাতা আপডেট",
+      "target": "মরহুম আকবর পাটোয়ারী",
+      "details": "পদবী: সহ-প্রতিষ্ঠাতা ও ভূমিদাতা"
+    },
+    {
+      "id": "log-1787303524577",
+      "timestamp": "8/21/2026, 3:12:04 PM",
+      "userId": "usr-1",
+      "userName": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "userRole": "super_admin",
+      "action": "প্রতিষ্ঠাতা আপডেট",
+      "target": "বেগম ছালেহা খাতুন",
+      "details": "পদবী: সহ-প্রতিষ্ঠাতা ও প্রধান হিতৈষী"
+    },
+    {
+      "id": "log-1787303517400",
+      "timestamp": "8/21/2026, 3:11:57 PM",
+      "userId": "usr-1",
+      "userName": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "userRole": "super_admin",
+      "action": "প্রতিষ্ঠাতা আপডেট",
+      "target": "ডাঃ আহমেদ উল্ল্যা",
+      "details": "পদবী: প্রধান প্রতিষ্ঠাতা ও আজীবন পৃষ্ঠপোষক"
+    },
+    {
+      "id": "log-1787303508710",
+      "timestamp": "8/21/2026, 3:11:48 PM",
+      "userId": "guest",
+      "userName": "ভিজিটর (Visitor)",
+      "userRole": "visitor",
+      "action": "লগইন (Login)",
+      "target": "সুপার অ্যাডমিনিস্ট্রেটর",
+      "details": "super_admin হিসেবে সফলভাবে প্রবেশ করেছেন।"
+    },
     {
       "id": "log-1787053701714",
       "timestamp": "১৮/৮/২০২৬, ৫:৪৮:২১ PM",
